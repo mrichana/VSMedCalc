@@ -38,17 +38,21 @@ module CalculatorViews {
         return viewsCollection._tags;
     }
 
-    static filter(filterString: string, collection: IViewDescription[] = viewsCollection._allList): IViewDescriptionList {
-        var ft = filterString.toLowerCase();
-        var list = _.filter(collection, function (view) {
-            if (!view.category) return false;
+    static filter = function (filterString: string): IViewDescriptionList {
+        if (filterString=="") filterString = '.'; // TODO: Should create an optimized path
+        var regex = new RegExp(filterString, 'i');
+        var list = _.map(viewsCollection._allList, function (view: IViewDescription) {
+            var ret: IViewDescription = view;
 
-            if (view.name.toLowerCase().indexOf(ft) > -1) return true;
-            if (view.category.toLowerCase().indexOf(ft) > -1) return true;
-            if (view.tags.toLowerCase().indexOf(ft) > -1) return true;
+            ret.hidden = true;
+            if (!view.category) { return ret; }
+            if (regex.test(view.name) || regex.test(view.category) || regex.test(view.tags)) { ret.hidden = false; }
 
-            return false;
+            return ret;
+        }).sort((a, b) => {
+            return a.category.localeCompare(b.category);
         });
+
         var categories = _.groupBy(list, function (view) {
             return view.category;
         });
@@ -62,8 +66,8 @@ module CalculatorViews {
             categories: categories,
             tags: tags
         };
-    }
-  }
+    };
+  };
 
   export interface IViewDescriptionList {
       list: IViewDescription[];
@@ -77,6 +81,7 @@ module CalculatorViews {
     category: string;
     tags: string;
     factory(values?: any): IView;
+    hidden?: boolean;
   }
 
   export class ViewDescription implements IViewDescription {
@@ -85,6 +90,7 @@ module CalculatorViews {
       this.name = name;
       this.category = category;
       this.tags = tags;
+      this.hidden = false;
 
       this.type = type;
     }
@@ -92,6 +98,7 @@ module CalculatorViews {
     name: string;
     category: string;
     tags: string;
+    hidden: boolean;
     private type: typeof View;
     factory(values?: any): IView {
       var ret: View = new this.type(values);
@@ -118,6 +125,7 @@ module CalculatorViews {
     template: string;
     defaultValues: any;
     fields: IField[];
+    hidden: boolean;
 
     values: any;
 
@@ -149,6 +157,7 @@ module CalculatorViews {
     template: string;
     defaultValues: any;
     fields: IField[];
+    hidden: boolean;
 
     values: any;
 

@@ -36,14 +36,18 @@
               return showHeader;
             };
 
-            ($scope.setFilter = function (filterText: string ="") {
+            $scope.setFilter = function (filterText: string = "") {
                 $scope.views = views.filter(filterText);
                 $scope.panelsList = _.map($scope.views.list, function (viewDesc: CalculatorViews.IViewDescription) {
-                    return viewDesc.factory($scope.values);
+                    var ret = viewDesc.factory($scope.values);
+                    ret.hidden = viewDesc.hidden;
+                    return ret;
                 });
+                
                 //$scope.categories = _.groupBy($scope.views.list, "category");
                 //$scope.categories = _.pairs($scope.views.categories);
-            })();
+            };
+            $scope.setFilter('');
 
             $scope.clearSearchBox = function() {
               $scope.filterText='';

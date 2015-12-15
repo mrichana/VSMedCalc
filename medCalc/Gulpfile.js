@@ -1,4 +1,4 @@
-﻿/// <binding ProjectOpened='serve' />
+/// <binding />
 require('es6-promise').polyfill();
 var gulp = require('gulp');
 var minifyHtml = require('gulp-minify-html');
@@ -13,9 +13,10 @@ var del = require('del');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemap = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
+var browserSyncDebug = require('browser-sync').create();
 var tsc = require('gulp-typescript');
 var manifest = require('gulp-manifest');
-
+var htmlReplace = require('gulp-html-replace');
 
 gulp.task('clean', function () {
     del('www/**');
@@ -45,11 +46,12 @@ gulp.task('copyLibs', ['bower'], function () {
     ])
     .pipe(gulpIf('!*.min.js', uglify()))
     .pipe(concat('index.min.js'))
-    .pipe(gulp.dest('www/lib'));
+    .pipe(gulp.dest('www/lib'))
 });
 
 gulp.task('copyHtml', function () {
     return gulp.src('app/**/*.html')
+    .pipe(gulp.dest('debug'))
     .pipe(minifyHtml())
     .pipe(gulp.dest('www'));
 });
@@ -64,20 +66,23 @@ gulp.task('copyRoot', function () {
 
 gulp.task('copyCss', function () {
     return gulp.src(['app/css/*.css'])
+    .pipe(gulp.dest('debug/css/'))
     .pipe(autoprefixer('last 2 versions'))
-    .pipe(minifyCss())
     .pipe(concat('index.css'))
-    .pipe(rename({suffix:'.min'}))
+    .pipe(minifyCss())
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('www/css/'));
 });
 
 gulp.task('copyFonts', function () {
     return gulp.src('app/fonts/*')
-    .pipe(gulp.dest('www/fonts'));
+    .pipe(gulp.dest('www/fonts'))
+    .pipe(gulp.dest('debug/fonts'));
 });
 
 gulp.task('copyImages', function () {
     return gulp.src('app/images/*')
+    .pipe(gulp.dest('debug/images'))
     .pipe(imageMin())
     .pipe(gulp.dest('www/images'));
 });
@@ -112,27 +117,36 @@ gulp.task('copyTypescript', function () {
 gulp.task('serve', ['watch'], function () {
     browserSync.init({
         server: {
-            baseDir: "www"
+            baseDir: "www",
+            port: 3000
         }
     });
-
     gulp.watch("www/**/*.*", browserSync.reload);
 });
 
-gulp.task('watch', function () {
+gulp.task('debug', ['watch'], function () {
+    browserSyncDebug.init({
+        server: {
+            baseDir: "debug"
+        }
+    });
+    gulp.watch("debug/**/*.*", browserSyncDebug.reload);
+});
+
+gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
     gulp.watch("scripts/**/*.ts", ['copyTypescript']);
     gulp.watch("app/**/*.css", ['copyCss']);
     gulp.watch("app/**/*.html", ['copyHtml']);
 });
 
 gulp.task('build', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
-    gulp.src(['www/**/*'])
-      .pipe(manifest({
+    return gulp.src(['www/**/*'])
+        .pipe(manifest({
           hash: true,
           preferOnline: false,
           filename: 'manifest.appcache',
           exclude: 'manifest.appcache'
-      }))
-    .pipe(gulp.dest('www'));
+        }))
+        .pipe(gulp.dest('www'));
 });
 

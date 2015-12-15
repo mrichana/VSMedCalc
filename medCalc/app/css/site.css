@@ -60,98 +60,32 @@ button[name=addPatient].ng-hide {
   margin: 20px 0;
 }
 
-/*
-  We're using CSS transitions for when
-  the enter and move events are triggered
-  for the element that has the .repeated-view
-  class
-*/
 
-.repeated-nav-view.ng-enter {
-  -webkit-transition: 1s linear all;
-  -moz-transition: 1s linear all;
-  -o-transition: 1s linear all;
-  transition: 1s linear all;
-  opacity: 0;
-  max-height: 0;
+.hidepanel {
+    -moz-transition: 2s ease all;
+    -o-transition: 2s ease all;
+    -webkit-transition: 2s ease all;
+    transition: 2s ease all;
 }
 
-/*
- The ng-enter-active and ng-move-active
- are where the transition destination properties
- are set so that the animation knows what to
- animate.
-*/
-
-.repeated-nav-view.ng-enter.ng-enter-active {
+.hidepanel.hidepanel-add-active,
+.hidepanel.hidepanel-remove {
+  transform: translate3d(0, 0, 0);
+  /*transform: scaleY(0);*/
+  max-height: 1000px;
   opacity: 1;
-  max-height: 40px;
-}
-.repeated-nav-view.ng-leave {
-  -webkit-transition: 1s linear all;
-  -moz-transition: 1s linear all;
-  -o-transition: 1s linear all;
-  transition: 1s linear all;
-  opacity: 1;
-  max-height: 40px;
+
 }
 
-/*
- The ng-leave-active and ng-move-active
- are where the transition destination properties
- are set so that the animation knows what to
- animate.
-*/
 
-.repeated-nav-view.ng-leave.ng-leave-active {
-  opacity: 0;
+.hidepanel {
+  transform: translate3d(-100%, 0, 0);
+  /*transform: scaleY(0);*/
   max-height: 0;
-}
-
-/*
-  We're using CSS transitions for when
-  the enter and move events are triggered
-  for the element that has the .repeated-nav-view
-  class
-*/
-
-.repeated-view.ng-enter {
-  -webkit-transition: 1s linear all;
-  -moz-transition: 1s linear all;
-  -o-transition: 1s linear all;
-  transition: 1s linear all;
   opacity: 0;
-  max-height: 0;
 }
 
-/*
- The ng-enter-active and ng-move-active
- are where the transition destination properties
- are set so that the animation knows what to
- animate.
-*/
 
-.repeated-view.ng-enter.ng-enter-active {
-  opacity: 1;
-  max-height: 110px;
-}
-.repeated-view.ng-leave {
-  -webkit-transition: 1s linear all;
-  -moz-transition: 1s linear all;
-  -o-transition: 1s linear all;
-  transition: 1s linear all;
-  opacity: 1;
-  max-height: 110px;
-}
-
-/*
- The ng-leave-active and ng-move-active
- are where the transition destination properties
- are set so that the animation knows what to
- animate.
-*/
-
-.repeated-view.ng-leave.ng-leave-active {
-  opacity: 0;
-  max-height: 0;
+#navview {
+    padding-top: 55px;
 }
