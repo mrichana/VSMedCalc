@@ -1,70 +1,45 @@
+/// <reference path="typings/angularjs/angular.d.ts"/>
+/// <reference path="filters.ts"/>
+/// <reference path="controllers.ts"/>
+/// <reference path="directives.ts"/>
+
 module app {
-  'use strict';
+    'use strict';
 
-  // Declare app level module which depends on filters, and services
-  angular.module('medicalCalculator', [
-      'medical.services',
-      'ngRoute',
-      'ngTouch',
-      'ngAnimate',
-      'ngSanitize',
-      'mobile-angular-ui',
-      'mgcrea.ngStrap',
-      //'ui.tinymce',
-      //'firebase'
-  ])
+    // Declare app level module which depends on filters, and services
+    angular.module('medicalCalculator', [
+        'medical.services',
+        'ngAnimate',
+        'ngSanitize',
+        'ngMaterial',
+        'duScroll'
+    ])
 
-  .filter('to_trusted', filters.to_trusted)
+        .filter('to_trusted', filters.to_trusted)
 
-  .controller('calculatorCtrl', controllers.calculatorCtrl)
-//  .controller('patientCtrl', controllers.patientCtrl)
-//  .controller('patientsCtrl', controllers.patientsCtrl)
+        .controller('calculatorController', controllers.calculatorController)
+        //  .controller('patientCtrl', controllers.patientCtrl)
+        //  .controller('patientsCtrl', controllers.patientsCtrl)
 
-  .directive('autosize', directives.autosize)
-  .directive('scrollto', directives.scrollto)
-  .directive('selectOnFocus', directives.selectOnFocus)
-  .directive('navView', directives.navView)
-  .directive('scrollMonitor', directives.scrollMonitor)
-  .directive('affix', directives.affix)
-  .directive('scrollSpy', directives.scrollSpy)
-  .directive('result', directives.result)
-  .directive('view', directives.view)
-  .directive('flipswitch', directives.flipswitch)
-  .directive('customInput', directives.customInput)
-  .directive('verifiedClick', directives.verifiedClick)
+        .directive('mrScrollTo', directives.mrScrollTo)
+        .directive('navView', directives.navView)
+        .directive('result', directives.result)
+        .directive('view', directives.view)
+        .directive('verifiedClick', directives.verifiedClick)
+        .config(['$mdThemingProvider', '$mdIconProvider', function ($mdThemingProvider, $mdIconProvider) {
 
-  .config(['$routeProvider', '$locationProvider', '$compileProvider',
-    function($routeProvider, $locationProvider, $compileProvider) {
-      $compileProvider.imgSrcSanitizationWhitelist('images/');
+            $mdIconProvider
+                .icon('menu', 'fonts/menu.svg', 24)
+                .icon('reset', 'fonts/reset.svg', 24)
+                .icon('check', 'fonts/check.svg', 24)
+                .icon('info', 'fonts/info.svg', 24)
+                .icon('error', 'fonts/error.svg', 24);
 
-      $routeProvider
-        .when('/Calculators', {
-          templateUrl: 'partials/calculators.html',
-          controller: 'calculatorCtrl'
-        })
-        // .when('/Patient/:id', {
-        //   templateUrl: 'partials/patient.html',
-        //   controller: 'patientCtrl',
-        //   resolve: {
-        //     patient: ['$route', 'patientHybridStorage', function($route, patientStorage) {
-        //       return patientStorage.patient($route.current.params.id);
-        //     }]
-        //   }
-        // })
-        // .when('/Patients', {
-        //   templateUrl: 'partials/patients.html',
-        //     controller: 'patientsCtrl',
-        //     resolve: {
-        //       patients: ['patientHybridStorage', function(patientStorage) {
-        //         return patientStorage.patients();
-        //       }]
-        //     }
-        //   })
-          .otherwise({
-            redirectTo: '/Calculators'
-          });
-          // configure html5 to get links working on jsfiddle
-          $locationProvider.html5Mode(false);
-        }
-      ]);
-    }
+            $mdThemingProvider.theme('default')
+                .primaryPalette('blue')
+                .accentPalette('red');
+
+        }])
+        .value('duScrollDuration', 2000)
+        .value('duScrollActiveClass', 'md-accent');
+}

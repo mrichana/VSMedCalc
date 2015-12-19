@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "noEmit":  true,
     "target": "es5",
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
-    "watch": true,
-    "inlineSourceMap": true,
-    "outDir": "../debug/scripts/"
+    "outDir": "../temp/tscscripts/",
+    "inlineSourceMap": true
   },
     "filesGlob": [
         "./**/*.ts",
@@ -17,7 +15,6 @@
     ],
     "files": [
         "./typings/angularjs/angular-animate.d.ts",
-        "./typings/angularjs/angular-route.d.ts",
         "./typings/angularjs/angular-sanitize.d.ts",
         "./typings/angularjs/angular.d.ts",
         "./typings/jquery/jquery.d.ts",

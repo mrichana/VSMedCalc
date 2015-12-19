@@ -1,4 +1,7 @@
-﻿module controllers {
+﻿/// <reference path="typings/underscore/underscore.d.ts"/>
+/// <reference path="views/views.ts"/>
+
+module controllers {
     'use strict';
 
     interface ICalculatorScope extends ng.IScope {
@@ -11,7 +14,7 @@
         categories: any;
         values: any;
 
-        CreateHeader(string):boolean;
+        toggleLeftPanel(): void;
 
         currentCategory: string;
 
@@ -20,21 +23,20 @@
     }
 
     /* Controllers */
-    export class calculatorCtrl {
-        public static $inject = ['$scope', '$location'];
-        constructor(private $scope: ICalculatorScope, private $location: ng.ILocationService) {
+    export class calculatorController {
+        public static $inject = ['$scope', '$location', '$mdSidenav'];
+        constructor(private $scope: ICalculatorScope, private $location: ng.ILocationService, private $mdSidenav) {
             var views = CalculatorViews.viewsCollection;
             $scope.filterText = '';
             $scope.values = {};
 
+            $scope.toggleLeftPanel = function () {
+                $mdSidenav('left').toggle();
+            }
+
             $scope.$watch("filterText", function(newValue, olValue) {
               $scope.setFilter(newValue);
             });
-
-            $scope.CreateHeader = function(index:number):boolean {
-              var showHeader = (index==0 || ($scope.panelsList[index].category!=$scope.panelsList[index-1].category));
-              return showHeader;
-            };
 
             $scope.setFilter = function (filterText: string = "") {
                 $scope.views = views.filter(filterText);
@@ -43,9 +45,6 @@
                     ret.hidden = viewDesc.hidden;
                     return ret;
                 });
-                
-                //$scope.categories = _.groupBy($scope.views.list, "category");
-                //$scope.categories = _.pairs($scope.views.categories);
             };
             $scope.setFilter('');
 

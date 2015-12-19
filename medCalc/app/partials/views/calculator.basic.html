@@ -1,21 +1,45 @@
-<ng-form class="form-horizontal">
-    <div ng-repeat="field in view.fields">
-        <div class="form-group" ng-class="{'has-error': field.error, 'has-warning': field.warning}">
-            <label class="col-sm-3 control-label" for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
-            <div class="col-sm-9">
-                <div class="input-group" ng-if="field.calculatorView">
-                    <custom-input field="field" values="view.values" result="view.result">
-                    </custom-input>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" data-animation="am-flip-x" data-placement="center" data-container='body' data-content-template='partials/modal.html' bs-modal="{title:field.calculatorView.name}"><i class="fa fa-calculator"></i>
-                        </button>
-                    </span>
-                </div>
-                <div>
-                    <custom-input ng-if="!field.calculator" field="field" values="view.values" result="view.result">
-                    </custom-input>
-                </div>
+<md-content layout-padding>
+    <div ng-repeat="field in view.fields" ng-switch on="field.input.type" layout="column">
+        <md-input-container ng-switch-when="none">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <span></span>
+        </md-input-container>
+        <md-input-container ng-switch-when="image">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <img ng-src="{{field.url}}" />
+        </md-input-container>
+        <!--<md-input-container ng-switch-when="number">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <div layout="row" layout-align="center center">
+                <input flex="10" type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
+                <md-slider flex="90" md-discrete step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
             </div>
+            <div class="hint">{{field.description}}</div>
+        </md-input-container>-->
+        <md-input-container ng-switch-when="number">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <input type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
+            <div class="hint">{{field.description}}</div>
+        </md-input-container>
+        <md-input-container ng-switch-when="text">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <input type="text" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" maxlength="{{field.input.length || 524288}}" ng-model="view.values[field.id]" />
+            <div class="hint">{{field.description}}</div>
+        </md-input-container>
+        <md-input-container ng-switch-when="select">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <md-select ng-model="view.values[field.id]" ng-disabled="{{field.input.disabled}}" ng-class="{disabled: field.input.disabled}">
+                <md-option ng-repeat="option in field.input.options" value="{{option.value}}">
+                    {{option.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container ng-switch-when="check">
+            <md-checkbox ng-model="view.values[field.id]">{{field.name | to_trusted}}</md-checkbox>
+            <div class="hint">{{field.description}}</div>
+        </md-input-container>
+        <div ng-switch-when="result">
+            <result result="view.result"></result>
         </div>
     </div>
-</ng-form>
+</md-content>

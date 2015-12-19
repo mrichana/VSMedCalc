@@ -1,3 +1,5 @@
+/// <reference path="../typings/mathjs/mathjs.d.ts"/>
+
 module CalculatorViews {
   'use strict';
 

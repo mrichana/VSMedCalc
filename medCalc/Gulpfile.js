@@ -1,4 +1,4 @@
-/// <binding />
+/// <binding ProjectOpened='serve' />
 require('es6-promise').polyfill();
 var gulp = require('gulp');
 var minifyHtml = require('gulp-minify-html');
@@ -13,10 +13,8 @@ var del = require('del');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemap = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
-var browserSyncDebug = require('browser-sync').create();
 var tsc = require('gulp-typescript');
 var manifest = require('gulp-manifest');
-var htmlReplace = require('gulp-html-replace');
 
 gulp.task('clean', function () {
     del('www/**');
@@ -32,17 +30,15 @@ gulp.task('copyLibs', ['bower'], function () {
         'bower_components/underscore/underscore-min.js',
         'bower_components/mathjs/dist/math.min.js',
         'bower_components/underscore/underscore-min.js',
-        'bower_components/jquery/dist/jquery.min.js',
         'bower_components/angular/angular.min.js',
         'bower_components/angular-route/angular-route.min.js',
         'bower_components/angular-sanitize/angular-sanitize.min.js',
         'bower_components/angular-animate/angular-animate.min.js',
-        'bower_components/angular-touch/angular-touch.min.js',
+        'bower_components/angular-aria/angular-aria.js',
         'bower_components/angular-i18n/angular-locale_el.js',
-        'bower_components/angular-strap/dist/angular-strap.min.js',
-        'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
-        'app/lib/mobile-angular-ui.js',
-        'bower_components/moment/min/moment.min.js'
+        'bower_components/moment/min/moment.min.js',
+        'bower_components/angular-material/angular-material.js',
+        'bower_components/angular-scroll/angular-scroll.min.js'
     ])
     .pipe(gulpIf('!*.min.js', uglify()))
     .pipe(concat('index.min.js'))
@@ -65,7 +61,10 @@ gulp.task('copyRoot', function () {
 });
 
 gulp.task('copyCss', function () {
-    return gulp.src(['app/css/*.css'])
+    return gulp.src([
+        'bower_components/angular-material/angular-material.css',
+        'app/css/*.css'
+    ])
     .pipe(gulp.dest('debug/css/'))
     .pipe(autoprefixer('last 2 versions'))
     .pipe(concat('index.css'))
@@ -109,7 +108,7 @@ gulp.task('copyTypescript', function () {
         target: 'ES5'
     }))
     .pipe(concat("index.min.js"))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(sourcemap.write())
     .pipe(gulp.dest('www/scripts'));
 });
@@ -122,15 +121,6 @@ gulp.task('serve', ['watch'], function () {
         }
     });
     gulp.watch("www/**/*.*", browserSync.reload);
-});
-
-gulp.task('debug', ['watch'], function () {
-    browserSyncDebug.init({
-        server: {
-            baseDir: "debug"
-        }
-    });
-    gulp.watch("debug/**/*.*", browserSyncDebug.reload);
 });
 
 gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {

@@ -1,91 +1,88 @@
-a[scroll-spy] {
-  transition: all ease 0.7s;
-}
-button[name=addPatient].ng-hide-add, button[name=addPatient].ng-hide-remove {
-  display: block!important;
-}
-button[name=addPatient].ng-hide-add.ng-hide-add-active, button[name=addPatient].ng-hide-remove.ng-hide-remove-active {
-  transition: all ease 0.5s;
-}
-button[name=addPatient].ng-hide {
-  line-height: 0;
-  opacity: 0;
-  padding: 0 0;
-}
-.panel {
-  margin-bottom: 0;
-}
-.visible-xs {
-  display: none !important;
-}
-@media (max-width: 767px) {
-  .visible-xs {
-    display: block !important;
-  }
-  .hidden-xs {
-    display: none !important;
-  }
-}
-.verify {
-  color: #ff0000 !important;
-}
-.verify-add, .verify-remove {
-  transition: all ease 0.3s;
-}
-.modal.center .modal-dialog {
-  margin: 0;
-  width: 70%;
-  height: 85%;
-}
-.modal {
-  overflow: hidden;
-}
-.modal-content {
-  height: 100%;
-  overflow: hidden;
-}
-.modal-body {
-  height: 100%;
-  overflow: auto;
-}
-.modal-body-content {
-  padding-bottom: 25px;
-}
-.ta-editor {
-  min-height: 32px;
-  height: auto;
-  overflow: auto;
-  font-family: inherit;
-  font-size: 100%;
-  margin: 20px 0;
+
+.hint {
+    /* Position the hint */
+    position: absolute;
+    left: 2px;
+    right: auto;
+    top: 30px;
+    /* Copy styles from ng-messages */
+    font-size: 12px;
+    line-height: 14px;
+    -moz-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    -o-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    -webkit-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    /* Set our own color */
+    color: grey;
 }
 
+    .hint.ng-hide,
+    .hint.ng-enter,
+    .hint.ng-leave.ng-leave-active {
+        top: 56px;
+        opacity: 0;
+    }
 
-.hidepanel {
-    -moz-transition: 2s ease all;
-    -o-transition: 2s ease all;
-    -webkit-transition: 2s ease all;
-    transition: 2s ease all;
+        .hint.ng-leave,
+        .hint.ng-enter.ng-enter-active {
+            top: 30px;
+            opacity: 1;
+        }
+
+.spin {
+    -webkit-animation: spin 2s infinite linear;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
 }
 
-.hidepanel.hidepanel-add-active,
-.hidepanel.hidepanel-remove {
-  transform: translate3d(0, 0, 0);
-  /*transform: scaleY(0);*/
-  max-height: 1000px;
-  opacity: 1;
-
+@-moz-keyframes spin {
+    0% {
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(359deg);
+        -ms-transform: rotate(359deg);
+        -o-transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }
 
-
-.hidepanel {
-  transform: translate3d(-100%, 0, 0);
-  /*transform: scaleY(0);*/
-  max-height: 0;
-  opacity: 0;
+@-webkit-keyframes spin {
+    0% {
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(359deg);
+        -ms-transform: rotate(359deg);
+        -o-transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }
 
-
-#navview {
-    padding-top: 55px;
+@keyframes spin {
+    0% {
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(359deg);
+        -ms-transform: rotate(359deg);
+        -o-transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }

@@ -5,7 +5,7 @@ module CalculatorViews {
     static Ctor = (() => viewsCollection.add(new ViewDescription('GFR', 'GFR', 'Παθολογία', 'Παθολογία', GFR)))();
 
     id: string = 'GFR';
-    name: string = 'GFR';
+    name: string = 'Glomerular Filtration Rate';
     category: string = 'Παθολογία';
     tags: string = 'Παθολογία renal';
     template: string = 'calculator.basic';
