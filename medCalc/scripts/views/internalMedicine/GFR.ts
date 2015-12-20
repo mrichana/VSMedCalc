@@ -5,9 +5,9 @@ module CalculatorViews {
     static Ctor = (() => viewsCollection.add(new ViewDescription('GFR', 'GFR', 'Παθολογία', 'Παθολογία', GFR)))();
 
     id: string = 'GFR';
-    name: string = 'Glomerular Filtration Rate';
+    name: string = 'Ρυθμός Σπειραματικής Διήθησης';
     category: string = 'Παθολογία';
-    tags: string = 'Παθολογία renal';
+    tags: string = 'Παθολογία renal gfr creatinine clearance';
     template: string = 'calculator.basic';
     defaultValues = {
       Plasma_Creatinine: 1.0,
@@ -44,19 +44,19 @@ module CalculatorViews {
 
       if (ret.result < 15) {
         ret.explanation = 'Νεφρική ανεπάρκεια';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else if (ret.result < 30) {
         ret.explanation = 'Νεφρική βλάβη με σοβαρή μείωση του GFR';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else if (ret.result < 60) {
         ret.explanation = 'Νεφρική βλάβη με μέτρια μείωση του GFR';
-        ret.resultlevel = 2;
+        ret.resultlevel=resultLevel.Intermediate;
       } else if (ret.result < 90) {
         ret.explanation = 'Νεφρική βλάβη με ήπια μείωση του GFR';
-        ret.resultlevel = 1;
+        ret.resultlevel=resultLevel.Normal;
       } else {
         ret.explanation = 'Φυσιολογική νεφρική λειτουργία';
-        ret.resultlevel = 0;
+        ret.resultlevel=resultLevel.Normal;
       }
       return ret;
     };

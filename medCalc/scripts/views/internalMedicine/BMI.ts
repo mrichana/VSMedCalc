@@ -25,28 +25,28 @@ module CalculatorViews {
 
       if (ret.result > 40) {
           ret.explanation = 'Νοσογόνος Παχυσαρκία';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
       } else if (ret.result > 35) {
           ret.explanation = 'Παχύσαρκος';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
       } else if (ret.result > 30) {
           ret.explanation = 'Ήπια Παχύσαρκος';
-          ret.resultlevel = 2;
+          ret.resultlevel=resultLevel.Intermediate;
       } else if (ret.result > 25) {
           ret.explanation = 'Υπέρβαρος';
-          ret.resultlevel = 1;
+          ret.resultlevel=resultLevel.Normal;
       } else if (ret.result > 18.5) {
           ret.explanation = 'Υγειές Βάρος';
-          ret.resultlevel = 0;
+          ret.resultlevel=resultLevel.Normal;
       } else if (ret.result > 16) {
           ret.explanation = 'Ελιποβαρής';
-          ret.resultlevel = 1;
+          ret.resultlevel=resultLevel.Normal;
       } else if (ret.result > 15) {
           ret.explanation = 'Έντονα Ελιποβαρής';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
       } else {
           ret.explanation = 'Καχεκτικός';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
       }
       return ret;
     };

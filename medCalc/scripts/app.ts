@@ -21,7 +21,6 @@ module app {
         //  .controller('patientCtrl', controllers.patientCtrl)
         //  .controller('patientsCtrl', controllers.patientsCtrl)
 
-        .directive('mrScrollTo', directives.mrScrollTo)
         .directive('navView', directives.navView)
         .directive('result', directives.result)
         .directive('view', directives.view)
@@ -31,9 +30,12 @@ module app {
             $mdIconProvider
                 .icon('menu', 'fonts/menu.svg', 24)
                 .icon('reset', 'fonts/reset.svg', 24)
-                .icon('check', 'fonts/check.svg', 24)
-                .icon('info', 'fonts/info.svg', 24)
-                .icon('error', 'fonts/error.svg', 24);
+                .icon('edit', 'fonts/edit.svg', 24)
+                .icon('close', 'fonts/close.svg', 24)
+
+                .icon('check', 'fonts/check.svg', 48)
+                .icon('info', 'fonts/info.svg', 48)
+                .icon('error', 'fonts/error.svg', 48);
 
             $mdThemingProvider.theme('default')
                 .primaryPalette('blue')
@@ -41,5 +43,5 @@ module app {
 
         }])
         .value('duScrollDuration', 2000)
-        .value('duScrollActiveClass', 'md-accent');
+        .value('duScrollActiveClass', 'md-primary');
 }

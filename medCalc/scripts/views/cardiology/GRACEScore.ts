@@ -209,14 +209,14 @@ module CalculatorViews {
 
       if (ret.result > 118) {
         ret.explanation += ', στους 6 μήνες >8%';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else
         if (ret.result > 88) {
           ret.explanation += ', στους 6 μήνες 3-8%';
-          ret.resultlevel = 2;
+          ret.resultlevel=resultLevel.Intermediate;
         } else {
           ret.explanation += ', στους 6 μήνες <3%';
-          ret.resultlevel = 0;
+          ret.resultlevel=resultLevel.Normal;
         }
 
       return ret;

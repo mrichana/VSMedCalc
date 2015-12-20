@@ -61,19 +61,19 @@ module CalculatorViews {
 
       if (ret.result >= 73) {
         ret.explanation = 'Μεγάλη διάταση αριστερού κόλπου';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else if (ret.result >= 63) {
         ret.explanation = 'Μέτρια διάταση αριστερού κόλπου';
-        ret.resultlevel = 2;
+        ret.resultlevel=resultLevel.Intermediate;
       } else if (ret.result >= 53) {
         ret.explanation = 'Μικρή διάταση αριστερού κόλπου';
-        ret.resultlevel = 1;
+        ret.resultlevel=resultLevel.Normal;
       } else if (ret.result >= 22) {
         ret.explanation = 'Φυσιολογικές διάστασεις αριστερού κόλπου';
-        ret.resultlevel = 0;
+        ret.resultlevel=resultLevel.Normal;
       } else {
         ret.explanation = 'Υπερβολικά χαμηλή τιμή - Πιθανό λάθος μετρήσεως';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       }
 
       return ret;

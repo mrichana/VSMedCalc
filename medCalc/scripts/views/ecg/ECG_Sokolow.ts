@@ -62,11 +62,11 @@ module CalculatorViews {
       if (hypertrophy) {
           ret.result = 'Θετικός για υπερτροφία μυοκαρδίου';
           ret.explanation = 'Ειδικότητα 100%';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
       } else {
           ret.result = 'Αρνητικός για υπερτροφία μυοκαρδίου';
           ret.explanation = 'Ευαισθησία 22%';
-          ret.resultlevel = 0;
+          ret.resultlevel=resultLevel.Normal;
       }
       return ret;
     };

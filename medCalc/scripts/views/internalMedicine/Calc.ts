@@ -27,17 +27,17 @@ module CalculatorViews {
       try {
         ret.formula = values.Calculation;
         ret.result = math.eval(ret.formula);
-        ret.resultlevel = 0;
+        ret.resultlevel = resultLevel.Unknown;
         if (!angular.isNumber(ret.result)) {
           throw 'nan';
         }
         if (!isFinite(ret.result)) {
           ret.result = 'Άπειρο';
-          ret.resultlevel = 2;
+          ret.resultlevel=resultLevel.Intermediate;
         }
       } catch (err) {
         ret.result = 'Λάθος Υπολογισμός';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       }
       return ret;
     };

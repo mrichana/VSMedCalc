@@ -51,7 +51,7 @@ module CalculatorViews {
       ret.formula = '60*ECG_PaperSpeed/ECG_HRQRS2QRSmm/ECG_Cycles';
       ret.result = View.roundNum(View.evaluator(values, ret.formula));
       ret.suffix = ' BPM';
-      ret.resultlevel = 0;
+      ret.resultlevel=resultLevel.Normal;
       return ret;
     };
   }

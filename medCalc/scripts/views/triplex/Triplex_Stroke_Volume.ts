@@ -42,9 +42,9 @@ module CalculatorViews {
       ret.suffix = 'cm<sup>3</sup>'
 
       if (ret.result < 60) {
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else {
-        ret.resultlevel = 1;
+        ret.resultlevel=resultLevel.Normal;
       }
       return ret;
     };

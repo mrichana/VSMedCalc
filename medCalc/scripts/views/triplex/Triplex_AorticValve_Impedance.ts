@@ -80,16 +80,16 @@ module CalculatorViews {
 
       if (ret.result >= 5.5) {
         ret.explanation = 'Πολύ Υψηλή Αορτοβαλβιδική Αντίσταση';
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else if (ret.result >= 4.5) {
         ret.explanation = 'Υψηλή Αορτοβαλβιδική Αντίσταση';
-        ret.resultlevel = 2;
+        ret.resultlevel=resultLevel.Intermediate;
       } else if (ret.result > 3.50) {
         ret.explanation = 'Μέτρια Αορτοβαλβιδική Αντίσταση';
-        ret.resultlevel = 1;
+        ret.resultlevel=resultLevel.Normal;
       } else {
         ret.explanation = 'Μικρή Αορτοβαλβιδική Αντίσταση';
-        ret.resultlevel = 0;
+        ret.resultlevel=resultLevel.Normal;
       }
       return ret;
     };

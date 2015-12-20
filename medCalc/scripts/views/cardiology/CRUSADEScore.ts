@@ -139,11 +139,11 @@ module CalculatorViews {
 
       ret.explanation = 'Πιθανότητα σοβαρής αιμορραγίας κατά την νοσηλεία: ' + probability[ret.result] + '%';
       if (ret.result >= 40) {
-        ret.resultlevel = 3;
+          ret.resultlevel = resultLevel.Abnormal;
       } else if (ret.result >= 30) {
-        ret.resultlevel = 2;
+        ret.resultlevel=resultLevel.Intermediate;
       } else {
-        ret.resultlevel = 1;
+        ret.resultlevel=resultLevel.Normal;
       }
 
       return ret;

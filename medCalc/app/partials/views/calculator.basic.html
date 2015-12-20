@@ -16,11 +16,16 @@
             </div>
             <div class="hint">{{field.description}}</div>
         </md-input-container>-->
-        <md-input-container ng-switch-when="number">
-            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
-            <input type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
-            <div class="hint">{{field.description}}</div>
-        </md-input-container>
+        <div layout="row" ng-switch-when="number">
+            <md-input-container flex>
+                <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+                <input type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
+                <div class="hint">{{field.description}}</div>
+            </md-input-container>
+            <md-button class="md-icon-button" aria-label="Υπολογισμός..." ng-if="field.calculatorView" ng-click="modalCalculator(field.calculatorView, $event)">
+                <md-icon md-svg-icon="edit" />
+            </md-button>
+        </div>
         <md-input-container ng-switch-when="text">
             <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
             <input type="text" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" maxlength="{{field.input.length || 524288}}" ng-model="view.values[field.id]" />

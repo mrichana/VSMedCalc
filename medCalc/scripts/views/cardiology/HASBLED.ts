@@ -91,31 +91,31 @@ module CalculatorViews {
       switch (ret.result) {
           case 0:
               ret.explanation = 'Ο κίνδυνος είναι 0.9%';
-              ret.resultlevel = 0;
+              ret.resultlevel=resultLevel.Normal;
               break;
           case 1:
               ret.explanation = 'Ο κίνδυνος είναι 3.4%';
-              ret.resultlevel = 0;
+              ret.resultlevel=resultLevel.Normal;
               break;
           case 2:
               ret.explanation = 'Ο κίνδυνος είναι 4.1%';
-              ret.resultlevel = 1;
+              ret.resultlevel=resultLevel.Normal;
               break;
           case 3:
               ret.explanation = 'Ο κίνδυνος είναι 5.8%';
-              ret.resultlevel = 1;
+              ret.resultlevel=resultLevel.Normal;
               break;
           case 4:
               ret.explanation = 'Ο κίνδυνος είναι 8.9%';
-              ret.resultlevel = 2;
+              ret.resultlevel=resultLevel.Intermediate;
               break;
           case 5:
               ret.explanation = 'Ο κίνδυνος είναι 9.1%';
-              ret.resultlevel = 2;
+              ret.resultlevel=resultLevel.Intermediate;
               break;
           default:
               ret.explanation = 'Δεν έχει υπολογισθεί ο κίνδυνος';
-              ret.resultlevel = 3;
+              ret.resultlevel=resultLevel.Abnormal;
               break;
       }
 

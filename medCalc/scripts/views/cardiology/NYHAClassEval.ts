@@ -44,19 +44,19 @@ module CalculatorViews {
 
       if (result === 'IV') {
           ret.explanation = 'Έντονος περιορισμός δραστηριότητας λόγω συμπτωμάτων. Παρουσία συμπτωμάτων κατά την ανάπαυση';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
       }
       if (result === 'III') {
           ret.explanation = 'Σημαντικός περιορισμός δραστηριότητας λόγω συμπτωμάτων, ακόμα και σε μικρότερη από φυσιολογική δραστηριότητα. Απουσία συμπτωμάτων κατά την ανάπαυση';
-          ret.resultlevel = 2;
+          ret.resultlevel=resultLevel.Intermediate;
       }
       if (result === 'II') {
           ret.explanation = 'Ήπια συμπτώματα και μικρός περιορισμός κατά την φυσιολογική δραστηριότητα';
-          ret.resultlevel = 1;
+          ret.resultlevel=resultLevel.Normal;
       }
       if (result === 'I') {
           ret.explanation = 'Απουσία συμπτωμάτων και κανένας περιορισμός στην φυσιολογική φυσική δραστηριότητα';
-          ret.resultlevel = 0;
+          ret.resultlevel=resultLevel.Normal;
       }
 
       return ret;

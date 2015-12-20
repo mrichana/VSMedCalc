@@ -46,19 +46,19 @@ module CalculatorViews {
       switch (result) {
         case 'I':
           ret.explanation = 'Απουσία κλινικών σημείων καρδιακής ανεπάρκειας';
-          ret.resultlevel = 0;
+          ret.resultlevel=resultLevel.Normal;
           break;
         case 'II':
           ret.explanation = 'Υγροί πνευμονικοί ήχοι, Τρίτος τόνος, Αυξημένη Πίεση Σφαγιτιδικών Φλεβών';
-          ret.resultlevel = 1;
+          ret.resultlevel=resultLevel.Normal;
           break;
         case 'III':
           ret.explanation = 'Οξύ Πνευμονικό Οίδημα';
-          ret.resultlevel = 2;
+          ret.resultlevel=resultLevel.Intermediate;
           break;
         case 'IV':
           ret.explanation = 'Καρδιογενές Σόκ ή Υπόταση (ΑΠ<90mmHg) και σημεία περιφερικού αγγειόσπασμου (Ολιγουρία, Κυάνωση ή Εφύδρωση)';
-          ret.resultlevel = 3;
+          ret.resultlevel=resultLevel.Abnormal;
           break;
       }
 

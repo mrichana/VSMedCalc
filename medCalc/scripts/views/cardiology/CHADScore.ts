@@ -71,15 +71,15 @@ module CalculatorViews {
       var explanations = [0, 1.3, 2.2, 3.2, 4.0, 6.7, 9.8, 9.6, 6.7, 15.2];
       ret.explanation = 'Πιθανότητα ισχαιμικού ΑΕΕ: ' + explanations[ret.result] + '% ανά έτος';
       switch (ret.result) {
-        case 0:
-          ret.resultlevel = 0;
+          case 0:
+              ret.resultlevel = resultLevel.Normal;
           break;
         case 1:
         case 2:
-          ret.resultlevel = 1;
+            ret.resultlevel = resultLevel.Intermediate;
           break;
         default:
-          ret.resultlevel = 2;
+            ret.resultlevel = resultLevel.Abnormal;
       }
       return ret;
     };

@@ -83,16 +83,16 @@ module CalculatorViews {
       ret.result += (values.Age>65)?1:0;
 
       if (ret.result>=11) {
-          ret.explanation="Υψηλή κλινική πιθανότητα";
-          ret.resultlevel=3;
+          ret.explanation = "Υψηλή κλινική πιθανότητα";
+          ret.resultlevel = resultLevel.Abnormal;
       }
       else if (ret.result>=4) {
-          ret.explanation="Ενδιάμεση κλινική πιθανότητα";
-          ret.resultlevel=2;
+          ret.explanation = "Ενδιάμεση κλινική πιθανότητα";
+          ret.resultlevel = resultLevel.Intermediate;
       }
       else {
-          ret.explanation="Χαμηλή κλινική πιθανότητα";
-          ret.resultlevel=0;
+          ret.explanation = "Χαμηλή κλινική πιθανότητα";
+          ret.resultlevel = resultLevel.Normal;
       };
 
       return ret;

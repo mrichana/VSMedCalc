@@ -100,10 +100,10 @@ gulp.task('copyTypescript', function () {
         "scripts/filters.ts",
         "scripts/directives.ts",
         "scripts/app.ts"
-    ])
+    ], { base: 'scripts/' })
     .pipe(sourcemap.init())
     .pipe(tsc({
-        noImnoImplicitAny: true,
+        noImplicitAny: false,
         outDir: 'www/scripts',
         target: 'ES5'
     }))
@@ -124,6 +124,7 @@ gulp.task('serve', ['watch'], function () {
 });
 
 gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
+    gulp.watch("fonts/**/*.svg", ['copyFonts']);
     gulp.watch("scripts/**/*.ts", ['copyTypescript']);
     gulp.watch("app/**/*.css", ['copyCss']);
     gulp.watch("app/**/*.html", ['copyHtml']);

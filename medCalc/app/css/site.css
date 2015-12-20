@@ -38,11 +38,11 @@
 
 @-moz-keyframes spin {
     0% {
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
     }
     100% {
         -moz-transform: rotate(359deg);
@@ -55,11 +55,11 @@
 
 @-webkit-keyframes spin {
     0% {
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
     }
     100% {
         -moz-transform: rotate(359deg);
@@ -72,11 +72,11 @@
 
 @keyframes spin {
     0% {
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
     }
     100% {
         -moz-transform: rotate(359deg);
@@ -85,4 +85,50 @@
         -webkit-transform: rotate(359deg);
         transform: rotate(359deg);
     }
+}
+
+md-icon svg {
+    fill: inherit;
+}
+
+md-card.result {
+    background-color:lightgray;
+}
+md-card.result.normal {
+    background-color:aliceblue;
+}
+
+md-card.result.intermediate {
+    background-color:paleturquoise;
+}
+md-card.result.abnormal {
+    background-color:lightpink;
+}
+
+md-card.result md-card-header md-card-avatar, md-card md-card-header:last-child md-card-avatar {
+    margin-left: 0;
+
+}
+
+md-card.result md-card-header md-card-avatar md-icon {
+    padding: 0;
+    background-color: inherit;
+    height: 40px;
+    width: 40px;
+}
+
+md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon {
+    border-radius: 0;
+}
+
+md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.normal {
+    fill: darkgreen;
+}
+
+md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.intermediate {
+    fill: darkblue;
+}
+
+md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.abnormal {
+    fill: darkred;
 }

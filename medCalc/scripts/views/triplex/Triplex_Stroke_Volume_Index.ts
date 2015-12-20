@@ -51,9 +51,9 @@ module CalculatorViews {
       ret.formula = '( ( pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_VTI ) / BSA ';
       ret.result = View.roundNum(View.evaluator(values, ret.formula));
       if (ret.result < 35) {
-        ret.resultlevel = 3;
+        ret.resultlevel=resultLevel.Abnormal;
       } else {
-        ret.resultlevel = 1;
+        ret.resultlevel=resultLevel.Normal;
       }
       return ret;
     };

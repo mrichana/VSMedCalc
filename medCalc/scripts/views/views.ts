@@ -126,7 +126,10 @@ module CalculatorViews {
     tags: string;
     template: string;
     defaultValues: any;
+
     fields: IField[];
+    external: IField[];
+
     hidden: boolean;
 
     values: any;
@@ -140,10 +143,18 @@ module CalculatorViews {
     result: Result;
   }
 
+  export enum resultLevel {
+      Unknown,
+      Normal, 
+      Intermediate,
+      Abnormal,
+      Severe
+  }
+
   export class Result {
     result: any;
     explanation: string;
-    resultlevel: number;
+    resultlevel: resultLevel = resultLevel.Unknown;
 
     prefix: string = '';
     suffix: string = '';
@@ -158,7 +169,10 @@ module CalculatorViews {
     tags: string;
     template: string;
     defaultValues: any;
+
     fields: IField[];
+    external: IField[];
+
     hidden: boolean;
 
     values: any;
@@ -171,12 +185,7 @@ module CalculatorViews {
 
     init() {
       _.defaults(this.values, this.defaultValues);
-      /*if (!this.parent) {
-        this.values = this.values || {};
-      } else {
-        this.values = this.parent.values;
-      };*/
-    }
+   }
 
     reset() {
       _.extend(this.values, this.defaultValues);

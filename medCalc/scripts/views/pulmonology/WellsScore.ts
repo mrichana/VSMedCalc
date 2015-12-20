@@ -79,16 +79,16 @@ module CalculatorViews {
       ret.result += values.PEMostLikely*3;
 
       if (ret.result>=7) {
-          ret.explanation="Υψηλή κλινική πιθανότητα";
-          ret.resultlevel=3;
+          ret.explanation = "Υψηλή κλινική πιθανότητα";
+          ret.resultlevel = resultLevel.Abnormal;
       }
       else if (ret.result>=2) {
-          ret.explanation="Ενδιάμεση κλινική πιθανότητα";
-          ret.resultlevel=2;
+          ret.explanation = "Ενδιάμεση κλινική πιθανότητα";
+          ret.resultlevel = resultLevel.Intermediate;
       }
       else {
-          ret.explanation="Χαμηλή κλινική πιθανότητα";
-          ret.resultlevel=0;
+          ret.explanation = "Χαμηλή κλινική πιθανότητα";
+          ret.resultlevel = resultLevel.Normal;
       };
 
       return ret;
