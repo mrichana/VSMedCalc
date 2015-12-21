@@ -94,7 +94,7 @@ module CalculatorViews {
       var ret = new Result();
       ret.result = 0;
       ret.result += values.Age;
-      ret.result += (values.Sex) ? 0 : 10;
+      ret.result += (values.Sex == 'f') ? 0 : 10;
       ret.result += values.Cancer * 30;
       ret.result += values.HistoryOf_CHF * 10;
       ret.result += values.HistoryOf_PulmonaryDisease * 10;

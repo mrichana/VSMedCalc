@@ -33,7 +33,7 @@ module CalculatorViews {
     ];
     calculator(values) {
       var ret = new Result();
-      if (values.Sex === 0) {
+      if (values.Sex == 'm') {
         values['GFR_Sex'] = 1;
       } else {
         values['GFR_Sex'] = 0.85;

@@ -11,7 +11,7 @@ module CalculatorViews {
     template: string = 'calculator.basic';
     defaultValues = {
       Age: 65,
-      Sex: 0,
+      Sex: 'm',
       GFR: 73,
       HistoryOf_VascularDisease: false,
       HistoryOf_PoorMobility: false,
@@ -188,7 +188,7 @@ module CalculatorViews {
 
       var value = -5.324537;
       value += (0.0285181 * (values.Age < 60 ? 1 : values.Age - 59));
-      value += (values.Sex * 0.2196434);
+      value += ((values.Sex=='m')?0:0.2196434);
 
       value += (values.GFR == 0 ? 0.6421508 : (values.GFR < 50 ? 0.8592256 : (values.GFR < 85 ? 0.30355 : 0)));
       value += (values.HistoryOf_VascularDisease * 0.5360268);

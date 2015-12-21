@@ -11,7 +11,7 @@ module CalculatorViews {
     template: string = 'calculator.basic';
     defaultValues = {
       Age: 65,
-      Sex: 0,
+      Sex: 'm',
       BloodPressure_Systolic: 120,
       Smoker: false,
       Cholesterol: 180
@@ -177,7 +177,7 @@ module CalculatorViews {
     calculator(values) {
       var ret = new Result();
 
-      var results = this.results[(!values.sex) ? 'male' : 'female'][(values.Smoker) ? 'smoker' : 'nonsmoker']
+      var results = this.results[(values.Sex=='m') ? 'male' : 'female'][(values.Smoker) ? 'smoker' : 'nonsmoker']
       if (values.Age < 45) {
         results = results[0];
       } else if (values.Age < 53) {

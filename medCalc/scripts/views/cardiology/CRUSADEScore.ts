@@ -17,7 +17,7 @@ module CalculatorViews {
       HistoryOf_VascularDisease: false,
       HistoryOf_Diabetes: false,
       CRUSADEScore_CHFAtPresentation: false,
-      Sex: 0
+      Sex: 'm'
     };
     fields: IField[] = [
       {
@@ -135,7 +135,7 @@ module CalculatorViews {
       ret.result += values.HistoryOf_VascularDisease ? 6 : 0;
       ret.result += values.HistoryOf_Diabetes ? 6 : 0;
       ret.result += values.CRUSADEScore_CHFAtPresentation ? 7 : 0;
-      ret.result += values.Sex ? 8 : 0;
+      ret.result += (values.Sex == 'f')? 8 : 0;
 
       ret.explanation = 'Πιθανότητα σοβαρής αιμορραγίας κατά την νοσηλεία: ' + probability[ret.result] + '%';
       if (ret.result >= 40) {

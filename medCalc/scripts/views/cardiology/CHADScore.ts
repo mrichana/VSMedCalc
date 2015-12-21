@@ -16,7 +16,7 @@ module CalculatorViews {
       'HistoryOf_Diabetes': false,
       'HistoryOf_Stroke': false,
       'HistoryOf_VascularDisease': false,
-      'Sex': 0
+      'Sex': 'm'
     };
     fields: IField[] = [
       {
@@ -66,7 +66,7 @@ module CalculatorViews {
       ret.result += values.HistoryOf_Diabetes ? 1 : 0;
       ret.result += values.HistoryOf_Stroke ? 2 : 0;
       ret.result += values.HistoryOf_VascularDisease ? 1 : 0;
-      ret.result += values.Sex ? 1 : 0;
+      ret.result += (values.Sex=='f') ? 1 : 0;
 
       var explanations = [0, 1.3, 2.2, 3.2, 4.0, 6.7, 9.8, 9.6, 6.7, 15.2];
       ret.explanation = 'Πιθανότητα ισχαιμικού ΑΕΕ: ' + explanations[ret.result] + '% ανά έτος';
