@@ -9,11 +9,13 @@ module controllers {
         onFilterTextChange
         setFilter(filterName: string): void;
         location: string;
-        views: CalculatorViews.IViewDescriptionList;
-        panelsList: CalculatorViews.IView[];
-        categories: any;
+        views: CalculatorViews.IViewDescriptions;
+        categories: _.Dictionary<_.Dictionary<CalculatorViews.IView>>;
+        tags: string[];
         values: any;
 
+        openLeftPanel(): void;
+        closeLeftPanel(): void;
         toggleLeftPanel(): void;
 
         currentCategory: string;
@@ -25,13 +27,21 @@ module controllers {
     /* Controllers */
     export class calculatorController {
         public static $inject = ['$scope', '$location', '$mdSidenav'];
-        constructor(private $scope: ICalculatorScope, private $location: ng.ILocationService, private $mdSidenav) {
-            var views = CalculatorViews.viewsCollection;
+        constructor(private $scope: ICalculatorScope, private $location: ng.ILocationService, private $mdSidenav: angular.material.ISidenavService) {
             $scope.filterText = '';
             $scope.values = {};
+            var views = new CalculatorViews.viewsCollection($scope.values);
 
             $scope.toggleLeftPanel = function () {
                 $mdSidenav('left').toggle();
+            }
+
+            $scope.openLeftPanel = function () {
+                $mdSidenav('left').open();
+            }
+
+            $scope.closeLeftPanel = function () {
+                $mdSidenav('left').close();
             }
 
             $scope.$watch("filterText", function(newValue, olValue) {
@@ -40,23 +50,19 @@ module controllers {
 
             $scope.setFilter = function (filterText: string = "") {
                 $scope.views = views.filter(filterText);
-                $scope.panelsList = _.map($scope.views.list, function (viewDesc: CalculatorViews.IViewDescription) {
-                    var ret = viewDesc.factory($scope.values);
-                    ret.hidden = viewDesc.hidden;
-                    return ret;
+                $scope.categories = $scope.views.categories;
+                var regex = new RegExp(filterText, 'i');
+                $scope.tags = _.values($scope.views.tags).filter((tag: CalculatorViews.TagDescription): boolean => {
+                    return regex.test(tag.name);
                 });
             };
-            $scope.setFilter('');
 
             $scope.clearSearchBox = function() {
               $scope.filterText='';
             };
 
             $scope.clearPanel = function (id) {
-                var panel = _.find($scope.panelsList, function (panel) {
-                    return panel.id === id;
-                });
-                panel.reset();
+                $scope.views.views[id].reset();
             };
         };
     }

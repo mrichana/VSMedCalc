@@ -10,7 +10,6 @@ module app {
     angular.module('medicalCalculator', [
         'medical.services',
         'ngAnimate',
-        'ngSanitize',
         'ngMaterial',
         'duScroll'
     ])
@@ -21,6 +20,9 @@ module app {
         //  .controller('patientCtrl', controllers.patientCtrl)
         //  .controller('patientsCtrl', controllers.patientsCtrl)
 
+        .directive('sticky', directives.sticky)
+        .directive('selectOnClick', directives.selectOnClick)
+    
         .directive('navView', directives.navView)
         .directive('result', directives.result)
         .directive('view', directives.view)
@@ -32,6 +34,7 @@ module app {
                 .icon('reset', 'fonts/reset.svg', 24)
                 .icon('edit', 'fonts/edit.svg', 24)
                 .icon('close', 'fonts/close.svg', 24)
+                .icon('search', 'fonts/search.svg', 24)
 
                 .icon('check', 'fonts/check.svg', 48)
                 .icon('info', 'fonts/info.svg', 48)
@@ -43,5 +46,10 @@ module app {
 
         }])
         .value('duScrollDuration', 2000)
-        .value('duScrollActiveClass', 'md-primary');
+        .value('duScrollActiveClass', 'md-primary')
+        .run(function ($rootScope) {
+            $rootScope.debug = function (item : any):void {
+                console.log(item);
+            }
+        });
 }

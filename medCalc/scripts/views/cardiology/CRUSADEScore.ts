@@ -2,12 +2,7 @@ module CalculatorViews {
   'use strict';
 
   class CRUSADEScore extends View {
-      static Ctor = (() => viewsCollection.add(new ViewDescription('CRUSADEScore', 'CRUSADE Score', 'Καρδιολογία', 'Καρδιολογία stemi nstemi', CRUSADEScore)))();
-
-    id: string = 'CRUSADEScore';
-    name: string = 'CRUSADE Score';
-    category: string = 'Καρδιολογία';
-    tags: string = 'Καρδιολογία stemi nstemi';
+      description = new CRUSADEScoreDescription();
     template: string = 'calculator.basic';
     defaultValues = {
       Hematocrit: 40,
@@ -17,7 +12,7 @@ module CalculatorViews {
       HistoryOf_VascularDisease: false,
       HistoryOf_Diabetes: false,
       CRUSADEScore_CHFAtPresentation: false,
-      Sex: 'm'
+      Sex: 0
     };
     fields: IField[] = [
       {
@@ -135,18 +130,31 @@ module CalculatorViews {
       ret.result += values.HistoryOf_VascularDisease ? 6 : 0;
       ret.result += values.HistoryOf_Diabetes ? 6 : 0;
       ret.result += values.CRUSADEScore_CHFAtPresentation ? 7 : 0;
-      ret.result += (values.Sex == 'f')? 8 : 0;
+      ret.result += (values.Sex)? 8 : 0;
 
       ret.explanation = 'Πιθανότητα σοβαρής αιμορραγίας κατά την νοσηλεία: ' + probability[ret.result] + '%';
       if (ret.result >= 40) {
-          ret.resultlevel = resultLevel.Abnormal;
+          ret.resultlevel = IResult.resultLevel.Abnormal;
       } else if (ret.result >= 30) {
-        ret.resultlevel=resultLevel.Intermediate;
+          ret.resultlevel = IResult.resultLevel.Intermediate;
       } else {
-        ret.resultlevel=resultLevel.Normal;
+          ret.resultlevel = IResult.resultLevel.Normal;
       }
 
       return ret;
     };
   }
+
+  class CRUSADEScoreDescription extends ViewDescription implements IViewDescription {
+      id: string = 'CRUSADEScore';
+      name: string = 'CRUSADE Score';
+      category: string = 'Καρδιολογία';
+      tags: string = 'stemi\\nstemi';
+      type: typeof View = CRUSADEScore;
+  }
+
+  viewsCollection.add(new CRUSADEScoreDescription());
+
+
+
 }

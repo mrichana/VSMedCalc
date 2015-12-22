@@ -2,12 +2,7 @@ module CalculatorViews {
   'use strict';
 
   class GRACEScore extends View {
-      static Ctor = (() => viewsCollection.add(new ViewDescription('GRACEScore', 'GRACE Score', 'Καρδιολογία', 'Καρδιολογία stemi nstemi', GRACEScore)))();
-
-    id: string = 'GRACEScore';
-    name: string = 'GRACE Score';
-    category: string = 'Καρδιολογία';
-    tags: string = 'Καρδιολογία stemi nstemi';
+      description = new GRACEScoreDescription();
     template: string = 'calculator.basic';
     defaultValues = {
       GRACEScore_arrest: false,
@@ -209,17 +204,27 @@ module CalculatorViews {
 
       if (ret.result > 118) {
         ret.explanation += ', στους 6 μήνες >8%';
-        ret.resultlevel=resultLevel.Abnormal;
+        ret.resultlevel=IResult.resultLevel.Abnormal;
       } else
         if (ret.result > 88) {
           ret.explanation += ', στους 6 μήνες 3-8%';
-          ret.resultlevel=resultLevel.Intermediate;
+          ret.resultlevel=IResult.resultLevel.Intermediate;
         } else {
           ret.explanation += ', στους 6 μήνες <3%';
-          ret.resultlevel=resultLevel.Normal;
+          ret.resultlevel=IResult.resultLevel.Normal;
         }
 
       return ret;
     };
   }
+
+  class GRACEScoreDescription extends ViewDescription implements IViewDescription {
+      id: string = 'GRACEScore';
+      name: string = 'GRACE Score';
+      category: string = 'Καρδιολογία';
+      tags: string = 'stemi\\nstemi';
+      type: typeof View = GRACEScore;
+  }
+
+  viewsCollection.add(new GRACEScoreDescription());
 }

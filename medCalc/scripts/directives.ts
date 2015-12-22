@@ -5,6 +5,41 @@
 module directives {
     'use strict';
 
+    export function selectOnClick($window): ng.IDirective {
+        return {
+            restrict: 'A',
+            link: function (scope: ng.IScope, element) {
+                var focusedElement;
+                element.on('click', () => {
+                    if (element[0] != focusedElement) {
+                        focusedElement = element[0];
+                        try {
+                            // ios likes this but windows-chrome does not on number fields
+                            element[0].setSelectionRange(0, element[0].value.length);
+                        } catch (e) {
+                            // windows-chrome likes this
+                            element[0].select();
+                        }
+                    }
+                });
+                element.on('blur', () => {
+                    focusedElement = null;
+                });
+            }
+        };
+    };
+    selectOnClick.$inject = ['$window'];
+
+    export function sticky($mdSticky): ng.IDirective {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                $mdSticky(scope, element);
+            }
+        }
+    };
+    sticky.$inject = ['$mdSticky'];
+
     export function navView(): ng.IDirective {
         return {
             restrict: 'E',
@@ -23,24 +58,20 @@ module directives {
                 result: '='
             },
             templateUrl: 'partials/directives/result.html',
-            link: ($scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: IViewAttributes) => {
+            link: ($scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
                 $scope.$watch('result.resultlevel', (newValue, oldValue, $scope) => {
                     switch (newValue) {
-                        case CalculatorViews.resultLevel.Normal:
+                        case CalculatorViews.IResult.resultLevel.Normal:
                             $scope['resultLevelIcon'] = 'check';
                             $scope['resultLevelClass'] = 'normal';
                             break;
-                        case CalculatorViews.resultLevel.Intermediate:
+                        case CalculatorViews.IResult.resultLevel.Intermediate:
                             $scope['resultLevelIcon'] = 'info';
                             $scope['resultLevelClass'] = 'intermediate';
                             break;
-                        case CalculatorViews.resultLevel.Abnormal:
+                        case CalculatorViews.IResult.resultLevel.Abnormal:
                             $scope['resultLevelIcon'] = 'error';
                             $scope['resultLevelClass'] = 'abnormal';
-                            break;
-                        case CalculatorViews.resultLevel.Severe:
-                            $scope['resultLevelIcon'] = 'check';
-                            $scope['resultLevelClass'] = 'severe';
                             break;
                         default:
                             $scope['resultLevelIcon'] = '';
@@ -56,8 +87,6 @@ module directives {
         modalCalculator(calculatorView: CalculatorViews.IView, $event: ng.IAugmentedJQuery): void;
     };
 
-    interface IViewAttributes extends ng.IAttributes {
-    };
     export function view($compile: ng.ICompileService, $http: ng.IHttpService, $templateCache: ng.ITemplateCacheService, $timeout: ng.ITimeoutService, $q, $mdDialog): ng.IDirective {
         var promise;
         return {
@@ -65,7 +94,7 @@ module directives {
             scope: {
                 view: '='
             },
-            link: ($scope: IViewScope, element: ng.IAugmentedJQuery, attributes: IViewAttributes) => {
+            link: ($scope: IViewScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
                 _.each($scope.view.fields, function (field: CalculatorViews.IField) {
                     if (field.id != 'result') {
                         $scope.$watch('view.values.' + field.id, function (newValue, oldValue, $scope: IViewScope) {

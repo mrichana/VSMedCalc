@@ -38,27 +38,32 @@
 </head>
 
 <body ng-app="medicalCalculator" ng-controller="calculatorController" layout="row" ng-cloak>
-    <md-sidenav layout="column"
-                class="site-sidenav md-sidenav-left md-whiteframe-z2"
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                layout="column"
                 md-component-id="left"
+                md-swipe-left="closeLeftPanel()"
                 md-is-locked-open="$mdMedia('gt-sm')">
 
-        <md-input-container>
-            <input type="text" class="form-control search-query" placeholder="Αναζήτηση..." ng-model="filterText" ng-model-options="{ debounce: 300 }" />
+        <md-input-container md-no-float class="search">
+            <md-icon md-svg-src="search"></md-icon>
+            <input ng-model="filterText" type="text" placeholder="Αναζήτηση...">
         </md-input-container>
-        <md-content flex md-scroll-y role="navigation">
-            <md-list id="navview" du-spy-context du-scroll-container="viewCards">
-                <md-list-item 
-                              ng-hide="view.hidden"
-                              class="nav-view-item"
-                              ng-repeat="view in panelsList track by view.id">
-                    <nav-view ng-click="$parent.toggleLeftPanel()"></nav-view>
-                </md-list-item>
-            </md-list>
+
+        <md-content md-scroll-y
+                    role="navigation">
+            <div ng-repeat="(categoryName, category) in categories">
+                <md-subheader class="md-primary">{{categoryName}}</md-subheader>
+                <md-list id="navview" du-spy-context du-scroll-container="viewCards">
+                    <md-list-item class="nav-view-item"
+                                  ng-repeat="view in category track by view.description.id">
+                        <nav-view></nav-view>
+                    </md-list-item>
+                </md-list>
+            </div>
         </md-content>
     </md-sidenav>
 
-    <div flex layout="column" tabIndex="-1" role="main">
+    <div flex layout="column" tabIndex="-1" role="main" md-swipe-right="openLeftPanel()">
         <md-toolbar layout="row" class="md-whiteframe-z1">
             <md-button class="menu" hide-gt-sm ng-click="toggleLeftPanel()" aria-label="Show Calculators List">
                 <md-icon md-svg-icon="menu"></md-icon>
@@ -68,28 +73,49 @@
             </div>
         </md-toolbar>
 
-        <md-content id="viewCards" flex layout="column" md-scroll-y layout-padding>
-            <md-card class="viewCard"
-                     id="{{view.id}}" 
-                     ng-hide="view.hidden"
-                     ng-repeat="view in panelsList track by view.id">
-                <md-card-title>
-                    <md-card-title-text layout="row">
-                        <span class="md-headline">{{view.name}}</span>
-                        <span flex></span>
-                        <md-button 
-                                   class="md-icon-button" 
-                                   aria-label="Reset Calculation"
-                                   ng-show="view.reset" 
-                                   verified-click="clearPanel(view.id)">
-                            <md-icon md-svg-icon="reset"></md-icon>
-                        </md-button>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                    <view view="view"></view>
-                </md-card-content>
-            </md-card>
+        <md-content id="viewCards" md-scroll-y layout-padding>
+            <div ng-repeat="(categoryName, category) in categories">
+                <md-subheader class="md-no-sticky">{{categoryName}}</md-subheader>
+                <div>
+                    <div class="viewCard"
+                                  id="{{view.description.id}}"
+                                  ng-repeat="view in category track by view.description.id">
+                        <div layout="row">
+                            <span class="md-headline">{{view.description.name}}</span>
+                            <span flex></span>
+                            <md-button class="md-icon-button"
+                                       aria-label="Reset Calculation"
+                                       ng-show="view.reset"
+                                       verified-click="clearPanel(view.description.id)">
+                                <md-icon md-svg-icon="reset"></md-icon>
+                            </md-button>
+                        </div>
+                        <div>
+                            <view view="view"></view>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </div>
+                </div>
+                <!--<md-card class="viewCard"
+                         id="{{view.description.id}}"
+                         ng-repeat="view in category track by view.description.id">
+                    <md-card-title>
+                        <md-card-title-text layout="row">
+                            <span class="md-headline">{{view.description.name}}</span>
+                            <span flex></span>
+                            <md-button class="md-icon-button"
+                                       aria-label="Reset Calculation"
+                                       ng-show="view.reset"
+                                       verified-click="clearPanel(view.description.id)">
+                                <md-icon md-svg-icon="reset"></md-icon>
+                            </md-button>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <view view="view"></view>
+                    </md-card-content>
+                </md-card>-->
+            </div>
         </md-content>
     </div>
 </body>

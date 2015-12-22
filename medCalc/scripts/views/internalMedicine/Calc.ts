@@ -1,45 +1,50 @@
 module CalculatorViews {
-  'use strict';
+    'use strict';
 
-  class Calc extends View {
-    static Ctor = (() => viewsCollection.add(new ViewDescription('Calc', 'Υπολογιστής', 'Παθολογία', 'Παθολογία', Calc)))();
+    class Calc extends View {
+        description = new CalcDescription();
 
-    id: string = 'Calc';
-    name: string = 'Υπολογιστής';
-    category: string = 'Παθολογία';
-    tags: string = 'Παθολογία';
-    template: string = 'calculator.basic';
-    defaultValues = {
-      Calculation: ''
-    };
-    fields: IField[] = [
-      {
-        id: 'Calculation',
-        name: 'Υπολογισμός',
-        input: {
-          type: 'text'
-        }
-      },
-      resultField
-    ];
-    calculator(values) {
-      var ret = new Result();
-      try {
-        ret.formula = values.Calculation;
-        ret.result = math.eval(ret.formula);
-        ret.resultlevel = resultLevel.Unknown;
-        if (!angular.isNumber(ret.result)) {
-          throw 'nan';
-        }
-        if (!isFinite(ret.result)) {
-          ret.result = 'Άπειρο';
-          ret.resultlevel=resultLevel.Intermediate;
-        }
-      } catch (err) {
-        ret.result = 'Λάθος Υπολογισμός';
-        ret.resultlevel=resultLevel.Abnormal;
-      }
-      return ret;
-    };
-  }
+        template: string = 'calculator.basic';
+        defaultValues = {
+            Calculation: ''
+        };
+        fields: IField[] = [
+            {
+                id: 'Calculation',
+                name: 'Υπολογισμός',
+                input: {
+                    type: 'text'
+                }
+            },
+            resultField
+        ];
+        calculator(values) {
+            var ret = new Result();
+            try {
+                ret.formula = values.Calculation;
+                ret.result = math.eval(ret.formula);
+                ret.resultlevel = IResult.resultLevel.Unknown;
+                if (!angular.isNumber(ret.result)) {
+                    throw 'nan';
+                }
+                if (!isFinite(ret.result)) {
+                    ret.result = 'Άπειρο';
+                    ret.resultlevel = IResult.resultLevel.Intermediate;
+                }
+            } catch (err) {
+                ret.result = 'Λάθος Υπολογισμός';
+                ret.resultlevel = IResult.resultLevel.Abnormal;
+            }
+            return ret;
+        };
+    }
+    class CalcDescription extends ViewDescription implements IViewDescription {
+        type: typeof View = Calc;
+        id: string = 'Calc';
+        name: string = 'Υπολογιστής';
+        category: string = 'Παθολογία';
+        tags: string = '';
+    }
+
+    viewsCollection.add(new CalcDescription());
 }

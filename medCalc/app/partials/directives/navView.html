@@ -1,9 +1,10 @@
 ﻿<md-list-item>
     <md-button
-               ng-href="#{{view.id}}"
+               ng-click="$parent.$parent.$parent.closeLeftPanel()"
+               ng-href="#{{view.description.id}}"
                du-smooth-scroll
                du-scrollspy
                duration="2000">
-        {{view.name}}
+        {{view.description.name}}
     </md-button>
 </md-list-item>

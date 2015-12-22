@@ -2,12 +2,7 @@ module CalculatorViews {
   'use strict';
 
   class Triplex_Stroke_Volume_Index extends View {
-    static Ctor = (() => viewsCollection.add(new ViewDescription('Triplex_Stroke_Volume_Index', 'Stroke Volume Index (SVi)', 'Υπερηχοκαρδιογράφημα', 'Υπερηχοκαρδιογράφημα', Triplex_Stroke_Volume_Index)))();
-
-    id: string = 'Triplex_Stroke_Volume_Index';
-    name: string = 'Stroke Volume Index (SVi)';
-    category: string = 'Υπερηχοκαρδιογράφημα';
-    tags: string = 'Υπερηχοκαρδιογράφημα';
+      description = new Triplex_Stroke_Volume_IndexDescription();
     template: string = 'calculator.basic';
     defaultValues = {
       Triplex_LVOT_Diameter: 20,
@@ -51,11 +46,23 @@ module CalculatorViews {
       ret.formula = '( ( pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_VTI ) / BSA ';
       ret.result = View.roundNum(View.evaluator(values, ret.formula));
       if (ret.result < 35) {
-        ret.resultlevel=resultLevel.Abnormal;
+        ret.resultlevel=IResult.resultLevel.Abnormal;
       } else {
-        ret.resultlevel=resultLevel.Normal;
+        ret.resultlevel=IResult.resultLevel.Normal;
       }
       return ret;
     };
   }
+
+  class Triplex_Stroke_Volume_IndexDescription extends ViewDescription implements IViewDescription {
+      id: string = 'Triplex_Stroke_Volume_Index';
+      name: string = 'Stroke Volume Index (SVi)';
+      category: string = 'Υπερηχοκαρδιογράφημα';
+      tags: string = '';
+      type: typeof View = Triplex_Stroke_Volume_Index;
+  }
+
+  viewsCollection.add(new Triplex_Stroke_Volume_IndexDescription());
+
+
 }
