@@ -2,9 +2,9 @@
   "name": "medCalc",
   "version": "1.0.0",
   "dependencies": {
-    "gulp-connect": "^2.3.1"
   },
   "devDependencies": {
+    "cordova": "^5.4.1",
     "browser-sync": "^2.10.0",
     "del": "^2.2.0",
     "es6-promise": "^3.0.2",

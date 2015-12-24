@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -61,8 +63,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '8 * Triplex_LeftAtrium_Area4Ch * Triplex_LeftAtrium_Area2Ch / ( 3 * pi * ( Triplex_LeftAtrium_Length / 10 )) / BSA';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = '8 * Triplex_LeftAtrium_Area4Ch * Triplex_LeftAtrium_Area2Ch / ( 3 * pi * ( Triplex_LeftAtrium_Length / 10 )) / BSA';
+            ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result >= 40) {
                 ret.explanation = 'Μεγάλη διάταση αριστερού κόλπου';

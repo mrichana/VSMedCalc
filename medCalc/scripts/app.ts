@@ -11,7 +11,8 @@ module app {
         'medical.services',
         'ngAnimate',
         'ngMaterial',
-        'duScroll'
+        'duScroll',
+        'katex'
     ])
 
         .filter('to_trusted', filters.to_trusted)
@@ -20,7 +21,6 @@ module app {
         //  .controller('patientCtrl', controllers.patientCtrl)
         //  .controller('patientsCtrl', controllers.patientsCtrl)
 
-        .directive('sticky', directives.sticky)
         .directive('selectOnClick', directives.selectOnClick)
     
         .directive('navView', directives.navView)
@@ -30,15 +30,15 @@ module app {
         .config(['$mdThemingProvider', '$mdIconProvider', function ($mdThemingProvider, $mdIconProvider) {
 
             $mdIconProvider
-                .icon('menu', 'fonts/menu.svg', 24)
-                .icon('reset', 'fonts/reset.svg', 24)
-                .icon('edit', 'fonts/edit.svg', 24)
-                .icon('close', 'fonts/close.svg', 24)
-                .icon('search', 'fonts/search.svg', 24)
+                .icon('menu', 'css/fonts/menu.svg', 24)
+                .icon('reset', 'css/fonts/reset.svg', 24)
+                .icon('edit', 'css/fonts/edit.svg', 24)
+                .icon('close', 'css/fonts/close.svg', 24)
+                .icon('search', 'css/fonts/search.svg', 24)
 
-                .icon('check', 'fonts/check.svg', 48)
-                .icon('info', 'fonts/info.svg', 48)
-                .icon('error', 'fonts/error.svg', 48);
+                .icon('check', 'css/fonts/check.svg', 48)
+                .icon('info', 'css/fonts/info.svg', 48)
+                .icon('error', 'css/fonts/error.svg', 48);
 
             $mdThemingProvider.theme('default')
                 .primaryPalette('blue')
@@ -47,9 +47,9 @@ module app {
         }])
         .value('duScrollDuration', 2000)
         .value('duScrollActiveClass', 'md-primary')
-        .run(function ($rootScope) {
+        .run(['$rootScope', function ($rootScope) {
             $rootScope.debug = function (item : any):void {
                 console.log(item);
             }
-        });
+        }]);
 }

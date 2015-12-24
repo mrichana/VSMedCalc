@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -50,8 +52,11 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '(pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_Vmax / Triplex_AorticValve_Vmax';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula), 2);
+            var formula = '(pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_Vmax / Triplex_AorticValve_Vmax';
+
+            ret.result = View.roundNum(View.evaluator(values, formula), 2);
+            ret.formula = View.formulaEvaluator(values, formula);
+
             ret.suffix = 'cm<sup>2</sup>'
 
             if (ret.result < 1.0) {

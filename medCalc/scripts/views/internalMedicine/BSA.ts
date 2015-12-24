@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -16,8 +18,10 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = 'sqrt (( Height * Weight ) / 3600)';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula), 2);
+            ret.suffix = 'm<sup>2</sup>';
+            var formula = 'sqrt (( Height * Weight ) / 3600)';
+            ret.formula = View.formulaEvaluator(values, formula);
+            ret.result = View.roundNum(View.evaluator(values, formula), 2);
             ret.resultlevel = IResult.resultLevel.Normal;
             return ret;
         };

@@ -8,9 +8,6 @@
     /* Copy styles from ng-messages */
     font-size: 12px;
     line-height: 14px;
-    -moz-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
-    -o-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
-    -webkit-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
     transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
     /* Set our own color */
     color: grey;
@@ -30,157 +27,120 @@
         }
 
 .spin {
-    -webkit-animation: spin 2s infinite linear;
-    -moz-animation: spin 2s infinite linear;
-    -o-animation: spin 2s infinite linear;
     animation: spin 2s infinite linear;
-}
-
-@-moz-keyframes spin {
-    0% {
-        -moz-transform: rotate(0);
-        -ms-transform: rotate(0);
-        -o-transform: rotate(0);
-        -webkit-transform: rotate(0);
-        transform: rotate(0);
-    }
-
-    100% {
-        -moz-transform: rotate(359deg);
-        -ms-transform: rotate(359deg);
-        -o-transform: rotate(359deg);
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-
-@-webkit-keyframes spin {
-    0% {
-        -moz-transform: rotate(0);
-        -ms-transform: rotate(0);
-        -o-transform: rotate(0);
-        -webkit-transform: rotate(0);
-        transform: rotate(0);
-    }
-
-    100% {
-        -moz-transform: rotate(359deg);
-        -ms-transform: rotate(359deg);
-        -o-transform: rotate(359deg);
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
 }
 
 @keyframes spin {
     0% {
-        -moz-transform: rotate(0);
-        -ms-transform: rotate(0);
-        -o-transform: rotate(0);
-        -webkit-transform: rotate(0);
         transform: rotate(0);
     }
 
     100% {
-        -moz-transform: rotate(359deg);
-        -ms-transform: rotate(359deg);
-        -o-transform: rotate(359deg);
-        -webkit-transform: rotate(359deg);
         transform: rotate(359deg);
     }
 }
+
 
 md-icon svg {
     fill: inherit;
 }
 
+
 /* starting animations */
 md-card.result.normal-add,
 md-card.result.intermediate-add,
 md-card.result.abnormal-add {
-    -webkit-animation: 0.2s pulse;
-    -moz-animation: 0.2s pulse;
-    -o-animation: 0.2s pulse;
     animation: 0.2s pulse;
-    -moz-animation-delay: 0.2s;
-    -o-animation-delay: 0.2s;
-    -webkit-animation-delay: 0.2s;
     animation-delay: 0.2s;
-    -moz-transition: background-color 0.4s linear;
-    -o-transition: background-color 0.4s linear;
-    -webkit-transition: background-color 0.4s linear;
     transition: background-color 0.4s linear;
 }
 
 @keyframes pulse {
     0% {
-        -moz-transform: scale3d(1,1,1);
-        -ms-transform: scale3d(1,1,1);
-        -o-transform: scale3d(1,1,1);
-        -webkit-transform: scale3d(1,1,1);
-        transform: scale3d(1,1,1);
+         transform: scale3d(1,1,1);
     }
 
     50% {
-        -moz-transform: scale3d(1.03, 1.03, 1.03);
-        -ms-transform: scale3d(1.03, 1.03, 1.03);
-        -o-transform: scale3d(1.03, 1.03, 1.03);
-        -webkit-transform: scale3d(1.03, 1.03, 1.03);
         transform: scale3d(1.03, 1.03, 1.03);
     }
 
     100% {
-        -moz-transform: scale3d(1, 1, 1);
-        -ms-transform: scale3d(1, 1, 1);
-        -o-transform: scale3d(1, 1, 1);
-        -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
     }
 }
 
-md-card.result {
-    background-color: lightgray;
+md-card.result
+{
+    background-color: #cfcfcf;
 }
 
-md-card.result.normal {
-    background-color: aliceblue;
-}
+    md-card.result.normal {
+        background-color: #cfefcf;
+    }
 
-md-card.result.intermediate {
-    background-color: lightgoldenrodyellow;
-}
+    md-card.result.intermediate {
+        background-color: #cfcfef;
+    }
 
-md-card.result.abnormal {
-    background-color: lightpink;
-}
+    md-card.result.abnormal {
+        background-color: #efcfcf;
+    }
 
-md-card.result md-card-header md-card-avatar, md-card md-card-header:last-child md-card-avatar {
-    margin-left: 0;
-}
+    md-card.result md-card-header md-card-avatar, md-card md-card-header:last-child md-card-avatar {
+        margin-left: 0;
+    }
 
-md-card.result md-card-header md-card-avatar md-icon {
-    padding: 0;
-    background-color: inherit;
-    height: 40px;
-    width: 40px;
-}
+        md-card.result md-card-header md-card-avatar md-icon {
+            padding: 0;
+            background-color: inherit;
+            height: 40px;
+            width: 40px;
+        }
 
-md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon {
-    border-radius: 0;
-}
+        md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon {
+            border-radius: 0;
+        }
 
-md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.normal {
-    fill: darkgreen;
-}
+            md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.normal {
+                fill: green;
+            }
 
-md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.intermediate {
-    fill: darkblue;
-}
-            
-md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.abnormal {
-    fill: darkred;
-}
+            md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.intermediate {
+                fill: blue;
+            }
+
+            md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.abnormal {
+                fill: red;
+            }
 
 md-input-container.search {
     margin-bottom: 0;
+}
+
+md-toast.result
+{
+    color: lightgray;
+}
+
+md-toast.result .normal {
+    color: lightcyan;
+}
+
+md-toast.result .intermediate {
+    color: lightgoldenrodyellow;
+}
+
+md-toast.result .abnormal {
+    color: lightpink;
+}
+
+span.result-text {
+    font-size: xx-large;
+    height: 33px;
+}
+
+span.result-prefix {
+}
+
+span.result-suffix {
 }

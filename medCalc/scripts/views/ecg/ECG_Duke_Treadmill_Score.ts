@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -50,9 +52,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-
-            ret.formula = 'ECG_Bruce_ExerciseTime - 5*ECG_Bruce_STDeviation - 4*ECG_Bruce_AnginaIndex';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = 'ECG_Bruce_ExerciseTime - 5*ECG_Bruce_STDeviation - 4*ECG_Bruce_AnginaIndex';
+            ret.formula = View.formulaEvaluator(values, formula);
+            ret.result = View.roundNum(View.evaluator(values, formula));
 
             if (ret.result >= 5) {
                 ret.explanation = 'Χαμηλός κίνδυνος (Θνησιμότητα στο έτος: 0.25%)';

@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -179,6 +181,15 @@ module CalculatorViews {
             },
             resultField
         ];
+        validate(newValue: any, oldValue: any, scope: ng.IScope, field: IField) {
+            if (field.id === 'EuroSCOREII_OperationWeight' && newValue==0 && this.values.EuroSCORE_ThoracicAorta == true) {
+                this.values.EuroSCORE_ThoracicAorta = false;
+            }
+            if (field.id === 'EuroSCORE_ThoracicAorta' && newValue == true && this.values.EuroSCOREII_OperationWeight == 0) {
+                this.values.EuroSCOREII_OperationWeight = 1;
+            }
+        }
+
         calculator(values) {
             var ret = new Result();
 
@@ -217,7 +228,7 @@ module CalculatorViews {
                 ret.resultlevel = IResult.resultLevel.Normal;
             }
 
-            ret.prefix = 'Υπολογιζόμενη Θνητότητα Χειρουργείου: ';
+            ret.prefix = 'Υπολογιζόμενη Θνητότητα Χειρουργείου';
             ret.suffix = '%';
 
 

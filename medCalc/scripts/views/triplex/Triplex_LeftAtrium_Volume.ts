@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -51,8 +53,10 @@ description = new Triplex_LeftAtrium_VolumeDescription();
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '8 * Triplex_LeftAtrium_Area4Ch * Triplex_LeftAtrium_Area2Ch / ( 3 * pi * ( Triplex_LeftAtrium_Length / 10 ))';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = '8 * Triplex_LeftAtrium_Area4Ch * Triplex_LeftAtrium_Area2Ch / ( 3 * pi * ( Triplex_LeftAtrium_Length / 10 ))';
+            ret.formula = View.formulaEvaluator(values, formula);
+
+            ret.result = View.roundNum(View.evaluator(values, formula));
             ret.suffix = 'cm<sup>3</sup>'
 
             if (ret.result >= 73) {

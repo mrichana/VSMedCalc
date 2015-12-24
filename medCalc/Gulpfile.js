@@ -29,24 +29,26 @@ gulp.task('copyLibs', ['bower'], function () {
         'app/lib/winstore-jscompat.js',
         'bower_components/underscore/underscore-min.js',
         'bower_components/mathjs/dist/math.min.js',
-        'bower_components/underscore/underscore-min.js',
         'bower_components/angular/angular.min.js',
-        'bower_components/angular-messages/angular-messages.min.js',
         'bower_components/angular-animate/angular-animate.min.js',
-        'bower_components/angular-aria/angular-aria.js',
+        'bower_components/angular-aria/angular-aria.min.js',
+        'bower_components/angular-messages/angular-messages.min.js',
         'bower_components/angular-i18n/angular-locale_el.js',
         'bower_components/moment/min/moment.min.js',
-        'bower_components/angular-material/angular-material.js',
-        'bower_components/angular-scroll/angular-scroll.min.js'
+        'bower_components/angular-material/angular-material.min.js',
+        'bower_components/angular-scroll/angular-scroll.min.js',
+        'bower_components/katex/dist/katex.min.js',
+        'bower_components/angular-katex/angular-katex.min.js'
     ])
+    .pipe(sourcemap.init())
     .pipe(gulpIf('!*.min.js', uglify()))
     .pipe(concat('index.min.js'))
+    .pipe(sourcemap.write())
     .pipe(gulp.dest('www/lib'))
 });
 
 gulp.task('copyHtml', function () {
     return gulp.src('app/**/*.html')
-    .pipe(gulp.dest('debug'))
     .pipe(minifyHtml())
     .pipe(gulp.dest('www'));
 });
@@ -62,9 +64,9 @@ gulp.task('copyRoot', function () {
 gulp.task('copyCss', function () {
     return gulp.src([
         'bower_components/angular-material/angular-material.css',
+        'bower_components/katex/dist/katex.min.css',
         'app/css/*.css'
     ])
-    .pipe(gulp.dest('debug/css/'))
     .pipe(autoprefixer('last 2 versions'))
     .pipe(concat('index.css'))
     .pipe(minifyCss())
@@ -73,14 +75,14 @@ gulp.task('copyCss', function () {
 });
 
 gulp.task('copyFonts', function () {
-    return gulp.src('app/fonts/*')
-    .pipe(gulp.dest('www/fonts'))
-    .pipe(gulp.dest('debug/fonts'));
+    return gulp.src([
+        'app/fonts/*',
+        'bower_components/katex/dist/fonts/*'])
+    .pipe(gulp.dest('www/css/fonts'));
 });
 
 gulp.task('copyImages', function () {
     return gulp.src('app/images/*')
-    .pipe(gulp.dest('debug/images'))
     .pipe(imageMin())
     .pipe(gulp.dest('www/images'));
 });
@@ -107,7 +109,7 @@ gulp.task('copyTypescript', function () {
         target: 'ES5'
     }))
     .pipe(concat("index.min.js"))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(sourcemap.write())
     .pipe(gulp.dest('www/scripts'));
 });

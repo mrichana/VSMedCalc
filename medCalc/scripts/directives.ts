@@ -30,16 +30,6 @@ module directives {
     };
     selectOnClick.$inject = ['$window'];
 
-    export function sticky($mdSticky): ng.IDirective {
-        return {
-            restrict: 'A',
-            link: function (scope, element) {
-                $mdSticky(scope, element);
-            }
-        }
-    };
-    sticky.$inject = ['$mdSticky'];
-
     export function navView(): ng.IDirective {
         return {
             restrict: 'E',
@@ -47,10 +37,14 @@ module directives {
         };
     };
 
-
+    interface IResultScope extends ng.IScope {
+        result: CalculatorViews.IResult;
+        resultLevelClass: string;
+        resultLevelIcon: string;
+    };
     interface IResultAttributes extends ng.IAttributes {
     };
-    export function result(): ng.IDirective {
+    export function result($rootScope: ng.IRootScopeService, $mdToast: angular.material.IToastService): ng.IDirective {
         return {
             restrict: 'E',
             replace: true,
@@ -58,29 +52,52 @@ module directives {
                 result: '='
             },
             templateUrl: 'partials/directives/result.html',
-            link: ($scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-                $scope.$watch('result.resultlevel', (newValue, oldValue, $scope) => {
+            link: ($scope: IResultScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
+                $rootScope.$on('duScrollspy:becameActive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
+                    if ($target.scope()['view']['result'] == $scope.result) {
+                        var toast;
+                        var unregisterWatchResult = $scope.$watch('result.resultlevel', function (newValue, oldValue, $scope: IResultScope) {
+                            $mdToast.show({
+                                hideDelay: 1000,
+                                position: 'top right',
+                                capsule: true,
+                                templateUrl: 'partials/directives/toastResult.html',
+                                controller: () => {
+                                },
+                                locals: { result: $scope.result, resultLevelClass: $scope.resultLevelClass},
+                                bindToController: true,
+                                controllerAs: 'toast'
+                            });
+                        });
+                        var unregisterWatchScrollBecomeInactive = $rootScope.$on('duScrollspy:becameInactive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
+                            unregisterWatchResult();
+                            unregisterWatchScrollBecomeInactive();
+                        });
+                    }
+                });
+                $scope.$watch('result.resultlevel', (newValue, oldValue, $scope: IResultScope) => {
                     switch (newValue) {
                         case CalculatorViews.IResult.resultLevel.Normal:
-                            $scope['resultLevelIcon'] = 'check';
-                            $scope['resultLevelClass'] = 'normal';
+                            $scope.resultLevelIcon = 'check';
+                            $scope.resultLevelClass = 'normal';
                             break;
                         case CalculatorViews.IResult.resultLevel.Intermediate:
-                            $scope['resultLevelIcon'] = 'info';
-                            $scope['resultLevelClass'] = 'intermediate';
+                            $scope.resultLevelIcon = 'info';
+                            $scope.resultLevelClass = 'intermediate';
                             break;
                         case CalculatorViews.IResult.resultLevel.Abnormal:
-                            $scope['resultLevelIcon'] = 'error';
-                            $scope['resultLevelClass'] = 'abnormal';
+                            $scope.resultLevelIcon = 'error';
+                            $scope.resultLevelClass = 'abnormal';
                             break;
                         default:
-                            $scope['resultLevelIcon'] = '';
-                            $scope['resultLevelClass'] = '';
+                            $scope.resultLevelIcon = '';
+                            $scope.resultLevelClass = '';
                     }
                 })
             }
         };
     };
+    result.$inject = ['$rootScope', '$mdToast'];
 
     interface IViewScope extends ng.IScope {
         view: CalculatorViews.IView;
@@ -119,7 +136,7 @@ module directives {
                     };
                     var target = $event && $event['currentTarget'];
                     $mdDialog.show({
-                        templateUrl: 'partials/directives/modal.html',
+                        templateUrl: 'partials/directives/dialog.html',
                         controller: DialogController,
                         clickOutsideToClose: true,
                         openFrom: target,
@@ -173,19 +190,19 @@ module directives {
                         if (!$scope.timer) {
                             $animate.addClass(element, 'verify');
                             $animate.addClass(element, 'md-accent');
-                            element.addClass('spin');
+                            $animate.addClass(element.children(), 'spin');
                             $scope.timer = $timeout(function () {
                                 $scope.timer = null;
                                 $animate.removeClass(element, 'verify');
                                 $animate.removeClass(element, 'md-accent');
-                                element.removeClass('spin');
+                                $animate.removeClass(element.children(), 'spin');
                             }, waitTime);
                         } else {
                             $timeout.cancel($scope.timer);
                             $scope.timer = null;
                             $animate.removeClass(element, 'verify');
                             $animate.removeClass(element, 'md-accent');
-                            element.removeClass('spin');
+                            $animate.removeClass(element.children(), 'spin');
                             $scope.verifiedClick(element, attributes);
                         }
                     });

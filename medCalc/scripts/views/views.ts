@@ -1,4 +1,6 @@
+/// <reference path="../typings/angularjs/angular.d.ts"/>
 /// <reference path="../typings/mathjs/mathjs.d.ts"/>
+/// <reference path="../typings/underscore/underscore.d.ts"/>
 
 module CalculatorViews {
     'use strict';
@@ -258,7 +260,15 @@ module CalculatorViews {
 
         static evaluator(scope, formula) {
             return math.compile(formula).eval(scope);
-        }
+        };
+
+        static formulaEvaluator(scope: any, formula: string) {
+            var items = _.keys(scope);
+            _.each(items, (item) => {
+                formula = formula.replace(item, scope[item]);
+            });
+            return math.parse(formula).toTex({ parenthesis: 'auto'});
+        };
 
         calculator(values) {
             return new Result();

@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -29,16 +31,17 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
+            var formula;
             if (!values.Sex) {
-                values['GFR_Sex'] = 1;
+                formula = '((140 - Age) * Weight ) / ( 72 * Plasma_Creatinine )';
             } else {
-                values['GFR_Sex'] = 0.85;
+                formula = '(((140 - Age) * Weight ) / ( 72 * Plasma_Creatinine ))*0.85';
             }
 
-            ret.formula = '((140 - Age) * Weight * GFR_Sex ) / ( 72 * Plasma_Creatinine )';
             ret.suffix = 'mL/min';
 
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result < 15) {
                 ret.explanation = 'Νεφρική ανεπάρκεια';

@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -35,8 +37,9 @@ module CalculatorViews {
         calculator(values) {
             var ret = new Result();
 
-            ret.formula = 'ECG_QTmm * (1/ECG_PaperSpeed) * 1000';
-            ret.result = View.evaluator(values, ret.formula);
+            var formula = 'ECG_QTmm * (1/ECG_PaperSpeed) * 1000';
+            ret.result = View.evaluator(values, formula);
+            ret.formula = View.formulaEvaluator(values, formula);
             ret.suffix = 'msec';
 
             return ret;

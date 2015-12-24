@@ -6,7 +6,7 @@
         "noImplicitAny": false,
         "removeComments": true,
         "noLib": false,
-        "outDir": "../temp/tscscripts/",
+        "out": "../typescript.tmp",
         "inlineSourceMap": true
     },
     "filesGlob": [

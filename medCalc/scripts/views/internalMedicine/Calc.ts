@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -21,8 +23,9 @@ module CalculatorViews {
         calculator(values) {
             var ret = new Result();
             try {
-                ret.formula = values.Calculation;
-                ret.result = math.eval(ret.formula);
+                var formula = values.Calculation;
+                ret.formula = View.formulaEvaluator(values, formula);
+                ret.result = math.eval(formula);
                 ret.resultlevel = IResult.resultLevel.Unknown;
                 if (!angular.isNumber(ret.result)) {
                     throw 'nan';

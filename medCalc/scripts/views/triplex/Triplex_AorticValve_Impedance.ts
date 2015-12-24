@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -71,8 +73,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '( BloodPressure_Systolic + 4 * Triplex_AorticValve_Vmean ^ 2 ) / ( ( ( pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_VTI ) / BSA )';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = '( BloodPressure_Systolic + 4 * Triplex_AorticValve_Vmean ^ 2 ) / ( ( ( pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_VTI ) / BSA )';
+            ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result >= 5.5) {
                 ret.explanation = 'Πολύ Υψηλή Αορτοβαλβιδική Αντίσταση';

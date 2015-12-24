@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -44,8 +46,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '60*ECG_PaperSpeed/ECG_HRQRS2QRSmm/ECG_Cycles';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = '60*ECG_PaperSpeed/ECG_HRQRS2QRSmm/ECG_Cycles';
+            ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.formula = View.formulaEvaluator(values, formula);
             ret.suffix = ' BPM';
             ret.resultlevel = IResult.resultLevel.Normal;
             return ret;

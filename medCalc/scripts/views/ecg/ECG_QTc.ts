@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -34,8 +36,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = 'ECG_QT / sqrt(60 / HeartRate)';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = 'ECG_QT / sqrt(60 / HeartRate)';
+            ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result >= 480) {
                 ret.explanation = 'Έντονα παρατεταμένο QT';

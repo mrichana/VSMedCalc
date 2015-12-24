@@ -52,8 +52,8 @@
         <md-content md-scroll-y
                     role="navigation">
             <div ng-repeat="(categoryName, category) in categories">
-                <md-subheader class="md-primary">{{categoryName}}</md-subheader>
-                <md-list id="navview" du-spy-context du-scroll-container="viewCards">
+                <md-subheader class="md-primary">{{::categoryName}}</md-subheader>
+                <md-list id="navview" du-spy-context du-scroll-container="view-cards">
                     <md-list-item class="nav-view-item"
                                   ng-repeat="view in category track by view.description.id">
                         <nav-view></nav-view>
@@ -73,48 +73,24 @@
             </div>
         </md-toolbar>
 
-        <md-content id="viewCards" md-scroll-y layout-padding>
+        <md-content id="view-cards" md-scroll-y layout-padding>
             <div ng-repeat="(categoryName, category) in categories">
-                <md-subheader class="md-no-sticky">{{categoryName}}</md-subheader>
-                <div>
-                    <div class="viewCard"
-                                  id="{{view.description.id}}"
-                                  ng-repeat="view in category track by view.description.id">
-                        <div layout="row">
-                            <span class="md-headline">{{view.description.name}}</span>
-                            <span flex></span>
-                            <md-button class="md-icon-button"
-                                       aria-label="Reset Calculation"
-                                       ng-show="view.reset"
-                                       verified-click="clearPanel(view.description.id)">
-                                <md-icon md-svg-icon="reset"></md-icon>
-                            </md-button>
-                        </div>
-                        <div>
-                            <view view="view"></view>
-                        </div>
-                        <md-divider ng-if="!$last"></md-divider>
+                <div class="view-card"
+                     id="{{::view.description.id}}"
+                     ng-repeat="view in category track by view.description.id">
+                    <div layout="row">
+                        <span class="md-headline">{{::view.description.name}}</span>
+                        <span flex></span>
+                        <md-button class="md-icon-button"
+                                   aria-label="Reset Calculation"
+                                   ng-show="view.reset"
+                                   verified-click="clearPanel(view.description.id)">
+                            <md-icon md-svg-icon="reset"></md-icon>
+                        </md-button>
                     </div>
+                    <view view="view"></view>
+                    <md-divider ng-if="!$last"></md-divider>
                 </div>
-                <!--<md-card class="viewCard"
-                         id="{{view.description.id}}"
-                         ng-repeat="view in category track by view.description.id">
-                    <md-card-title>
-                        <md-card-title-text layout="row">
-                            <span class="md-headline">{{view.description.name}}</span>
-                            <span flex></span>
-                            <md-button class="md-icon-button"
-                                       aria-label="Reset Calculation"
-                                       ng-show="view.reset"
-                                       verified-click="clearPanel(view.description.id)">
-                                <md-icon md-svg-icon="reset"></md-icon>
-                            </md-button>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-content>
-                        <view view="view"></view>
-                    </md-card-content>
-                </md-card>-->
             </div>
         </md-content>
     </div>

@@ -1,4 +1,5 @@
 ﻿/// <reference path="typings/underscore/underscore.d.ts"/>
+/// <reference path="typings/angular-material/angular-material.d.ts"/>
 /// <reference path="views/views.ts"/>
 
 module controllers {
@@ -26,8 +27,8 @@ module controllers {
 
     /* Controllers */
     export class calculatorController {
-        public static $inject = ['$scope', '$location', '$mdSidenav'];
-        constructor(private $scope: ICalculatorScope, private $location: ng.ILocationService, private $mdSidenav: angular.material.ISidenavService) {
+        public static $inject = ['$scope', '$mdSidenav'];
+        constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
             $scope.filterText = '';
             $scope.values = {};
             var views = new CalculatorViews.viewsCollection($scope.values);

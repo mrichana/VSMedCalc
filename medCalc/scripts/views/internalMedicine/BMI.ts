@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -16,8 +18,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = 'Weight / (Height/100) ^ 2';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = 'Weight / (Height/100) ^ 2';
+            ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result > 40) {
                 ret.explanation = 'Νοσογόνος Παχυσαρκία';

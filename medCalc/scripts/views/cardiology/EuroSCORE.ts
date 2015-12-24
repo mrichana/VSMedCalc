@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -180,7 +182,7 @@ module CalculatorViews {
                 ret.resultlevel = IResult.resultLevel.Normal;
             }
 
-            ret.prefix = 'Υπολογιζόμενη Θνητότητα Χειρουργείου: ';
+            ret.prefix = 'Υπολογιζόμενη Θνητότητα Χειρουργείου';
             ret.suffix = '%';
 
             return ret;

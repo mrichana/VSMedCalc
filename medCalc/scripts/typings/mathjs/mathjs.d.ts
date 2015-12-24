@@ -1317,7 +1317,9 @@ declare module mathjs {
 	
 	export interface MathNode {
 		compile(): EvalFunction;
-		eval(): any;
+        eval(): any;
+        toTex(parameters?: any): string;
+        toString(parameters?: any): string;
 	}
 	
 	export interface Parser {

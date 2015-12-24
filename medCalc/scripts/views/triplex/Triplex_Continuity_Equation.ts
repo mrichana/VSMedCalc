@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -48,9 +50,11 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '(pi * ((Triplex_Continuity_Equation_A1_Diameter / 10) / 2) ^ 2) * Triplex_Continuity_Equation_VTI1 / Triplex_Continuity_Equation_VTI2';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula), 2);
-            ret.suffix = 'cm<sup>2</sup>'
+            var formula = '(pi * ((Triplex_Continuity_Equation_A1_Diameter / 10) / 2) ^ 2) * Triplex_Continuity_Equation_VTI1 / Triplex_Continuity_Equation_VTI2';
+            ret.result = View.roundNum(View.evaluator(values, formula), 2);
+            ret.formula = View.formulaEvaluator(values, formula);
+
+           ret.suffix = 'cm<sup>2</sup>'
             return ret;
         };
     }

@@ -1,3 +1,5 @@
+/// <reference path="../views.ts"/>
+
 module CalculatorViews {
     'use strict';
 
@@ -38,8 +40,10 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            ret.formula = '4 * ((Triplex_Modified_Bernoulli_Equation_V2 ^ 2) - (Triplex_Modified_Bernoulli_Equation_V1 ^ 2))';
-            ret.result = View.roundNum(View.evaluator(values, ret.formula));
+            var formula = '4 * ((Triplex_Modified_Bernoulli_Equation_V2 ^ 2) - (Triplex_Modified_Bernoulli_Equation_V1 ^ 2))';
+            ret.formula = View.formulaEvaluator(values, formula);
+
+            ret.result = View.roundNum(View.evaluator(values, formula));
             ret.suffix = 'mmHg'
             return ret;
         };
