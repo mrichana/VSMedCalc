@@ -22,7 +22,6 @@ module app {
         //  .controller('patientsCtrl', controllers.patientsCtrl)
 
         .directive('selectOnClick', directives.selectOnClick)
-        .directive('onVisible', directives.onVisible)
 
         .directive('navView', directives.navView)
         .directive('result', directives.result)

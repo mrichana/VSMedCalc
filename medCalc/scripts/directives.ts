@@ -8,17 +8,17 @@ module directives {
     export function selectOnClick($window): ng.IDirective {
         return {
             restrict: 'A',
-            link: function (scope: ng.IScope, element) {
+            link: (scope: ng.IScope, element: ng.IAugmentedJQuery) => {
                 var focusedElement;
                 element.on('click', () => {
                     if (element[0] != focusedElement) {
                         focusedElement = element[0];
                         try {
                             // ios likes this but windows-chrome does not on number fields
-                            element[0].setSelectionRange(0, element[0].value.length);
+                            element[0]['setSelectionRange'](0, element[0]['value']['length']);
                         } catch (e) {
                             // windows-chrome likes this
-                            element[0].select();
+                            element[0]['select']();
                         }
                     }
                 });
@@ -42,29 +42,9 @@ module directives {
         resultLevelClass: string;
         resultLevelIcon: string;
     };
-
-    export function onVisible($rootScope: ng.IRootScopeService): ng.IDirective {
-        return {
-            restrict: 'A',
-            link: ($scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-                $scope.$on('duScrollspy:becameActive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
-                    $target.addClass('active');
-                    $scope['active'] = $target;
-                    var unregisterWatchScrollBecomeInactive = $rootScope.$on('duScrollspy:becameInactive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
-                        $target.removeClass('active');
-                        if ($scope['active'] == $target) { $scope['active'] = null; }
-                        unregisterWatchScrollBecomeInactive();
-                    });
-                });
-            }
-        }
-    };
-    onVisible.$inject = ['$rootScope'];
-
-
     interface IResultAttributes extends ng.IAttributes {
     };
-    export function result($rootScope: ng.IRootScopeService): ng.IDirective {
+    export function result(): ng.IDirective {
         return {
             restrict: 'E',
             replace: true,
@@ -74,7 +54,6 @@ module directives {
             templateUrl: 'partials/directives/result.html'
         };
     };
-    result.$inject = ['$rootScope'];
 
     interface IViewScope extends ng.IScope {
         view: CalculatorViews.IView;
@@ -155,19 +134,16 @@ module directives {
                         var waitTime = attributes.verifyWait || 2000;
                         if (!$scope.timer) {
                             $animate.addClass(element, 'verify');
-                            $animate.addClass(element, 'md-accent');
                             $animate.addClass(element.children(), 'spin');
                             $scope.timer = $timeout(function () {
                                 $scope.timer = null;
                                 $animate.removeClass(element, 'verify');
-                                $animate.removeClass(element, 'md-accent');
                                 $animate.removeClass(element.children(), 'spin');
                             }, waitTime);
                         } else {
                             $timeout.cancel($scope.timer);
                             $scope.timer = null;
                             $animate.removeClass(element, 'verify');
-                            $animate.removeClass(element, 'md-accent');
                             $animate.removeClass(element.children(), 'spin');
                             $scope.verifiedClick(element, attributes);
                         }

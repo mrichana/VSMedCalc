@@ -40,16 +40,17 @@
     }
 }
 
-
+md-icon,
 md-icon svg {
     fill: inherit;
 }
 
 
 /* starting animations */
-md-card.result.normal-add,
-md-card.result.intermediate-add,
-md-card.result.abnormal-add {
+md-card.result.resultlevel-normal-none,
+md-card.result.resultlevel-normal-add,
+md-card.result.resultlevel-intermediate-add,
+md-card.result.resultlevel-abnormal-add {
     animation: 0.2s pulse;
     animation-delay: 0.2s;
     transition: background-color 0.4s linear;
@@ -104,9 +105,6 @@ md-card.result
             border-radius: 0;
         }
 
-        md-icon {
-            fill: inherit;
-        }
 
 
 md-input-container.search {
@@ -128,11 +126,13 @@ md-dialog {
     min-width: 66%;
 }
 
+md-list-item {
+    transition: color 0.5s;
+}
+
 md-list-item.active {
     color: red;
 }
-
-
 
 md-card.result.affix {
     position: relative;
