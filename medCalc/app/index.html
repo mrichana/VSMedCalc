@@ -33,11 +33,12 @@
 
     <link rel="stylesheet" href="css/index.min.css" />
 
+    <script src="lib/platformOverrides.js"></script>
     <script src="lib/index.min.js"></script>
     <script src="scripts/index.min.js"></script>
 </head>
 
-<body ng-app="medicalCalculator" ng-controller="calculatorController" layout="row" ng-cloak>
+<body ng-strict-di ng-app="medicalCalculator" ng-controller="calculatorController" layout="row" ng-cloak>
     <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                 layout="column"
                 md-component-id="left"
@@ -54,10 +55,9 @@
             <div ng-repeat="(categoryName, category) in categories">
                 <md-subheader class="md-primary">{{::categoryName}}</md-subheader>
                 <md-list id="navview" du-spy-context du-scroll-container="view-cards">
-                    <md-list-item class="nav-view-item"
-                                  ng-repeat="view in category track by view.description.id">
-                        <nav-view></nav-view>
-                    </md-list-item>
+                    <nav-view class="nav-view-item"
+                                ng-repeat="view in category track by view.description.id">
+                    </nav-view>
                 </md-list>
             </div>
         </md-content>
@@ -73,20 +73,17 @@
             </div>
         </md-toolbar>
 
-        <md-content id="view-cards" md-scroll-y layout-padding>
+        <md-content id="view-cards" md-scroll-y layout-padding on-visible>
             <div ng-repeat="(categoryName, category) in categories">
                 <div class="view-card"
                      id="{{::view.description.id}}"
                      ng-repeat="view in category track by view.description.id">
-                    <div layout="row">
-                        <span class="md-headline">{{::view.description.name}}</span>
-                        <span flex></span>
-                        <md-button class="md-icon-button"
-                                   aria-label="Reset Calculation"
-                                   ng-show="view.reset"
-                                   verified-click="clearPanel(view.description.id)">
-                            <md-icon md-svg-icon="reset"></md-icon>
-                        </md-button>
+                    <div class="result-header">
+                        <md-subheader class="result" ng-class="[view.result.resultlevel]">
+                            <span><md-icon md-svg-icon="{{view.result.resultlevel}}" ng-class="[view.result.resultlevel]" /></span>
+                            <span class="result-text" ng-bind-html="view.result.result | to_trusted"></span>
+                            <span class="result-suffix" ng-bind-html="view.result.suffix | to_trusted"></span>
+                        </md-subheader>
                     </div>
                     <view view="view"></view>
                     <md-divider ng-if="!$last"></md-divider>
@@ -95,5 +92,4 @@
         </md-content>
     </div>
 </body>
-
 </html>

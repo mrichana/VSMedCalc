@@ -78,15 +78,15 @@ module CalculatorViews {
 
             if (ret.result >= 7) {
                 ret.explanation = "Υψηλή κλινική πιθανότητα";
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
             else if (ret.result >= 2) {
                 ret.explanation = "Ενδιάμεση κλινική πιθανότητα";
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             }
             else {
                 ret.explanation = "Χαμηλή κλινική πιθανότητα";
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             };
 
             return ret;

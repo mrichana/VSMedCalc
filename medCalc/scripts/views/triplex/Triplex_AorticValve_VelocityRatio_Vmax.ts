@@ -49,13 +49,13 @@ module CalculatorViews {
 
             if (ret.result < 0.25) {
                 ret.explanation = 'Σοβαρή στένωση αορτικής βαλβίδας';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result <= 0.50) {
                 ret.explanation = 'Μέτρια στένωση αορτικής βαλβίδας';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else {
                 ret.explanation = 'Μικρή στένωση/Σκλήρυνση αορτικής βαλβίδας';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };

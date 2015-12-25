@@ -60,11 +60,23 @@ module CalculatorViews {
     }
     export module IResult {
 
-        export enum resultLevel {
-            Unknown,
-            Normal,
-            Intermediate,
-            Abnormal
+        export class resultLevel {
+            static get none() {
+                return 'resultlevel-none';
+            }   
+
+            
+            static get normal() {
+                return 'resultlevel-normal';
+            }
+
+            static get intermediate() {
+                return 'resultlevel-intermediate';
+            }
+
+            static get abnormal() {
+                return 'resultlevel-abnormal';
+            }
         }
     };
 
@@ -209,7 +221,7 @@ module CalculatorViews {
     export class Result implements IResult {
         result: any;
         explanation: string;
-        resultlevel: IResult.resultLevel = IResult.resultLevel.Unknown;
+        resultlevel: IResult.resultLevel = IResult.resultLevel.none;
 
         prefix: string = '';
         suffix: string = '';

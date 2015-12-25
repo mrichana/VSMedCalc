@@ -105,23 +105,23 @@ module CalculatorViews {
 
             if (ret.result > 125) {
                 ret.explanation = "Class V Πολύ υψηλή θνησιμότητα (10-24.5%)";
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
             else if (ret.result > 105) {
                 ret.explanation = "Class IV Υψηλή θνησιμότητα (4-11.4%)";
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
             else if (ret.result > 85) {
                 ret.explanation = "Class III Μέτρια θνησιμότητα (3.2-7.1%)";
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             }
             else if (ret.result > 65) {
                 ret.explanation = "Class II Χαμηλή θνησιμότητα (1.7-3.5%)";
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             else {
                 ret.explanation = "Class I Πολύ χαμηλή κλινική θνησιμότητα (0-1.6%)";
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             };
             return ret;
         };

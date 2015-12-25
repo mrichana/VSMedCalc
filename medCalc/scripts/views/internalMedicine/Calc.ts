@@ -26,17 +26,17 @@ module CalculatorViews {
                 var formula = values.Calculation;
                 ret.formula = View.formulaEvaluator(values, formula);
                 ret.result = math.eval(formula);
-                ret.resultlevel = IResult.resultLevel.Unknown;
+                ret.resultlevel = IResult.resultLevel.none;
                 if (!angular.isNumber(ret.result)) {
                     throw 'nan';
                 }
                 if (!isFinite(ret.result)) {
                     ret.result = 'Άπειρο';
-                    ret.resultlevel = IResult.resultLevel.Intermediate;
+                    ret.resultlevel = IResult.resultLevel.intermediate;
                 }
             } catch (err) {
                 ret.result = 'Λάθος Υπολογισμός';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
             return ret;
         };

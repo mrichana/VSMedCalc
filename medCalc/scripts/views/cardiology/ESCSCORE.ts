@@ -211,11 +211,11 @@ module CalculatorViews {
             }
 
             if (ret.result < 2) {
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result < 5) {
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else {
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
 
             ret.suffix = '%';

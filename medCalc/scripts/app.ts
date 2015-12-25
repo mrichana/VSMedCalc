@@ -22,7 +22,8 @@ module app {
         //  .controller('patientsCtrl', controllers.patientsCtrl)
 
         .directive('selectOnClick', directives.selectOnClick)
-    
+        .directive('onVisible', directives.onVisible)
+
         .directive('navView', directives.navView)
         .directive('result', directives.result)
         .directive('view', directives.view)
@@ -36,9 +37,10 @@ module app {
                 .icon('close', 'css/fonts/close.svg', 24)
                 .icon('search', 'css/fonts/search.svg', 24)
 
-                .icon('check', 'css/fonts/check.svg', 48)
-                .icon('info', 'css/fonts/info.svg', 48)
-                .icon('error', 'css/fonts/error.svg', 48);
+                .icon('resultlevel-none', 'css/fonts/info.svg', 48)
+                .icon('resultlevel-normal', 'css/fonts/check.svg', 48)
+                .icon('resultlevel-intermediate', 'css/fonts/info.svg', 48)
+                .icon('resultlevel-abnormal', 'css/fonts/error.svg', 48);
 
             $mdThemingProvider.theme('default')
                 .primaryPalette('blue')
@@ -46,7 +48,9 @@ module app {
 
         }])
         .value('duScrollDuration', 2000)
-        .value('duScrollActiveClass', 'md-primary')
+        .config(['$compileProvider', function ($compileProvider) {
+            $compileProvider.debugInfoEnabled(false);
+        }])
         .run(['$rootScope', function ($rootScope) {
             $rootScope.debug = function (item : any):void {
                 console.log(item);

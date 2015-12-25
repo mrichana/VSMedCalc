@@ -45,19 +45,19 @@ module CalculatorViews {
 
             if (ret.result < 15) {
                 ret.explanation = 'Νεφρική ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result < 30) {
                 ret.explanation = 'Νεφρική βλάβη με σοβαρή μείωση του GFR';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result < 60) {
                 ret.explanation = 'Νεφρική βλάβη με μέτρια μείωση του GFR';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else if (ret.result < 90) {
                 ret.explanation = 'Νεφρική βλάβη με ήπια μείωση του GFR';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else {
                 ret.explanation = 'Φυσιολογική νεφρική λειτουργία';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };

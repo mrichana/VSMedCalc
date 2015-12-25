@@ -152,20 +152,20 @@ module CalculatorViews {
                 case 2:
                 case 3:
                     ret.explanation = '0.9-1.7%';
-                    ret.resultlevel = IResult.resultLevel.Normal;
+                    ret.resultlevel = IResult.resultLevel.normal;
                     break;
                 case 4:
                 case 5:
                 case 6:
                 case 7:
                     ret.explanation = '12-16.6%';
-                    ret.resultlevel = IResult.resultLevel.Normal;
+                    ret.resultlevel = IResult.resultLevel.normal;
                     break;
                 case 8:
                 case 9:
                 case 10:
                     ret.explanation = '50-65%';
-                    ret.resultlevel = IResult.resultLevel.Intermediate;
+                    ret.resultlevel = IResult.resultLevel.intermediate;
                     break;
             };
 

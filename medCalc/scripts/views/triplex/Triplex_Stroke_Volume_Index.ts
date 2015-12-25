@@ -51,9 +51,9 @@ module CalculatorViews {
             ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result < 35) {
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else {
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };

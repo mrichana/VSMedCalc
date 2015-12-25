@@ -42,62 +42,39 @@ module directives {
         resultLevelClass: string;
         resultLevelIcon: string;
     };
+
+    export function onVisible($rootScope: ng.IRootScopeService): ng.IDirective {
+        return {
+            restrict: 'A',
+            link: ($scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
+                $scope.$on('duScrollspy:becameActive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
+                    $target.addClass('active');
+                    $scope['active'] = $target;
+                    var unregisterWatchScrollBecomeInactive = $rootScope.$on('duScrollspy:becameInactive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
+                        $target.removeClass('active');
+                        if ($scope['active'] == $target) { $scope['active'] = null; }
+                        unregisterWatchScrollBecomeInactive();
+                    });
+                });
+            }
+        }
+    };
+    onVisible.$inject = ['$rootScope'];
+
+
     interface IResultAttributes extends ng.IAttributes {
     };
-    export function result($rootScope: ng.IRootScopeService, $mdToast: angular.material.IToastService): ng.IDirective {
+    export function result($rootScope: ng.IRootScopeService): ng.IDirective {
         return {
             restrict: 'E',
             replace: true,
             scope: {
                 result: '='
             },
-            templateUrl: 'partials/directives/result.html',
-            link: ($scope: IResultScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-                $rootScope.$on('duScrollspy:becameActive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
-                    if ($target.scope()['view']['result'] == $scope.result) {
-                        var toast;
-                        var unregisterWatchResult = $scope.$watch('result.resultlevel', function (newValue, oldValue, $scope: IResultScope) {
-                            $mdToast.show({
-                                hideDelay: 1000,
-                                position: 'top right',
-                                capsule: true,
-                                templateUrl: 'partials/directives/toastResult.html',
-                                controller: () => {
-                                },
-                                locals: { result: $scope.result, resultLevelClass: $scope.resultLevelClass},
-                                bindToController: true,
-                                controllerAs: 'toast'
-                            });
-                        });
-                        var unregisterWatchScrollBecomeInactive = $rootScope.$on('duScrollspy:becameInactive', function ($event: ng.IAngularEvent, $element: ng.IAugmentedJQuery, $target: ng.IAugmentedJQuery) {
-                            unregisterWatchResult();
-                            unregisterWatchScrollBecomeInactive();
-                        });
-                    }
-                });
-                $scope.$watch('result.resultlevel', (newValue, oldValue, $scope: IResultScope) => {
-                    switch (newValue) {
-                        case CalculatorViews.IResult.resultLevel.Normal:
-                            $scope.resultLevelIcon = 'check';
-                            $scope.resultLevelClass = 'normal';
-                            break;
-                        case CalculatorViews.IResult.resultLevel.Intermediate:
-                            $scope.resultLevelIcon = 'info';
-                            $scope.resultLevelClass = 'intermediate';
-                            break;
-                        case CalculatorViews.IResult.resultLevel.Abnormal:
-                            $scope.resultLevelIcon = 'error';
-                            $scope.resultLevelClass = 'abnormal';
-                            break;
-                        default:
-                            $scope.resultLevelIcon = '';
-                            $scope.resultLevelClass = '';
-                    }
-                })
-            }
+            templateUrl: 'partials/directives/result.html'
         };
     };
-    result.$inject = ['$rootScope', '$mdToast'];
+    result.$inject = ['$rootScope'];
 
     interface IViewScope extends ng.IScope {
         view: CalculatorViews.IView;
@@ -134,6 +111,7 @@ module directives {
                             $mdDialog.hide();
                         }
                     };
+                    DialogController.$inject = ['$scope', '$mdDialog'];
                     var target = $event && $event['currentTarget'];
                     $mdDialog.show({
                         templateUrl: 'partials/directives/dialog.html',
@@ -145,25 +123,13 @@ module directives {
                     });
                 };
 
-                function asyncLoad() {
-                    var deferred = $q.defer();
-                    var templateName = $scope['view'].template || 'calculator';
-                    $http.get('partials/views/' + templateName + '.html', {
-                        cache: $templateCache
-                    }).success(function (html: string) {
-                        element.html(html);
-                    }).then(function () {
-                        element.replaceWith($compile(element.html())($scope));
-                        deferred.resolve();
-                    });
-                    return deferred.promise;
-                }
+                var templateName = $scope['view'].template || 'calculator';
+                $http.get('partials/views/' + templateName + '.html', {
+                    cache: $templateCache
+                }).success(function (html: string) {
+                    element.replaceWith(($compile(html))($scope));
 
-                if (!promise) {
-                    promise = asyncLoad();
-                } else {
-                    promise.then(() => asyncLoad());
-                }
+                });
 
             }
         }
@@ -186,7 +152,7 @@ module directives {
             link: ($scope: IVerifiedClickScope, element: ng.IAugmentedJQuery, attributes: IVerifiedClickAttributes) => {
                 element.on('tap click', function () {
                     $scope.$apply(function () {
-                        var waitTime = attributes.verifyWait || 3000;
+                        var waitTime = attributes.verifyWait || 2000;
                         if (!$scope.timer) {
                             $animate.addClass(element, 'verify');
                             $animate.addClass(element, 'md-accent');

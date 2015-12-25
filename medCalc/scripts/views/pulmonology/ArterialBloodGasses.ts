@@ -105,15 +105,15 @@ module CalculatorViews {
 
             if (values['ArterialBlood_pCO2'] > (expectedPco2 + 2)) {
                 ret.result += ',\nμε αναπνευστική οξέωση';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             }
             if (values['ArterialBlood_pCO2'] < (expectedPco2 - 2)) {
                 ret.result += ',\nμε αναπνευστική αλκάλωση';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             }
             if ((values['ArterialBlood_pCO2'] <= (expectedPco2 + 2)) && (values['ArterialBlood_pCO2'] >= (expectedPco2 - 2))) {
                 ret.result += ',\nμε πλήρη αναπνευστική αντιρρόπηση';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
 
             //  Primary Respiratory Disorders
@@ -134,7 +134,7 @@ module CalculatorViews {
                     ret.result = 'Οξεία (μη αντιρροπούμενη) ' + ret.result;
                     if (values['ArterialBlood_H2CO3'] < (hco3Low - 2)) {
                         ret.result += ',\nμε μεταβολική οξέωση';
-                        ret.resultlevel = IResult.resultLevel.Abnormal;
+                        ret.resultlevel = IResult.resultLevel.abnormal;
                     }
                 }
 
@@ -142,13 +142,13 @@ module CalculatorViews {
                     ret.result = 'Χρόνια (αντιρροπούμενη) ' + ret.result;
                     if (values['ArterialBlood_H2CO3'] > (hco3High + 2)) {
                         ret.result += ',\nμε μεταβολική αλκάλωση';
-                        ret.resultlevel = IResult.resultLevel.Normal;
+                        ret.resultlevel = IResult.resultLevel.normal;
                     }
                 }
 
                 if ((values['ArterialBlood_pH'] > (phLow + 0.02)) && (values['ArterialBlood_pH'] < (phHigh - 0.02001))) {
                     ret.result = '(1) μερικώς αντιρροπούμενη πρωτοπαθής αναπνευστική οξέωση, ή\n(2) οξεία επί χρόνιας ' + ret.result + ', ή\n(3) μικτή οξεία αναπνευστική οξέωση με μικρή μεταβολική αλκάλωση';
-                    ret.resultlevel = IResult.resultLevel.Intermediate;
+                    ret.resultlevel = IResult.resultLevel.intermediate;
 
                 }
             }
@@ -170,7 +170,7 @@ module CalculatorViews {
                     if (values['ArterialBlood_H2CO3'] < (hco3Low - 2)) {
                         ret.result += ',\nμε μεταβολική οξέωση';
                     }
-                    ret.resultlevel = IResult.resultLevel.Normal;
+                    ret.resultlevel = IResult.resultLevel.normal;
                 }
 
                 if (values['ArterialBlood_pH'] >= (phHigh - 0.02)) {
@@ -178,14 +178,14 @@ module CalculatorViews {
                     if (values['ArterialBlood_H2CO3'] > (hco3High + 2)) {
                         ret.result += ',\nμε μεταβολική αλκάλωση';
                     }
-                    ret.resultlevel = IResult.resultLevel.Abnormal;
+                    ret.resultlevel = IResult.resultLevel.abnormal;
                 }
 
                 if ((values['ArterialBlood_pH'] > (phLow + 0.02)) && (values['ArterialBlood_pH'] < (phHigh - 0.02))) {
                     ret.result = '(1) μερικώς αντιρροπούμενη πρωτοπαθής αναπνευστική αλκάλωση, ή\n' +
                         '(2) οξεία επί χρόνιας ' + ret.result + ', ή\n' +
                         '(3) μικτή οξεία αναπνευστική αλκάλωση με μικρή μεταβολική οξέωση';
-                    ret.resultlevel = IResult.resultLevel.Intermediate;
+                    ret.resultlevel = IResult.resultLevel.intermediate;
                 }
             }
 
@@ -195,14 +195,14 @@ module CalculatorViews {
                     if ((values['ArterialBlood_pCO2'] > 40) && (values['ArterialBlood_H2CO3'] > 26)) {
                         ret.result = 'Μικτή αναπνευστική οξέωση - μεταβολική αλκάλωση';
                         //expectedPco2 = 0.7 * values['ArterialBlood_H2CO3'] + 21;
-                        ret.resultlevel = IResult.resultLevel.Abnormal;
+                        ret.resultlevel = IResult.resultLevel.abnormal;
                     } else if ((values['ArterialBlood_pCO2'] < 40) && (values['ArterialBlood_H2CO3'] < 22)) {
                         ret.result = 'Μικτή αναπνευστική αλκάλωση - μεταβολική οξέωση';
                         //expectedPco2 = 1.5 * values['ArterialBlood_H2CO3'] + 8;
-                        ret.resultlevel = IResult.resultLevel.Abnormal;
+                        ret.resultlevel = IResult.resultLevel.abnormal;
                     } else {
                         ret.result = 'Φυσιολογικά αέρια αίματος';
-                        ret.resultlevel = IResult.resultLevel.Normal;
+                        ret.resultlevel = IResult.resultLevel.normal;
                     }
                 }
             }

@@ -40,9 +40,9 @@ module CalculatorViews {
             ret.suffix = 'cm<sup>3</sup>'
 
             if (ret.result < 60) {
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else {
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };

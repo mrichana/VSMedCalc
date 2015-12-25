@@ -1,0 +1,1 @@
+﻿!function () { var t = document.createElement("script"); t.setAttribute("src", "lib/winstore-jscompat.js"), document.body ? document.body.appendChild(t) : document.head.appendChild(t) }();

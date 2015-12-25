@@ -1,11 +1,7 @@
-﻿<md-list-item>
-    <md-button
-               ng-click="$parent.$parent.$parent.closeLeftPanel()"
-               ng-href="#{{::view.description.id}}"
-               du-smooth-scroll
-               du-scrollspy
-               offset="50"
-               >
-        {{::view.description.name}}
-    </md-button>
+﻿<md-list-item ng-click="$parent.$parent.$parent.closeLeftPanel()"
+              ng-href="#{{::view.description.id}}"
+              du-smooth-scroll
+              du-scrollspy
+              offset=60>
+    {{::view.description.name}}
 </md-list-item>

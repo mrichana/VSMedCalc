@@ -24,28 +24,28 @@ module CalculatorViews {
 
             if (ret.result > 40) {
                 ret.explanation = 'Νοσογόνος Παχυσαρκία';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result > 35) {
                 ret.explanation = 'Παχύσαρκος';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result > 30) {
                 ret.explanation = 'Ήπια Παχύσαρκος';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else if (ret.result > 25) {
                 ret.explanation = 'Υπέρβαρος';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result > 18.5) {
                 ret.explanation = 'Υγειές Βάρος';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result > 16) {
                 ret.explanation = 'Ελιποβαρής';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result > 15) {
                 ret.explanation = 'Έντονα Ελιποβαρής';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else {
                 ret.explanation = 'Καχεκτικός';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
             return ret;
         };

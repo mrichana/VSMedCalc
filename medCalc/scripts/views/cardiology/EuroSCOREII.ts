@@ -219,13 +219,13 @@ module CalculatorViews {
 
             if (ret.result > 8) {
                 ret.explanation = 'Υψηλού Κινδύνου';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result > 4) {
                 ret.explanation = 'Μετρίου Κινδύνου';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else {
                 ret.explanation = 'Μικρού Κινδύνου';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
 
             ret.prefix = 'Υπολογιζόμενη Θνητότητα Χειρουργείου';

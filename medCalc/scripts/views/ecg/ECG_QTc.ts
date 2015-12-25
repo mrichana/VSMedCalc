@@ -42,25 +42,25 @@ module CalculatorViews {
 
             if (ret.result >= 480) {
                 ret.explanation = 'Έντονα παρατεταμένο QT';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result >= 460) {
                 ret.explanation = 'Παρατεταμένο QT';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else if (ret.result >= 440) {
                 ret.explanation = 'Μικρή παράταση QT';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result <= 330) {
                 ret.explanation = 'Έντονη βράχυνση QT';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result <= 350) {
                 ret.explanation = 'Βραχύ QT';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else if (ret.result <= 370) {
                 ret.explanation = 'Μικρή βράχυνση QT';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else {
                 ret.explanation = 'Φυσιολογικό QT';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };

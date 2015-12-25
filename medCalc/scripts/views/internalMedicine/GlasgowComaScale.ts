@@ -90,13 +90,13 @@ module CalculatorViews {
 
             if (ret.result > 13) {
                 ret.explanation = 'Καμμία ή Μικρή Βαθμού Εγκεφαλική Βλαβη';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result > 8) {
                 ret.explanation = 'Μέτριου Βαθμού Εγκεφαλική Βλάβη';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else if (ret.result > 0) {
                 ret.explanation = 'Σοβαρού Βαθμού Εγκεφαλική Βλάβη (Διασωλήνωση)';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else {
                 ret.explanation = '';
             }

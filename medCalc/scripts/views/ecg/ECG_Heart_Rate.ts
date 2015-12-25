@@ -50,7 +50,7 @@ module CalculatorViews {
             ret.result = View.roundNum(View.evaluator(values, formula));
             ret.formula = View.formulaEvaluator(values, formula);
             ret.suffix = ' BPM';
-            ret.resultlevel = IResult.resultLevel.Normal;
+            ret.resultlevel = IResult.resultLevel.normal;
             return ret;
         };
     }

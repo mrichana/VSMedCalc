@@ -22,7 +22,7 @@ module CalculatorViews {
             var formula = 'sqrt (( Height * Weight ) / 3600)';
             ret.formula = View.formulaEvaluator(values, formula);
             ret.result = View.roundNum(View.evaluator(values, formula), 2);
-            ret.resultlevel = IResult.resultLevel.Normal;
+            ret.resultlevel = IResult.resultLevel.normal;
             return ret;
         };
     }

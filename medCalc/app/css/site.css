@@ -74,16 +74,19 @@ md-card.result
     background-color: #cfcfcf;
 }
 
-    md-card.result.normal {
+    .result.resultlevel-normal {
         background-color: #cfefcf;
+        fill: green;
     }
 
-    md-card.result.intermediate {
+    .result.resultlevel-intermediate {
         background-color: #cfcfef;
+        fill: blue;
     }
 
-    md-card.result.abnormal {
+    .result.resultlevel-abnormal {
         background-color: #efcfcf;
+        fill: red;
     }
 
     md-card.result md-card-header md-card-avatar, md-card md-card-header:last-child md-card-avatar {
@@ -101,37 +104,13 @@ md-card.result
             border-radius: 0;
         }
 
-            md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.normal {
-                fill: green;
-            }
+        md-icon {
+            fill: inherit;
+        }
 
-            md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.intermediate {
-                fill: blue;
-            }
-
-            md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon.abnormal {
-                fill: red;
-            }
 
 md-input-container.search {
     margin-bottom: 0;
-}
-
-md-toast.result
-{
-    color: lightgray;
-}
-
-md-toast.result .normal {
-    color: lightcyan;
-}
-
-md-toast.result .intermediate {
-    color: lightgoldenrodyellow;
-}
-
-md-toast.result .abnormal {
-    color: lightpink;
 }
 
 span.result-text {
@@ -144,3 +123,33 @@ span.result-prefix {
 
 span.result-suffix {
 }
+
+md-dialog {
+    min-width: 66%;
+}
+
+md-list-item.active {
+    color: red;
+}
+
+
+
+md-card.result.affix {
+    position: relative;
+    z-index: 1;
+    top: -100px;
+}
+
+.result-header {
+    visibility: hidden;
+    height: 0;
+}
+
+.md-sticky-clone[sticky-state=active] .md-subheader.result{
+    margin-top: -10px;
+    margin-left: -40px;
+}
+
+    .md-sticky-clone[sticky-state=active] .md-subheader.result .md-subheader-inner {
+        padding-bottom: 0;
+    }

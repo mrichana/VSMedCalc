@@ -29,13 +29,13 @@ module CalculatorViews {
             ret.result = values.Triplex_AorticValve_Regurgitation_VenaContracta_Width;
             if (values.Triplex_AorticValve_Regurgitation_VenaContracta_Width > 0.6) {
                 ret.explanation = 'Σοβαρή Ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (values.Triplex_AorticValve_Regurgitation_VenaContracta_Width > 0.3) {
                 ret.explanation = 'Μέτρια Ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else {
                 ret.explanation = 'Μικρή Ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };
@@ -76,13 +76,13 @@ module CalculatorViews {
             ret.result = values.Triplex_AorticValve_Regurgitation_PHT;
             if (values.Triplex_AorticValve_Regurgitation_PHT < 200) {
                 ret.explanation = 'Σοβαρή Ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (values.Triplex_AorticValve_Regurgitation_PHT < 500) {
                 ret.explanation = 'Μέτρια Ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else {
                 ret.explanation = 'Μικρή Ανεπάρκεια';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             }
             return ret;
         };

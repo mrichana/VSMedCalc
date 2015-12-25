@@ -1,4 +1,14 @@
 <md-content layout-padding>
+    <div layout="row">
+        <span class="md-headline">{{::view.description.name}}</span>
+        <span flex></span>
+        <md-button class="md-icon-button reset-button"
+                   aria-label="Reset Calculation"
+                   ng-show="view.reset"
+                   verified-click="clearPanel(view.description.id)">
+            <md-icon md-svg-icon="reset"></md-icon>
+        </md-button>
+    </div>
     <form name="{{::view.description.id}}">
         <div ng-repeat="field in ::view.fields" ng-switch on="field.input.type" layout="column">
             <md-input-container ng-switch-when="none">

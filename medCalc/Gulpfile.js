@@ -25,8 +25,7 @@ gulp.task('bower', function () {
 });
 
 gulp.task('copyLibs', ['bower'], function () {
-    return gulp.src([
-        'app/lib/winstore-jscompat.js',
+    gulp.src([
         'bower_components/underscore/underscore-min.js',
         'bower_components/mathjs/dist/math.min.js',
         'bower_components/angular/angular.min.js',
@@ -40,11 +39,14 @@ gulp.task('copyLibs', ['bower'], function () {
         'bower_components/katex/dist/katex.min.js',
         'bower_components/angular-katex/angular-katex.min.js'
     ])
-    .pipe(sourcemap.init())
+//    .pipe(sourcemap.init())
     .pipe(gulpIf('!*.min.js', uglify()))
     .pipe(concat('index.min.js'))
-    .pipe(sourcemap.write())
-    .pipe(gulp.dest('www/lib'))
+//    .pipe(sourcemap.write())
+    .pipe(gulp.dest('www/lib'));
+
+    gulp.src(['app/lib/*.js'])
+    .pipe(gulp.dest('www/lib'));
 });
 
 gulp.task('copyHtml', function () {
@@ -55,9 +57,10 @@ gulp.task('copyHtml', function () {
 
 gulp.task('copyRoot', function () {
     return gulp.src([
-        'app/*.{png,svg}',
-        'app/browserconfig.xml'
+        'app/favicon/*',
+//        'app/favicon/browserconfig.xm'
     ])
+    .pipe(gulpIf('*.xm', rename({ extname: '.xml' })))
     .pipe(gulp.dest('www'));
 });
 
@@ -109,7 +112,7 @@ gulp.task('copyTypescript', function () {
         target: 'ES5'
     }))
     .pipe(concat("index.min.js"))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(sourcemap.write())
     .pipe(gulp.dest('www/scripts'));
 });
@@ -125,6 +128,7 @@ gulp.task('serve', ['watch'], function () {
 });
 
 gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
+    gulp.watch("lib/*.js", ['copyLibs']);
     gulp.watch("fonts/**/*.svg", ['copyFonts']);
     gulp.watch("scripts/**/*.ts", ['copyTypescript']);
     gulp.watch("app/**/*.css", ['copyCss']);
@@ -134,10 +138,10 @@ gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages'
 gulp.task('build', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
     return gulp.src(['www/**/*'])
         .pipe(manifest({
-          hash: true,
-          preferOnline: false,
-          filename: 'manifest.appcache',
-          exclude: 'manifest.appcache'
+            hash: true,
+            preferOnline: false,
+            filename: 'manifest.appcache',
+            exclude: 'manifest.appcache'
         }))
         .pipe(gulp.dest('www'));
 });

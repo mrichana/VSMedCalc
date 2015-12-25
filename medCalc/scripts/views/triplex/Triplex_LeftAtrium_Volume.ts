@@ -61,19 +61,19 @@ description = new Triplex_LeftAtrium_VolumeDescription();
 
             if (ret.result >= 73) {
                 ret.explanation = 'Μεγάλη διάταση αριστερού κόλπου';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             } else if (ret.result >= 63) {
                 ret.explanation = 'Μέτρια διάταση αριστερού κόλπου';
-                ret.resultlevel = IResult.resultLevel.Intermediate;
+                ret.resultlevel = IResult.resultLevel.intermediate;
             } else if (ret.result >= 53) {
                 ret.explanation = 'Μικρή διάταση αριστερού κόλπου';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else if (ret.result >= 22) {
                 ret.explanation = 'Φυσιολογικές διάστασεις αριστερού κόλπου';
-                ret.resultlevel = IResult.resultLevel.Normal;
+                ret.resultlevel = IResult.resultLevel.normal;
             } else {
                 ret.explanation = 'Υπερβολικά χαμηλή τιμή - Πιθανό λάθος μετρήσεως';
-                ret.resultlevel = IResult.resultLevel.Abnormal;
+                ret.resultlevel = IResult.resultLevel.abnormal;
             }
 
             return ret;

@@ -69,14 +69,14 @@ module CalculatorViews {
           ret.explanation = 'Πιθανότητα ισχαιμικού ΑΕΕ: ' + explanations[ret.result] + '% ανά έτος';
           switch (ret.result) {
               case 0:
-                  ret.resultlevel = IResult.resultLevel.Normal;
+                  ret.resultlevel = IResult.resultLevel.normal;
                   break;
               case 1:
               case 2:
-                  ret.resultlevel = IResult.resultLevel.Intermediate;
+                  ret.resultlevel = IResult.resultLevel.intermediate;
                   break;
               default:
-                  ret.resultlevel = IResult.resultLevel.Abnormal;
+                  ret.resultlevel = IResult.resultLevel.abnormal;
           }
           return ret;
       };
