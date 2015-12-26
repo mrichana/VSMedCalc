@@ -126,11 +126,11 @@ md-dialog {
     min-width: 66%;
 }
 
-md-list-item {
-    transition: color 0.5s;
+nav-view {
+    transition: color 1s;
 }
 
-md-list-item.active {
+nav-view.active {
     color: red;
 }
 

@@ -11,9 +11,11 @@ module controllers {
         setFilter(filterName: string): void;
         location: string;
         views: CalculatorViews.IViewDescriptions;
-        categories: _.Dictionary<_.Dictionary<CalculatorViews.IView>>;
+        categories: _.Collection<_.Dictionary<_.Dictionary<CalculatorViews.IView>>>;
         tags: string[];
         values: any;
+
+        selectedTopCategory: number;
 
         openLeftPanel(): void;
         closeLeftPanel(): void;
@@ -51,7 +53,9 @@ module controllers {
 
             $scope.setFilter = function (filterText: string = "") {
                 $scope.views = views.filter(filterText);
-                $scope.categories = $scope.views.categories;
+                $scope.categories = [];
+                $scope.categories[0] = { name: 'Υπολογιστές', categories: _.omit($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
+                $scope.categories[1] = { name: 'Υπερηχοκαρδιογράφημα', categories: _.pick($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
                 var regex = new RegExp(filterText, 'i');
                 $scope.tags = _.values($scope.views.tags).filter((tag: CalculatorViews.TagDescription): boolean => {
                     return regex.test(tag.name);

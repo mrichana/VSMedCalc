@@ -52,11 +52,15 @@
 
         <md-content md-scroll-y
                     role="navigation">
-            <div ng-repeat="(categoryName, category) in categories">
+            <div ng-repeat="(categoryName, category) in categories[selectedTopCategory].categories">
                 <md-subheader class="md-primary">{{::categoryName}}</md-subheader>
-                <md-list id="navview" du-spy-context du-scroll-container="view-cards">
+                <md-list id="navview" du-spy-context du-scroll-container="view-cards{{selectedTopCategory}}">
                     <nav-view class="nav-view-item"
-                                ng-repeat="view in category track by view.description.id">
+                              ng-href="#{{::view.description.id}}"
+                              du-smooth-scroll
+                              du-scrollspy
+                              offset=60
+                              ng-repeat="view in category track by view.description.id">
                     </nav-view>
                 </md-list>
             </div>
@@ -72,24 +76,27 @@
                 <h2 class="md-heading">Ιατρικό Βοήθημα</h2>
             </div>
         </md-toolbar>
-
-        <md-content id="view-cards" md-scroll-y layout-padding>
-            <div ng-repeat="(categoryName, category) in categories">
-                <div class="view-card"
-                     id="{{::view.description.id}}"
-                     ng-repeat="view in category track by view.description.id">
-                    <div class="result-header">
-                        <md-subheader class="result" ng-class="[view.result.resultlevel]">
-                            <span><md-icon md-svg-icon="{{view.result.resultlevel}}" ng-class="[view.result.resultlevel]" /></span>
-                            <span class="result-text" ng-bind-html="view.result.result | to_trusted"></span>
-                            <span class="result-suffix" ng-bind-html="view.result.suffix | to_trusted"></span>
-                        </md-subheader>
+        <md-tabs flex layout="column" md-border-bottom md-enable-disconnect md-selected="selectedTopCategory">
+            <md-tab flex layout="column" layout-fill ng-repeat="topCategoriesList in categories track by $index" label="{{topCategoriesList.name}}">
+                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards{{$index}}">
+                    <div ng-repeat="(categoryName, category) in topCategoriesList.categories">
+                        <div class="view-card"
+                             id="{{::view.description.id}}"
+                             ng-repeat="view in category track by view.description.id">
+                            <div class="result-header">
+                                <md-subheader class="result" ng-class="[view.result.resultlevel]">
+                                    <span><md-icon md-svg-icon="{{view.result.resultlevel}}" ng-class="[view.result.resultlevel]" /></span>
+                                    <span class="result-text" ng-bind-html="view.result.result | to_trusted"></span>
+                                    <span class="result-suffix" ng-bind-html="view.result.suffix | to_trusted"></span>
+                                </md-subheader>
+                            </div>
+                            <view view="view"></view>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </div>
                     </div>
-                    <view view="view"></view>
-                    <md-divider ng-if="!$last"></md-divider>
-                </div>
-            </div>
-        </md-content>
+                </md-tab-content>
+            </md-tab>
+        </md-tabs>
     </div>
 </body>
 </html>
