@@ -48,6 +48,7 @@ module CalculatorViews {
             var formula = '( ( pi * ((Triplex_LVOT_Diameter / 10) / 2) ^ 2) * Triplex_LVOT_VTI ) / BSA ';
             
             ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.suffix = 'cm<sup>3</sup>/m<sup>2</sup>';
             ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result < 35) {

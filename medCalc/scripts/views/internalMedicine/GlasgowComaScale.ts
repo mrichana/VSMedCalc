@@ -109,7 +109,7 @@ module CalculatorViews {
         type: typeof View = GlasgowComaScale;
         id: string = 'GlasgowComaScale';
         name: string = 'Κλίμακα Γλασκόβης';
-        category: string = 'Παθολογία';
+        category: string = 'Κλινική>>Παθολογία';
         tags: string = '';
     }
 

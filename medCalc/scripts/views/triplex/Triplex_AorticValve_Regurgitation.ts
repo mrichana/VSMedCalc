@@ -8,17 +8,17 @@ module CalculatorViews {
 
         template: string = 'calculator.basic';
         defaultValues = {
-            Triplex_AorticValve_Regurgitation_VenaContracta_Width: 0.0,
+            Triplex_AorticValve_Regurgitation_VenaContracta_Width: 0,
         };
         fields: IField[] = [
             {
                 id: 'Triplex_AorticValve_Regurgitation_VenaContracta_Width',
-                name: 'Vena Contracta Width (cm)',
+                name: 'Vena Contracta Width (mm)',
                 input: {
                     type: 'number',
-                    step: 0.1,
-                    min: 0.0,
-                    max: 1.5
+                    step: 1,
+                    min: 0,
+                    max: 15
                 }
             },
             resultField
@@ -27,10 +27,11 @@ module CalculatorViews {
             var ret = new Result();
 
             ret.result = values.Triplex_AorticValve_Regurgitation_VenaContracta_Width;
-            if (values.Triplex_AorticValve_Regurgitation_VenaContracta_Width > 0.6) {
+            ret.suffix = 'mm';
+            if (values.Triplex_AorticValve_Regurgitation_VenaContracta_Width > 6) {
                 ret.explanation = 'Σοβαρή Ανεπάρκεια';
                 ret.resultlevel = IResult.resultLevel.abnormal;
-            } else if (values.Triplex_AorticValve_Regurgitation_VenaContracta_Width > 0.3) {
+            } else if (values.Triplex_AorticValve_Regurgitation_VenaContracta_Width > 3) {
                 ret.explanation = 'Μέτρια Ανεπάρκεια';
                 ret.resultlevel = IResult.resultLevel.intermediate;
             } else {
@@ -44,7 +45,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Regurgitation_VC;
         id: string = 'Triplex_AorticValve_Regurgitation_VC';
         name: string = 'Aortic Valve Regurgitation (Vena Contracta)';
-        category: string = 'Υπερηχοκαρδιογράφημα';
+        category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Ανεπάρκεια';
         tags: string = 'AoV\\regurgitation';
     }
 
@@ -62,7 +63,7 @@ module CalculatorViews {
             {
 
                 id: 'Triplex_AorticValve_Regurgitation_PHT',
-                name: 'Pressure Half Time (ms)',
+                name: 'Pressure Half Time (msec)',
                 input: {
                     type: 'number',
                     step: 10,
@@ -74,6 +75,7 @@ module CalculatorViews {
         calculator(values) {
             var ret = new Result();
             ret.result = values.Triplex_AorticValve_Regurgitation_PHT;
+            ret.suffix = 'msec';
             if (values.Triplex_AorticValve_Regurgitation_PHT < 200) {
                 ret.explanation = 'Σοβαρή Ανεπάρκεια';
                 ret.resultlevel = IResult.resultLevel.abnormal;
@@ -91,7 +93,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Regurgitation_PHT;
         id: string = 'Triplex_AorticValve_Regurgitation_PHT';
         name: string = 'Aortic Valve Regurgitation (PHT)';
-        category: string = 'Υπερηχοκαρδιογράφημα';
+        category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Ανεπάρκεια';
         tags: string = 'AoV\\regurgitation';
     }
 

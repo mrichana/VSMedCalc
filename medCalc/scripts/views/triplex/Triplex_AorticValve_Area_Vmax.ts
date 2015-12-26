@@ -76,7 +76,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Area_Vmax;
         id: string = 'Triplex_AorticValve_Area_Vmax';
         name: string = 'Aortic Valve Area (Vmax)';
-        category: string = 'Υπερηχοκαρδιογράφημα';
+        category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Στένωση';
         tags: string = 'AoV\\Stenosis';
     }
 

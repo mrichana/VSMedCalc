@@ -134,13 +134,7 @@ nav-view.active {
     color: red;
 }
 
-md-card.result.affix {
-    position: relative;
-    z-index: 1;
-    top: -100px;
-}
-
-.result-header {
+/*.result-header {
     visibility: hidden;
     height: 0;
 }
@@ -152,4 +146,4 @@ md-card.result.affix {
 
     .md-sticky-clone[sticky-state=active] .md-subheader.result .md-subheader-inner {
         padding-bottom: 0;
-    }
+    }*/

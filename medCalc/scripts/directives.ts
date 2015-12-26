@@ -30,13 +30,6 @@ module directives {
     };
     selectOnClick.$inject = ['$window'];
 
-    export function navView(): ng.IDirective {
-        return {
-            restrict: 'E',
-            templateUrl: 'partials/directives/navView.html'
-        };
-    };
-
     interface IResultScope extends ng.IScope {
         result: CalculatorViews.IResult;
         resultLevelClass: string;

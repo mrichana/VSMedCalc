@@ -11,7 +11,6 @@ module app {
         'medical.services',
         'ngAnimate',
         'ngMaterial',
-        'duScroll',
         'katex'
     ])
 
@@ -23,7 +22,6 @@ module app {
 
         .directive('selectOnClick', directives.selectOnClick)
 
-        .directive('navView', directives.navView)
         .directive('result', directives.result)
         .directive('view', directives.view)
         .directive('verifiedClick', directives.verifiedClick)

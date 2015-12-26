@@ -65,6 +65,7 @@ module CalculatorViews {
             var ret = new Result();
             var formula = '8 * Triplex_LeftAtrium_Area4Ch * Triplex_LeftAtrium_Area2Ch / ( 3 * pi * ( Triplex_LeftAtrium_Length / 10 )) / BSA';
             ret.result = View.roundNum(View.evaluator(values, formula));
+            ret.suffix = 'cm<sup>3</sup>/m<sup>2</sup>';
             ret.formula = View.formulaEvaluator(values, formula);
 
             if (ret.result >= 40) {
@@ -91,7 +92,7 @@ module CalculatorViews {
     class Triplex_LeftAtrium_Volume_IndexDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_LeftAtrium_Volume_Index';
         name: string = 'Left Atrial Volume Index';
-        category: string = 'Υπερηχοκαρδιογράφημα';
+        category: string = 'Υπερηχοκαρδιογράφημα>>Αριστερός Κόλπος';
         tags: string = 'af';
         type: typeof View = Triplex_LeftAtrium_Volume_Index;
     }

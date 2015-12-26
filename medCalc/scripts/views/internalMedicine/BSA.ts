@@ -30,7 +30,7 @@ module CalculatorViews {
         type: typeof View = BSA;
         id: string = 'BSA';
         name: string = 'Επιφάνεια Σώματος (BSA)';
-        category: string = 'Παθολογία';
+        category: string = 'Κλινική>>Παθολογία';
         tags: string = '';
     }
 

@@ -66,7 +66,7 @@ module CalculatorViews {
         type: typeof View = GFR;
         id: string = 'GFR';
         name: string = 'Ρυθμός Σπειραματικής Διήθησης';
-        category: string = 'Παθολογία';
+        category: string = 'Κλινική>>Παθολογία';
         tags: string = 'renal\\gfr\\creatinine clearance';
     }
 

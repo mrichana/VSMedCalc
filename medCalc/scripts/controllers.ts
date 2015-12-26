@@ -11,20 +11,26 @@ module controllers {
         setFilter(filterName: string): void;
         location: string;
         views: CalculatorViews.IViewDescriptions;
-        categories: _.Collection<_.Dictionary<_.Dictionary<CalculatorViews.IView>>>;
+        categories: any[];
         tags: string[];
         values: any;
 
-        selectedTopCategory: number;
+        selectedTabCategoryIndex: number;
 
         openLeftPanel(): void;
         closeLeftPanel(): void;
         toggleLeftPanel(): void;
 
-        currentCategory: string;
+        navViewItemClicked(viewId: string): void;
 
         clearSearchBox(): void;
         clearPanel(id: string): void;
+
+        keys(dictionary: any): string[];
+        subcategories(category: any): any;
+        items(category: any): any;
+        selectedTabCategory(): any;
+        viewsList(): CalculatorViews.IView[];
     }
 
     /* Controllers */
@@ -33,6 +39,8 @@ module controllers {
         constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
             $scope.filterText = '';
             $scope.values = {};
+            $scope.selectedTabCategoryIndex = 0;
+
             var views = new CalculatorViews.viewsCollection($scope.values);
 
             $scope.toggleLeftPanel = function () {
@@ -47,20 +55,65 @@ module controllers {
                 $mdSidenav('left').close();
             }
 
+            $scope.navViewItemClicked = (viewId: string) => {
+                $scope.closeLeftPanel();
+            }
+
             $scope.$watch("filterText", function(newValue, olValue) {
               $scope.setFilter(newValue);
             });
 
             $scope.setFilter = function (filterText: string = "") {
                 $scope.views = views.filter(filterText);
-                $scope.categories = [];
-                $scope.categories[0] = { name: 'Υπολογιστές', categories: _.omit($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
-                $scope.categories[1] = { name: 'Υπερηχοκαρδιογράφημα', categories: _.pick($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
+                //$scope.categories = [];
+                //$scope.categories[0] = { name: 'Υπολογιστές', categories: _.omit($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
+                //$scope.categories[1] = { name: 'Υπερηχοκαρδιογράφημα', categories: _.pick($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
                 var regex = new RegExp(filterText, 'i');
                 $scope.tags = _.values($scope.views.tags).filter((tag: CalculatorViews.TagDescription): boolean => {
                     return regex.test(tag.name);
                 });
             };
+
+            $scope.setFilter($scope.filterText);
+
+            $scope.keys = function (dictionary: any) {
+                return _.keys(dictionary);
+            }
+
+            $scope.subcategories = function (category: any) {
+                return _.pick(category, (items, index) => {
+                    return !_.has(items, 'description');
+                });
+            }
+            $scope.items = function (category: any) {
+                return _.pick(category, (items, index) => {
+                    return _.has(items, 'description');
+                });
+            }
+
+            $scope.selectedTabCategory = function () {
+                return $scope.views.categories[$scope.keys($scope.views.categories)[$scope.selectedTabCategoryIndex]];
+            }
+
+            $scope.viewsList = function () {
+                var ret: CalculatorViews.IView[] = [];
+                _.each($scope.items($scope.selectedTabCategory()), (item: CalculatorViews.IView) => {
+                    ret.push(item);
+                });
+                _.each($scope.subcategories($scope.selectedTabCategory()), (subcategory: any) => {
+                    _.each($scope.items(subcategory), (item: CalculatorViews.IView) => {
+                        ret.push(item);
+                    });
+                    _.each($scope.subcategories(subcategory), (subcategory: any) => {
+                        _.each($scope.items(subcategory), (item: CalculatorViews.IView) => {
+                            ret.push(item);
+                        });
+                    });
+                });
+                return ret;
+            };
+
+
 
             $scope.clearSearchBox = function() {
               $scope.filterText='';

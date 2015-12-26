@@ -25,7 +25,7 @@ module CalculatorViews {
             try {
                 var formula = values.Calculation;
                 ret.formula = View.formulaEvaluator(values, formula);
-                ret.result = math.eval(formula);
+                ret.result = View.roundNum(math.eval(formula), 2);
                 ret.resultlevel = IResult.resultLevel.none;
                 if (!angular.isNumber(ret.result)) {
                     throw 'nan';
@@ -45,7 +45,7 @@ module CalculatorViews {
         type: typeof View = Calc;
         id: string = 'Calc';
         name: string = 'Υπολογιστής';
-        category: string = 'Παθολογία';
+        category: string = 'Κλινική';
         tags: string = '';
     }
 

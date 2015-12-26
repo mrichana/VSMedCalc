@@ -16,7 +16,7 @@ module CalculatorViews {
 
     export interface IViewDescriptions {
         views: _.Dictionary<IView>;
-        categories: { [category: string]: _.Dictionary<IView> };
+        categories: any;
         tags: { [tag: string]: TagDescription };
     }
 
@@ -89,7 +89,7 @@ module CalculatorViews {
 
         private _views: _.Dictionary<IView> = {};
         private _tags: _.Dictionary<TagDescription> = {};
-        private _categories: _.Dictionary<_.Dictionary < IView >>  = { };
+        private _categories: any = {};
 
         constructor(values: any) {
             _.each(viewsCollection.__viewDescriptions, (viewDescription: IViewDescription) => {
@@ -108,12 +108,18 @@ module CalculatorViews {
             });
         };
 
-        private static __prepareCategories(view: IView, categories: _.Dictionary<_.Dictionary<IView>> = {}): _.Dictionary<_.Dictionary<IView>> {
+        private static __prepareCategories(view: IView, categories: any = {})  {
             if (!view.description.isHelper && view.description.category) {
-                if (!_.has(categories, view.description.category)) {
-                    categories[view.description.category] = {};
-                } 
-                categories[view.description.category][view.description.id] = view;
+                var descCategories: string[] = view.description.category.split('>>');
+
+                var recursiveCategories = categories;
+                _.each(descCategories, (descCategory: string, index: number) => {
+                    if (!_.has(recursiveCategories, descCategory)) {
+                        recursiveCategories[descCategory] = {};
+                    }
+                    recursiveCategories = recursiveCategories[descCategory];
+                });
+                recursiveCategories[view.description.id] = view;
             }
             return categories;        
         }
@@ -174,7 +180,7 @@ module CalculatorViews {
                 var regex = new RegExp(filterString, 'i');
 
                 var tags: _.Dictionary<TagDescription> = {};
-                var categories: { [category: string]: _.Dictionary<IView> } = {};
+                var categories: { name: string, categories: _.Dictionary<_.Dictionary<IView>> }[] = [];
                 var views = _.pick(this.filterCacheFunc(filterString), function (view: IView) {
                     if (view.description.isHelper) {
                         return false;
