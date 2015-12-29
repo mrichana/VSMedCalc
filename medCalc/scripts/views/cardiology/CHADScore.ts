@@ -86,7 +86,7 @@ module CalculatorViews {
   class CHADScoreDescription extends ViewDescription implements IViewDescription {
       id: string = 'CHADScore';
       name: string = 'CHA2DS2-VASc Score';
-      category: string = 'Καρδιολογία';
+      category: string[] = [ 'Καρδιολογία', 'Κολπική Μαρμαρυγή'];
       tags: string = 'Καρδιολογία\\af';
       type: typeof View = CHADScore;
   }

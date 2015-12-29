@@ -35,7 +35,7 @@ gulp.task('copyLibs', ['bower'], function () {
         'bower_components/angular-i18n/angular-locale_el.js',
         'bower_components/moment/min/moment.min.js',
         'bower_components/angular-material/angular-material.min.js',
-        'bower_components/ngSmoothScroll/dist/angular-smooth-scroll.min.js',
+        'bower_components/angular-scroll/angular-scroll.min.js',
         'bower_components/katex/dist/katex.min.js',
         'bower_components/angular-katex/angular-katex.min.js'
     ])
@@ -94,11 +94,12 @@ gulp.task('copyTypescript', function () {
     return gulp.src([
         "scripts/typings/**/*.ts",
         "scripts/views/views.ts",
+        "scripts/views/viewsCollections.ts",
         "scripts/views/internalMedicine/*.ts",
-        //"scripts/views/pulmonology/*.ts",
+        "scripts/views/pulmonology/*.ts",
         "scripts/views/triplex/*.ts",
-        //"scripts/views/cardiology/*.ts",
-        //"scripts/views/ecg/*.ts",
+        "scripts/views/cardiology/*.ts",
+        "scripts/views/ecg/*.ts",
         "scripts/services.ts",
         "scripts/controllers.ts",
         "scripts/filters.ts",
@@ -145,4 +146,6 @@ gulp.task('build', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages'
         }))
         .pipe(gulp.dest('www'));
 });
+
+gulp.task('default',['serve']);
 

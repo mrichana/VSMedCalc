@@ -130,7 +130,7 @@ module CalculatorViews {
         type: typeof View = PESI;
         id: string = 'PESI';
         name: string = 'Δείκτης σοβαρότητας Πνευμονικής Εμβολής (PESI)';
-        category: string = 'Πνευμονολογία';
+        category: string[] = [ 'Πνευμονολογία'];
         tags: string = 'pe';
     }
 

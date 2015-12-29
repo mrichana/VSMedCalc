@@ -100,7 +100,7 @@ module CalculatorViews {
         type: typeof View = GenevaScore;
         id: string = 'GenevaScore';
         name: string = 'Score της Γενέβης';
-        category: string = 'Πνευμονολογία';
+        category: string[] = ['Πνευμονολογία'];
         tags: string = 'pe';
     }
 

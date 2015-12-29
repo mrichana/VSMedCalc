@@ -72,7 +72,7 @@ module CalculatorViews {
  class ECG_SokolowDescription extends ViewDescription implements IViewDescription {
    id: string = 'ECG_Sokolow';
    name: string = 'Δείκτης Sokolow-Lyon';
-   category: string = 'ΗΚΓ';
+   category: string[] = ['Καρδιολογία', 'ΗΚΓ'];
    tags: string = 'υπερτροφική μυοκαρδιοπάθεια';
      type: typeof View = ECG_Sokolow;
  }

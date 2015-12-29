@@ -75,7 +75,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Area_VTI;
         id: string = 'Triplex_AorticValve_Area_VTI';
         name: string = 'Aortic Valve Area (VTI)';
-        category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Στένωση';
+        category: string[] = ['Υπερηχοκαρδιογράφημα','Αορτική Βαλβίδα', 'Στένωση Αορτικής'];
         tags: string = 'AoV\\Stenosis';
     }
 

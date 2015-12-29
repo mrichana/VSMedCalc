@@ -45,7 +45,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Regurgitation_VC;
         id: string = 'Triplex_AorticValve_Regurgitation_VC';
         name: string = 'Aortic Valve Regurgitation (Vena Contracta)';
-        category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Ανεπάρκεια';
+        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αορτική Βαλβίδα', 'Ανεπάρκεια Αορτικής'];
         tags: string = 'AoV\\regurgitation';
     }
 
@@ -93,7 +93,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Regurgitation_PHT;
         id: string = 'Triplex_AorticValve_Regurgitation_PHT';
         name: string = 'Aortic Valve Regurgitation (PHT)';
-        category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Ανεπάρκεια';
+        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αορτική Βαλβίδα', 'Ανεπάρκεια Αορτικής'];
         tags: string = 'AoV\\regurgitation';
     }
 

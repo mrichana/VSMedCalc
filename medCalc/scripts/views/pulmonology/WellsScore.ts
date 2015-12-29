@@ -96,7 +96,7 @@ module CalculatorViews {
         type: typeof View = WellsScore;
         id: string = 'WellsScore';
         name: string = 'Κριτήρια του Wells';
-        category: string = 'Πνευμονολογία';
+        category: string[] = ['Πνευμονολογία'];
         tags: string = 'pe';
     }
 

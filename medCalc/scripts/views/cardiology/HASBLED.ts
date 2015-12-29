@@ -125,7 +125,7 @@ module CalculatorViews {
         type: typeof View = HASBLED;
         id: string = 'HASBLED';
         name: string = 'HAS-BLED Score';
-        category: string = 'Καρδιολογία';
+        category: string[] = ['Καρδιολογία'];
         tags: string = 'af';
     }
 

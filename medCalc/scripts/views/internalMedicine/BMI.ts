@@ -54,7 +54,7 @@ module CalculatorViews {
       type: typeof View = BMI;
       id: string = 'BMI';
       name: string = 'Δείκτης Μάζας Σώματος';
-      category: string = 'Κλινική>>Παθολογία';
+      category: string[] = ['Παθολογία'];
       tags: string = '';
   }
 

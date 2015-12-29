@@ -11,7 +11,8 @@ module app {
         'medical.services',
         'ngAnimate',
         'ngMaterial',
-        'katex'
+        'katex',
+        'duScroll'
     ])
 
         .filter('to_trusted', filters.to_trusted)

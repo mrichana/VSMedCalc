@@ -150,7 +150,7 @@ module CalculatorViews {
   class CRUSADEScoreDescription extends ViewDescription implements IViewDescription {
       id: string = 'CRUSADEScore';
       name: string = 'CRUSADE Score';
-      category: string = 'Καρδιολογία';
+      category: string[] = ['Καρδιολογία','NSTEMI'];
       tags: string = 'stemi\\nstemi';
       type: typeof View = CRUSADEScore;
   }

@@ -65,7 +65,7 @@ module CalculatorViews {
         type: typeof View = NYHAClassEval;
         id: string = 'NYHAClassEval';
         name: string = 'NYHA Class';
-        category: string = 'Καρδιολογία';
+        category: string[] = [ 'Καρδιολογία'];
         tags: string = 'hf';
     }
 

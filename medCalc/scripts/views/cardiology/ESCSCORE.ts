@@ -227,7 +227,7 @@ module CalculatorViews {
         type: typeof View = ESCSCORE;
         id: string = 'ESCSCORE';
         name: string = 'EuroHeart SCORE';
-        category: string = 'Καρδιολογία';
+        category: string[] = [ 'Καρδιολογία'];
         tags: string = 'nstemi';
     }
 

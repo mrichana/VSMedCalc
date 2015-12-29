@@ -4,26 +4,11 @@
 
 module CalculatorViews {
     'use strict';
-    interface array<T> {
-
-    };
-
-    export class TagDescription {
-        name: string;
-        type: string = 'tag';
-        viewsCollection: _.Dictionary<IView> = {};
-    }
-
-    export interface IViewDescriptions {
-        views: _.Dictionary<IView>;
-        categories: any;
-        tags: { [tag: string]: TagDescription };
-    }
 
     export interface IViewDescription {
         id: string;
         name: string;
-        category: string;
+        category: string[];
         tags: string;
         isHelper?: boolean;
         factory(values?: any): IView;
@@ -78,138 +63,6 @@ module CalculatorViews {
                 return 'resultlevel-abnormal';
             }
         }
-    };
-
-    export class viewsCollection {
-        private static __viewDescriptions: _.Dictionary<IViewDescription> = {};
-
-        static add(viewDescription: IViewDescription): void {
-            viewsCollection.__viewDescriptions[viewDescription.id] = viewDescription;
-        };
-
-        private _views: _.Dictionary<IView> = {};
-        private _tags: _.Dictionary<TagDescription> = {};
-        private _categories: any = {};
-
-        constructor(values: any) {
-            _.each(viewsCollection.__viewDescriptions, (viewDescription: IViewDescription) => {
-                var view = viewDescription.factory(values);
-                _.each(view.fields, function (field) {
-                    if (field.calculator) {
-                        var calculator = viewsCollection.__viewDescriptions[field.calculator];
-                        if (calculator) {
-                            field.calculatorView = calculator.factory(values);
-                        }
-                    }
-                });
-                this._views[view.description.id] = view;
-                viewsCollection.__prepareTags(view, this._tags);
-                viewsCollection.__prepareCategories(view, this._categories);
-            });
-        };
-
-        private static __prepareCategories(view: IView, categories: any = {})  {
-            if (!view.description.isHelper && view.description.category) {
-                var descCategories: string[] = view.description.category.split('>>');
-
-                var recursiveCategories = categories;
-                _.each(descCategories, (descCategory: string, index: number) => {
-                    if (!_.has(recursiveCategories, descCategory)) {
-                        recursiveCategories[descCategory] = {};
-                    }
-                    recursiveCategories = recursiveCategories[descCategory];
-                });
-                recursiveCategories[view.description.id] = view;
-            }
-            return categories;        
-        }
-
-        private static __prepareTags(view: IView, tags: _.Dictionary<TagDescription> = {}): _.Dictionary<TagDescription> {
-            var tagNames = view.description.tags?view.description.tags.split('\\'):[];
-            tagNames.push(view.description.name);
-            _.each(tagNames, (tag: string) => {
-                if (!_.has(tags, tag)) {
-                    tags[tag] = new TagDescription();
-                    tags[tag].name = tag;
-                    if (tag == view.description.name) {
-                        tags[tag].type = 'calculator';
-                    } else if (tag == view.description.category) {
-                        tags[tag].type = 'category';
-                    }
-                }
-                tags[tag].viewsCollection[view.description.id] = view;
-            });
-            return tags;
-        }
-
-        get views() {
-            return this._views;
-        };
-        get categories() {
-            return this._categories;
-        };
-
-        get tags() {
-            return this._tags;
-        };
-
-        get allViewDescriptions(): IViewDescriptions {
-            return {
-                views: this.views,
-                categories: this.categories, 
-                tags: this.tags
-            };
-        }
-
-        private filterCache: _.Dictionary<IViewDescriptions> = {};
-        private filterCacheFunc(filterString: string): _.Dictionary<IView> {
-            if (!filterString) return this.views;
-            if (_.has(this.filterCache, filterString)) return this.filterCache[filterString].views;
-            return this.filterCacheFunc(filterString.slice(0, -1));
-
-        };
-        filter(filterString: string): IViewDescriptions {
-            var ret: IViewDescriptions;
-            if (filterString) {
-                filterString = filterString.toLocaleLowerCase();
-
-                if (_.has(this.filterCache, filterString)) {
-                    return this.filterCache[filterString];
-                }
-
-                var regex = new RegExp(filterString, 'i');
-
-                var tags: _.Dictionary<TagDescription> = {};
-                var categories: { name: string, categories: _.Dictionary<_.Dictionary<IView>> }[] = [];
-                var views = _.pick(this.filterCacheFunc(filterString), function (view: IView) {
-                    if (view.description.isHelper) {
-                        return false;
-                    }
-                    if (regex.test(view.description.name) || regex.test(view.description.category) || regex.test(view.description.tags)) {
-                        viewsCollection.__prepareTags(view, tags);
-                        viewsCollection.__prepareCategories(view, categories);
-                        return true;
-                    }
-                    return false;
-                });
-                ret = {
-                    views: views,
-                    categories: categories,
-                    tags: tags
-                };
-                this.filterCache[filterString] = ret;
-            } else {
-                var views = _.omit(this.views, function (view: IView) {
-                    return view.description.isHelper;
-                });
-                ret = {
-                    views: views,
-                    categories: this.categories,
-                    tags: this.tags
-                };
-            };
-            return ret;
-        };
     };
 
     export class ViewDescription {

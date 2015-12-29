@@ -58,7 +58,7 @@ module CalculatorViews {
         type: typeof View = ECG_Heart_Rate;
         id: string = 'ECG_Heart_Rate';
         name: string = 'Καρδιακή Συχνότητα';
-        category: string = 'ΗΚΓ';
+        category: string[] = ['Καρδιολογία', 'ΗΚΓ'];
         tags: string = 'af';
     }
 

@@ -69,7 +69,7 @@ module CalculatorViews {
         type: typeof View = ECG_QTc;
         id: string = 'ECG_QTc';
         name: string = 'Διορθωμένο QT';
-        category: string = 'ΗΚΓ';
+        category: string[] = ['Καρδιολογία', 'ΗΚΓ'];
         tags: string = '';
     }
 

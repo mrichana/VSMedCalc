@@ -178,7 +178,7 @@ module CalculatorViews {
         type: typeof View = HEARTScore;
         id: string = 'HEARTScore';
         name: string = 'HEART Score';
-        category: string = 'Καρδιολογία';
+        category: string[] = [ 'Καρδιολογία'];
         tags: string = 'nstemi';
     }
 

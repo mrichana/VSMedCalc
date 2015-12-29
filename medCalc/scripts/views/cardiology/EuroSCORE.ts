@@ -192,7 +192,7 @@ module CalculatorViews {
         type: typeof View = EuroSCORE;
         id: string = 'EuroSCORE';
         name: string = 'EuroSCORE';
-        category: string = 'Καρδιολογία';
+        category: string[] = ['Καρδιολογία'];
         tags: string = '';
     }
 

@@ -68,7 +68,7 @@ module CalculatorViews {
         type: typeof View = KillipClassEval;
         id: string = 'KillipClassEval';
         name: string = 'Killip Class';
-        category: string = 'Καρδιολογία';
+        category: string[] = [ 'Καρδιολογία'];
         tags: string = 'stemi\\nstemi';
     }
 

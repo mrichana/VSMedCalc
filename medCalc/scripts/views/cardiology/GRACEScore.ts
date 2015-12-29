@@ -223,7 +223,7 @@ module CalculatorViews {
   class GRACEScoreDescription extends ViewDescription implements IViewDescription {
       id: string = 'GRACEScore';
       name: string = 'GRACE Score';
-      category: string = 'Καρδιολογία';
+      category: string[] = [ 'Καρδιολογία'];
       tags: string = 'stemi\\nstemi';
       type: typeof View = GRACEScore;
   }

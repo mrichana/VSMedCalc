@@ -45,7 +45,7 @@ module CalculatorViews {
         type: typeof View = Calc;
         id: string = 'Calc';
         name: string = 'Υπολογιστής';
-        category: string = 'Κλινική';
+        category: string[] = ['Γενικά'];
         tags: string = '';
     }
 

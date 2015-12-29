@@ -52,7 +52,7 @@ module CalculatorViews {
         type: typeof View = Triplex_Modified_Bernoulli_Equation;
         id: string = 'Triplex_Modified_Bernoulli_Equation';
         name: string = 'Τροποποιημένη Εξίσωση Bernoulli';
-        category: string = 'Υπερηχοκαρδιογράφημα';
+        category: string[] = ['Υπερηχοκαρδιογράφημα'];
         tags: string = '';
     }
 

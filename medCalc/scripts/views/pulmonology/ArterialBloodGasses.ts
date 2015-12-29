@@ -221,7 +221,7 @@ module CalculatorViews {
         type: typeof View = ArterialBloodGasses;
         id: string = 'ArterialBloodGasses';
         name: string = 'Αέρια Αίματος';
-        category: string = 'Πνευμονολογία';
+        category: string[] = ['Πνευμονολογία'];
         tags: string = 'pe';
     }
 

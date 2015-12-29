@@ -53,30 +53,12 @@
         <md-content md-scroll-y
                     role="navigation">
             <md-list id="navview">
-                <md-list-item class="nav-view-item"
-                              ng-repeat="(viewName, view) in items(selectedTabCategory())"
-                              href="#{{view.description.id}}"
-                              ng-click="navViewItemClicked(view.description.id)">
+                <md-list-item ng-repeat="view in viewsList() track by view.description.id"
+                              class="nav-view-item"
+                              ng-href="#{{view.description.id}}"
+                              ng-click="navViewItemClicked($event)">
                     {{::view.description.name}}
                 </md-list-item>
-                <div ng-repeat="(subcategoryName1, subcategory1) in subcategories(selectedTabCategory())">
-                    <md-subheader class="md-no-sticky md-primary md-hue-1">{{::subcategoryName1}}</md-subheader>
-                    <md-list-item class="nav-view-item"
-                                  ng-repeat="(viewName, view) in items(subcategory1)"
-                                  href="#{{view.description.id}}"
-                                  ng-click="navViewItemClicked(view.description.id)">
-                        {{::view.description.name}}
-                    </md-list-item>
-                    <div ng-repeat="(subcategoryName2, subcategory2) in subcategories(subcategory1)">
-                        <md-subheader class="md-no-sticky md-primary">{{::subcategoryName1+" "+subcategoryName2}}</md-subheader>
-                        <md-list-item class="nav-view-item"
-                                      ng-repeat="(viewName, view) in items(subcategory2)"
-                                      href="#{{view.description.id}}"
-                                      ng-click="navViewItemClicked(view.description.id)">
-                            {{::view.description.name}}
-                        </md-list-item>
-                    </div>
-                </div>
             </md-list>
         </md-content>
     </md-sidenav>
@@ -92,9 +74,9 @@
         </md-toolbar>
         <md-tabs flex layout="column" md-border-bottom md-enable-disconnect md-selected="selectedTabCategoryIndex">
             <md-tab flex layout="column" layout-fill ng-repeat="(key, category) in views.categories" label="{{key}}">
-                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards">
+                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{keys(views.categories)[$index]}}">
                     <div class="view-card"
-                         ng-repeat="view in viewsList()"
+                         ng-repeat="view in viewsList() track by view.description.id"
                          id="{{::view.description.id}}">
                         <view view="view"></view>
                         <md-divider ng-if="!$last"></md-divider>

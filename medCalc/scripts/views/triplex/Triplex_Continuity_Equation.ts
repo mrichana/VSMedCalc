@@ -62,7 +62,7 @@ module CalculatorViews {
     class Triplex_Continuity_EquationDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_Continuity_Equation';
         name: string = 'Εξίσωση Συνεχείας';
-        category: string = 'Υπερηχοκαρδιογράφημα';
+        category: string[] = ['Υπερηχοκαρδιογράφημα'];
         tags: string = '';
         type: typeof View = Triplex_Continuity_Equation;
     }

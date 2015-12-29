@@ -85,7 +85,7 @@ description = new Triplex_LeftAtrium_VolumeDescription();
     class Triplex_LeftAtrium_VolumeDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_LeftAtrium_Volume';
         name: string = 'Left Atrial Volume';
-        category: string = 'Υπερηχοκαρδιογράφημα>>Αριστερός Κόλπος';
+        category: string[] = ['Υπερηχοκαρδιογράφημα','Αριστερός Κόλπος'];
         tags: string = '';
         type: typeof View = Triplex_LeftAtrium_Volume;
     }

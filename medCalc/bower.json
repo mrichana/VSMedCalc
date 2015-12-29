@@ -8,7 +8,8 @@
     "mathjs": "^2.5.0",
     "underscore": "^1.8.3",
     "angular-material": "^1.0.0",
-    "angular-katex": "^0.9.0"
+    "angular-katex": "^0.9.0",
+    "angular-scroll": "^1.0.0"
   },
   "resolutions": {
     "angular": "1.x.x"

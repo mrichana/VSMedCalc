@@ -97,7 +97,7 @@ module CalculatorViews {
       type: typeof View = Triplex_AorticValve_Impedance;
       id: string = 'Triplex_AorticValve_Impedance';
       name: string = 'Aorto-Valvular Impedance (Zva)';
-      category: string = 'Υπερηχοκαρδιογράφημα>>Αορτική Βαλβίδα>>Στένωση';
+	  category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αορτική Βαλβίδα', 'Στένωση Αορτικής'];
       tags: string = 'AoV\\Stenosis';
   }
 

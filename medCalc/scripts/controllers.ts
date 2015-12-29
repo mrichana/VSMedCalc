@@ -1,18 +1,16 @@
-﻿/// <reference path="typings/underscore/underscore.d.ts"/>
+/// <reference path="typings/underscore/underscore.d.ts"/>
 /// <reference path="typings/angular-material/angular-material.d.ts"/>
+/// <reference path="typings/jquery/jquery.d.ts"/>
 /// <reference path="views/views.ts"/>
+/// <reference path="views/viewsCollections.ts"/>
 
 module controllers {
     'use strict';
 
     interface ICalculatorScope extends ng.IScope {
         filterText: string;
-        onFilterTextChange
         setFilter(filterName: string): void;
-        location: string;
         views: CalculatorViews.IViewDescriptions;
-        categories: any[];
-        tags: string[];
         values: any;
 
         selectedTabCategoryIndex: number;
@@ -21,7 +19,7 @@ module controllers {
         closeLeftPanel(): void;
         toggleLeftPanel(): void;
 
-        navViewItemClicked(viewId: string): void;
+        navViewItemClicked($event: JQueryEventObject): void;
 
         clearSearchBox(): void;
         clearPanel(id: string): void;
@@ -31,6 +29,8 @@ module controllers {
         items(category: any): any;
         selectedTabCategory(): any;
         viewsList(): CalculatorViews.IView[];
+
+		isNewCategory(index: number, views: CalculatorViews.IView[]): number;
     }
 
     /* Controllers */
@@ -43,60 +43,59 @@ module controllers {
 
             var views = new CalculatorViews.viewsCollection($scope.values);
 
-            $scope.toggleLeftPanel = function () {
+            $scope.toggleLeftPanel = function() {
                 $mdSidenav('left').toggle();
             }
 
-            $scope.openLeftPanel = function () {
+            $scope.openLeftPanel = function() {
                 $mdSidenav('left').open();
             }
 
-            $scope.closeLeftPanel = function () {
+            $scope.closeLeftPanel = function() {
                 $mdSidenav('left').close();
             }
 
-            $scope.navViewItemClicked = (viewId: string) => {
+            $scope.navViewItemClicked = ($event: JQueryEventObject) => {
                 $scope.closeLeftPanel();
+                $event.preventDefault();
+                var targetId = angular.element($event.target).parent().parent().attr('href').slice(1);
+                var target = angular.element(document.getElementById(targetId));
+                var targetContainer = target.parent();
+                targetContainer['duScrollToElementAnimated'](target);
+
+
             }
 
             $scope.$watch("filterText", function(newValue, olValue) {
-              $scope.setFilter(newValue);
+            $scope.setFilter(newValue);
             });
 
-            $scope.setFilter = function (filterText: string = "") {
+            $scope.setFilter = function(filterText: string = "") {
                 $scope.views = views.filter(filterText);
-                //$scope.categories = [];
-                //$scope.categories[0] = { name: 'Υπολογιστές', categories: _.omit($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
-                //$scope.categories[1] = { name: 'Υπερηχοκαρδιογράφημα', categories: _.pick($scope.views.categories, (category, name) => { return name == 'Υπερηχοκαρδιογράφημα'; }) };
-                var regex = new RegExp(filterText, 'i');
-                $scope.tags = _.values($scope.views.tags).filter((tag: CalculatorViews.TagDescription): boolean => {
-                    return regex.test(tag.name);
-                });
             };
 
-            $scope.setFilter($scope.filterText);
 
-            $scope.keys = function (dictionary: any) {
+            $scope.keys = function(dictionary: any) {
                 return _.keys(dictionary);
             }
 
-            $scope.subcategories = function (category: any) {
+            $scope.subcategories = function(category: any) {
                 return _.pick(category, (items, index) => {
-                    return !_.has(items, 'description');
+                    return _.isObject(items) && !_.has(items, 'description');
                 });
             }
-            $scope.items = function (category: any) {
+            $scope.items = function(category: any) {
                 return _.pick(category, (items, index) => {
-                    return _.has(items, 'description');
+                    return _.isObject(items) && _.has(items, 'description');
                 });
             }
 
-            $scope.selectedTabCategory = function () {
+            $scope.selectedTabCategory = function() {
                 return $scope.views.categories[$scope.keys($scope.views.categories)[$scope.selectedTabCategoryIndex]];
             }
 
-            $scope.viewsList = function () {
-                var ret: CalculatorViews.IView[] = [];
+            $scope.viewsList = function() {
+                var ret: any = [];
                 _.each($scope.items($scope.selectedTabCategory()), (item: CalculatorViews.IView) => {
                     ret.push(item);
                 });
@@ -114,12 +113,11 @@ module controllers {
             };
 
 
-
             $scope.clearSearchBox = function() {
-              $scope.filterText='';
+              $scope.filterText = '';
             };
 
-            $scope.clearPanel = function (id) {
+            $scope.clearPanel = function(id) {
                 $scope.views.views[id].reset();
             };
         };
