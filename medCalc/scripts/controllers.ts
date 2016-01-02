@@ -5,247 +5,234 @@
 /// <reference path="views/viewsCollections.ts"/>
 
 module controllers {
-    'use strict';
+	'use strict';
 
-    interface ICalculatorScope extends ng.IScope {
-        filterText: string;
-        setFilter(filterName: string): void;
-        views: CalculatorViews.IViewDescriptions;
-        values: any;
+	interface ICalculatorScope extends ng.IScope {
+		filterText: string;
+		setFilter(filterName: string): void;
+		values: any;
 
-        selectedTabCategoryIndex: number;
+		views: CalculatorViews.IFilteredViews;
 
-        openLeftPanel(): void;
-        closeLeftPanel(): void;
-        toggleLeftPanel(): void;
+		selectedTabCategoryIndex: number;
 
-        navViewItemClicked($event: JQueryEventObject): void;
+		openLeftPanel(): void;
+		closeLeftPanel(): void;
+		toggleLeftPanel(): void;
 
-        clearSearchBox(): void;
-        clearPanel(id: string): void;
+		navViewItemClicked($event: JQueryEventObject): void;
 
-        keys(dictionary: any): string[];
-        subcategories(category: any): any;
-        items(category: any): any;
-        selectedTabCategory(): any;
-        viewsList(): CalculatorViews.IView[];
+		clearSearchBox(): void;
+		clearPanel(id: string): void;
 
-		isNewCategory(index: number, views: CalculatorViews.IView[]): number;
-    }
+		keys(dictionary: any): string[];
+		subcategories(category: any): any;
+		items(category: any): any;
+		selectedTabCategory(): any;
+		viewsList(): CalculatorViews.IView[];
 
-    /* Controllers */
-    export class calculatorController {
-        public static $inject = ['$scope', '$mdSidenav'];
-        constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
-            $scope.filterText = '';
-            $scope.values = {};
-            $scope.selectedTabCategoryIndex = 0;
+		isNewCategory(index: number): string[];
+	}
 
-            var views = new CalculatorViews.viewsCollection($scope.values);
+	/* Controllers */
+	export class calculatorController {
+		public static $inject = ['$scope', '$mdSidenav'];
+		constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
+			$scope.filterText = '';
+			$scope.values = {};
+			$scope.selectedTabCategoryIndex = 0;
 
-            $scope.toggleLeftPanel = function() {
-                $mdSidenav('left').toggle();
-            }
+			var views = new CalculatorViews.ViewsCollection($scope.values);
 
-            $scope.openLeftPanel = function() {
-                $mdSidenav('left').open();
-            }
+			$scope.toggleLeftPanel = function() {
+				$mdSidenav('left').toggle();
+			}
 
-            $scope.closeLeftPanel = function() {
-                $mdSidenav('left').close();
-            }
+			$scope.openLeftPanel = function() {
+				$mdSidenav('left').open();
+			}
 
-            $scope.navViewItemClicked = ($event: JQueryEventObject) => {
-                $scope.closeLeftPanel();
-                $event.preventDefault();
-                var targetId = angular.element($event.target).parent().parent().attr('href').slice(1);
-                var target = angular.element(document.getElementById(targetId));
-                var targetContainer = target.parent();
-                targetContainer['duScrollToElementAnimated'](target);
+			$scope.closeLeftPanel = function() {
+				$mdSidenav('left').close();
+			}
 
-
-            }
-
-            $scope.$watch("filterText", function(newValue, olValue) {
-            $scope.setFilter(newValue);
-            });
-
-            $scope.setFilter = function(filterText: string = "") {
-                $scope.views = views.filter(filterText);
-            };
+			$scope.navViewItemClicked = ($event: JQueryEventObject) => {
+				$scope.closeLeftPanel();
+				$event.preventDefault();
+				var targetId = angular.element($event.target).parent().parent().attr('href').slice(1);
+				var target = angular.element(document.getElementById(targetId));
+				var targetContainer = target.parent();
+				targetContainer['duScrollToElementAnimated'](target);
 
 
-            $scope.keys = function(dictionary: any) {
-                return _.keys(dictionary);
-            }
+			}
 
-            $scope.subcategories = function(category: any) {
-                return _.pick(category, (items, index) => {
-                    return _.isObject(items) && !_.has(items, 'description');
-                });
-            }
-            $scope.items = function(category: any) {
-                return _.pick(category, (items, index) => {
-                    return _.isObject(items) && _.has(items, 'description');
-                });
-            }
+			$scope.$watch("filterText", function(newValue, olValue) {
+				$scope.setFilter(newValue);
+			});
 
-            $scope.selectedTabCategory = function() {
-                return $scope.views.categories[$scope.keys($scope.views.categories)[$scope.selectedTabCategoryIndex]];
-            }
-
-            $scope.viewsList = function() {
-                var ret: any = [];
-                _.each($scope.items($scope.selectedTabCategory()), (item: CalculatorViews.IView) => {
-                    ret.push(item);
-                });
-                _.each($scope.subcategories($scope.selectedTabCategory()), (subcategory: any) => {
-                    _.each($scope.items(subcategory), (item: CalculatorViews.IView) => {
-                        ret.push(item);
-                    });
-                    _.each($scope.subcategories(subcategory), (subcategory: any) => {
-                        _.each($scope.items(subcategory), (item: CalculatorViews.IView) => {
-                            ret.push(item);
-                        });
-                    });
-                });
-                return ret;
-            };
+			$scope.setFilter = function(filterText: string = ""): void {
+				$scope.views = views.filter(filterText);
+			};
 
 
-            $scope.clearSearchBox = function() {
-              $scope.filterText = '';
-            };
+			$scope.viewsList = function (): CalculatorViews.IView[] {
+				var ret;
+				if (!_.isEmpty($scope.views.categories.categories)) {
+					ret = $scope.views.viewsList($scope.views.categories.categories[_.keys($scope.views.categories.categories)[$scope.selectedTabCategoryIndex]])
+				} else {
+					ret = [];
+				}
+				return ret;
+			};
 
-            $scope.clearPanel = function(id) {
-                $scope.views.views[id].reset();
-            };
-        };
-    }
+			$scope.isNewCategory = function (index: number) {
+				var prev: CalculatorViews.IView = $scope.viewsList()[index - 1];
+				var curr: CalculatorViews.IView = $scope.viewsList()[index];
+				var ret: string[] = ['',''];
+				if (!prev || prev.description.category[1] != curr.description.category[1]) {
+					ret[0] = curr.description.category[1] || '';
+					ret[1] = curr.description.category[2] || '';
+				}
+				else if (prev.description.category[2] != curr.description.category[2]) {
+					ret[1] = curr.description.category[2] || '';
+				}
+				return ret;
+			}
 
-    /*
-      interface IPatientScope extends ICalculatorScope {
-        patient: any;
-      };
-      export class patientCtrl {
-        public static $inject = ['$scope', '$location', 'patient', 'views', 'patientViews', 'internalMedicineViews', 'ΠνευμονολογίαViews', 'ΚαρδιολογίαViews', 'triplexViews'];
-        constructor(private $scope: IPatientScope, private $location, private patient, private views, private patientViews, private internalMedicineViews, private pulmonologyViews, private cardiologyViews, private triplexViews) {
-          var updatePanelsList = function() {
-            $scope.panelsList = angular.copy(_.sortBy(_.filter(views.all(), function(view) {
-              return _.contains(_.keys($scope.patient.calculatorsActive), view.id);
-            }), 'order'));
-          };
+			$scope.clearSearchBox = function() {
+			  $scope.filterText = '';
+			};
 
-          $scope.patient = patient.value;
-          updatePanelsList();
-          _.each($scope.panelsList, function(panel) {
-            panel.values = $scope.patient;
-          });
+			$scope.clearPanel = function(id) {
+				$scope.views.views[id].reset();
+			};
+		};
+	}
 
-          $scope.fullName = function(patient) {
-            return patient && patient.lastname + ', ' + patient.firstname;
-          };
-          $scope.save = function() {
-            patient.save();
-            $location.path('/Patients');
-          };
-          $scope.delete = function() {
-            patient.delete();
-            $location.path('/Patients');
-          };
+	/*
+	  interface IPatientScope extends ICalculatorScope {
+		patient: any;
+	  };
+	  export class patientCtrl {
+		public static $inject = ['$scope', '$location', 'patient', 'views', 'patientViews', 'internalMedicineViews', 'ΠνευμονολογίαViews', 'ΚαρδιολογίαViews', 'triplexViews'];
+		constructor(private $scope: IPatientScope, private $location, private patient, private views, private patientViews, private internalMedicineViews, private pulmonologyViews, private cardiologyViews, private triplexViews) {
+		  var updatePanelsList = function() {
+			$scope.panelsList = angular.copy(_.sortBy(_.filter(views.all(), function(view) {
+			  return _.contains(_.keys($scope.patient.calculatorsActive), view.id);
+			}), 'order'));
+		  };
 
-          $scope.dropdown = [{
-            text: 'Στοιχεία Επικοινωνίας...',
-            disabled: 'existPanel(\'patientContactDetails\')',
-            click: 'addPanel(\'patientContactDetails\')'
-          }, {
-              text: 'Σημειώσεις...',
-              disabled: 'existPanel(\'patientNotes\')',
-              click: 'addPanel(\'patientNotes\')'
-            }];
+		  $scope.patient = patient.value;
+		  updatePanelsList();
+		  _.each($scope.panelsList, function(panel) {
+			panel.values = $scope.patient;
+		  });
+
+		  $scope.fullName = function(patient) {
+			return patient && patient.lastname + ', ' + patient.firstname;
+		  };
+		  $scope.save = function() {
+			patient.save();
+			$location.path('/Patients');
+		  };
+		  $scope.delete = function() {
+			patient.delete();
+			$location.path('/Patients');
+		  };
+
+		  $scope.dropdown = [{
+			text: 'Στοιχεία Επικοινωνίας...',
+			disabled: 'existPanel(\'patientContactDetails\')',
+			click: 'addPanel(\'patientContactDetails\')'
+		  }, {
+			  text: 'Σημειώσεις...',
+			  disabled: 'existPanel(\'patientNotes\')',
+			  click: 'addPanel(\'patientNotes\')'
+			}];
 
 
-          $scope.existPanel = function(panelId) {
-            return _.contains(_.keys($scope.patient.calculatorsActive), panelId);
-          };
+		  $scope.existPanel = function(panelId) {
+			return _.contains(_.keys($scope.patient.calculatorsActive), panelId);
+		  };
 
-          $scope.addPanel = function(panelId) {
-            $scope.patient.calculatorsActive = $scope.patient.calculatorsActive || {};
-            $scope.patient.calculatorsActive[panelId] = true;
+		  $scope.addPanel = function(panelId) {
+			$scope.patient.calculatorsActive = $scope.patient.calculatorsActive || {};
+			$scope.patient.calculatorsActive[panelId] = true;
 
-            updatePanelsList();
+			updatePanelsList();
 
-            _.each($scope.panelsList, function(panel) {
-              panel.values = $scope.patient;
-            });
-          };
+			_.each($scope.panelsList, function(panel) {
+			  panel.values = $scope.patient;
+			});
+		  };
 
-          $scope.removePanel = function(id) {
-            _.each(views.all()[id].defaultValues, function(value, key) {
-              $scope.patient[key] = value;
-            });
-            delete $scope.patient.calculatorsActive[id];
-            $scope.panelsList = _.filter(views.all(), function(view) {
-              return _.contains(_.keys($scope.patient.calculatorsActive), view.id);
-            });
-            _.each($scope.panelsList, function(panel) {
-              panel.values = $scope.patient;
-            });
-          };
-        };
-      }
+		  $scope.removePanel = function(id) {
+			_.each(views.all()[id].defaultValues, function(value, key) {
+			  $scope.patient[key] = value;
+			});
+			delete $scope.patient.calculatorsActive[id];
+			$scope.panelsList = _.filter(views.all(), function(view) {
+			  return _.contains(_.keys($scope.patient.calculatorsActive), view.id);
+			});
+			_.each($scope.panelsList, function(panel) {
+			  panel.values = $scope.patient;
+			});
+		  };
+		};
+	  }
 
-      export class patientsCtrl {
-        public static $inject = ['$scope', '$location', 'views', 'patients', 'patientViews'];
-        constructor($scope, $location, views, patients, patientViews) {
-          var values = {};
+	  export class patientsCtrl {
+		public static $inject = ['$scope', '$location', 'views', 'patients', 'patientViews'];
+		constructor($scope, $location, views, patients, patientViews) {
+		  var values = {};
 
-          $scope.searchView = views.all().newPatient;
-          $scope.patientView = views.all().patientView;
-          $scope.searchView.values = $scope.values = values;
+		  $scope.searchView = views.all().newPatient;
+		  $scope.patientView = views.all().patientView;
+		  $scope.searchView.values = $scope.values = values;
 
-          $scope.values.patients = patients.list;
+		  $scope.values.patients = patients.list;
 
-          $scope.searchView.addPatient = function() {
-            this.result.calculatorsActive = {
-              patientEdit: true
-            };
-            patients.add(this.result);
-            $scope.go('/Patient/' + this.result.id);
-          };
+		  $scope.searchView.addPatient = function() {
+			this.result.calculatorsActive = {
+			  patientEdit: true
+			};
+			patients.add(this.result);
+			$scope.go('/Patient/' + this.result.id);
+		  };
 
-          $scope.go = function(address) {
-            $location.path(address);
-          };
+		  $scope.go = function(address) {
+			$location.path(address);
+		  };
 
-          $scope.$watch('values', function() {
-            $scope.patientTemplate = {
-              amka: values.amka,
-              firstname: values.firstname,
-              lastname: values.lastname
-            };
+		  $scope.$watch('values', function() {
+			$scope.patientTemplate = {
+			  amka: values.amka,
+			  firstname: values.firstname,
+			  lastname: values.lastname
+			};
 
-            //     // $scope.values.filteredPatients = patientStorage.filterPatients({
-            //     //     amka: values.amka,
-            //     //     firstname: values.firstname,
-            //     //     lastname: values.lastname
-            //     // });
+			//     // $scope.values.filteredPatients = patientStorage.filterPatients({
+			//     //     amka: values.amka,
+			//     //     firstname: values.firstname,
+			//     //     lastname: values.lastname
+			//     // });
 
-            //     // $scope.patients = _.map($scope.values.patients, function(patient) {
-            //     //     var view = views.all().patientView;
-            //     //     view.values = patient;
-            //     //     return view;
-            //     // });
-          }, true);
+			//     // $scope.patients = _.map($scope.values.patients, function(patient) {
+			//     //     var view = views.all().patientView;
+			//     //     view.values = patient;
+			//     //     return view;
+			//     // });
+		  }, true);
 
-          $scope.clearPanel = function(id) {
-            views.all()[id].reset();
-          };
+		  $scope.clearPanel = function(id) {
+			views.all()[id].reset();
+		  };
 
-          $scope.fullName = function(patient) {
-            return patient && patient.lastname + ', ' + patient.firstname;
-          };
-        }
-      }
-    */
+		  $scope.fullName = function(patient) {
+			return patient && patient.lastname + ', ' + patient.firstname;
+		  };
+		}
+	  }
+	*/
 }

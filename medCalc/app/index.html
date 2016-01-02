@@ -44,21 +44,29 @@
                 md-component-id="left"
                 md-swipe-left="closeLeftPanel()"
                 md-is-locked-open="$mdMedia('gt-sm')">
-
-        <md-input-container md-no-float class="search">
-            <md-icon md-svg-src="search"></md-icon>
-            <input ng-model="filterText" type="text" placeholder="Αναζήτηση...">
-        </md-input-container>
-
+            <md-input-container md-no-float class="search md-icon-float md-block md-icon-right">
+                <md-icon md-svg-src="search"></md-icon>
+                <input ng-model="filterText" type="text" placeholder="Αναζήτηση...">
+                <md-icon ng-show="filterText" md-svg-icon="close" ng-click="clearSearchBox()"></md-icon>
+            </md-input-container>
         <md-content md-scroll-y
                     role="navigation">
             <md-list id="navview">
-                <md-list-item ng-repeat="view in viewsList() track by view.description.id"
-                              class="nav-view-item"
-                              ng-href="#{{view.description.id}}"
-                              ng-click="navViewItemClicked($event)">
-                    {{::view.description.name}}
-                </md-list-item>
+                <div ng-repeat="view in viewsList() track by view.description.id">
+                    <md-subheader ng-if="isNewCategory($index)[0]!=''"
+                                  class="md-primary md-hue-1">
+                        {{isNewCategory($index)[0]}}
+                    </md-subheader>
+                    <md-subheader ng-if="isNewCategory($index)[1]!=''"
+                                  class="md-hue-1">
+                        {{isNewCategory($index)[1]}}
+                    </md-subheader>
+                    <md-list-item class="nav-view-item"
+                                  ng-href="#{{view.description.id}}"
+                                  ng-click="navViewItemClicked($event)">
+                        {{::view.description.name}}
+                    </md-list-item>
+                </div>
             </md-list>
         </md-content>
     </md-sidenav>
@@ -73,8 +81,8 @@
             </div>
         </md-toolbar>
         <md-tabs flex layout="column" md-border-bottom md-enable-disconnect md-selected="selectedTabCategoryIndex">
-            <md-tab flex layout="column" layout-fill ng-repeat="(key, category) in views.categories" label="{{key}}">
-                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{keys(views.categories)[$index]}}">
+            <md-tab flex layout="column" layout-fill ng-repeat="(key, category) in views.categories.categories" label="{{category.name}}">
+                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{category.name}}">
                     <div class="view-card"
                          ng-repeat="view in viewsList() track by view.description.id"
                          id="{{::view.description.id}}">

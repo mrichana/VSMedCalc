@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -62,5 +63,5 @@ module CalculatorViews {
         tags: string = 'af';
     }
 
-    viewsCollection.add(new ECG_Heart_RateDescription());
+    ViewsCollection.add(new ECG_Heart_RateDescription());
 }

@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -70,5 +71,5 @@ module CalculatorViews {
         tags: string = 'renal\\gfr\\creatinine clearance';
     }
 
-    viewsCollection.add(new GFRDescription());
+    ViewsCollection.add(new GFRDescription());
 }

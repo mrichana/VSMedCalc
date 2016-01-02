@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -69,5 +70,5 @@ module CalculatorViews {
        type: typeof View = Triplex_AorticValve_VelocityRatio_VTI;
     }
 
-    viewsCollection.add(new Triplex_AorticValve_VelocityRatio_VTIDescription());
+    ViewsCollection.add(new Triplex_AorticValve_VelocityRatio_VTIDescription());
 }

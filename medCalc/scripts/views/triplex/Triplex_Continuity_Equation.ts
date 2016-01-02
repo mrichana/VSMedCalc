@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -67,5 +68,5 @@ module CalculatorViews {
         type: typeof View = Triplex_Continuity_Equation;
     }
 
-    viewsCollection.add(new Triplex_Continuity_EquationDescription());
+    ViewsCollection.add(new Triplex_Continuity_EquationDescription());
 }

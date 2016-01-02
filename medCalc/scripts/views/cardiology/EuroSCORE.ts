@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -192,9 +193,9 @@ module CalculatorViews {
         type: typeof View = EuroSCORE;
         id: string = 'EuroSCORE';
         name: string = 'EuroSCORE';
-        category: string[] = ['Καρδιολογία'];
+        category: string[] = ['Καρδιολογία', 'Καρδιοχειρουργικός Κίνδυνος'];
         tags: string = '';
     }
 
-    viewsCollection.add(new EuroSCOREDescription());
+    ViewsCollection.add(new EuroSCOREDescription());
 }

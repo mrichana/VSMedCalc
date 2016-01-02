@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -34,5 +35,5 @@ module CalculatorViews {
         tags: string = '';
     }
 
-    viewsCollection.add(new BSADescription());
+    ViewsCollection.add(new BSADescription());
 }

@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -104,5 +105,5 @@ module CalculatorViews {
         tags: string = 'pe';
     }
 
-    viewsCollection.add(new GenevaScoreDescription());
+    ViewsCollection.add(new GenevaScoreDescription());
 }

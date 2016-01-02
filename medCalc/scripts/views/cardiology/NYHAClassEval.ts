@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -65,9 +66,9 @@ module CalculatorViews {
         type: typeof View = NYHAClassEval;
         id: string = 'NYHAClassEval';
         name: string = 'NYHA Class';
-        category: string[] = [ 'Καρδιολογία'];
+        category: string[] = [ 'Καρδιολογία', 'Καρδιακή Ανεπάρκεια'];
         tags: string = 'hf';
     }
 
-    viewsCollection.add(new NYHAClassEvalDescription());
+    ViewsCollection.add(new NYHAClassEvalDescription());
 }

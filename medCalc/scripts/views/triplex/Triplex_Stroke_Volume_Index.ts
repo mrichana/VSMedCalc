@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -68,7 +69,7 @@ module CalculatorViews {
         type: typeof View = Triplex_Stroke_Volume_Index;
     }
 
-    viewsCollection.add(new Triplex_Stroke_Volume_IndexDescription());
+    ViewsCollection.add(new Triplex_Stroke_Volume_IndexDescription());
 
 
 }

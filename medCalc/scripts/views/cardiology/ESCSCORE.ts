@@ -1,4 +1,5 @@
 /// <reference path="../views.ts"/>
+/// <reference path="../viewsCollections.ts"/>
 
 module CalculatorViews {
     'use strict';
@@ -227,9 +228,9 @@ module CalculatorViews {
         type: typeof View = ESCSCORE;
         id: string = 'ESCSCORE';
         name: string = 'EuroHeart SCORE';
-        category: string[] = [ 'Καρδιολογία'];
+        category: string[] = [ 'Καρδιολογία', 'Στεφανιαία Νόσος', 'Πρόληψη'];
         tags: string = 'nstemi';
     }
 
-    viewsCollection.add(new ESCSCOREDescription());
+    ViewsCollection.add(new ESCSCOREDescription());
 }

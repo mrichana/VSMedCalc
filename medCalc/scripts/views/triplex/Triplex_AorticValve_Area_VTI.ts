@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -79,5 +80,5 @@ module CalculatorViews {
         tags: string = 'AoV\\Stenosis';
     }
 
-    viewsCollection.add(new Triplex_AorticValve_Area_VTIDescription());
+    ViewsCollection.add(new Triplex_AorticValve_Area_VTIDescription());
 }

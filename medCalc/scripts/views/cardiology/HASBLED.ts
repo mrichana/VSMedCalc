@@ -1,4 +1,5 @@
 /// <reference path="../views.ts"/>
+/// <reference path="../viewsCollections.ts"/>
 
 module CalculatorViews {
     'use strict';
@@ -125,9 +126,9 @@ module CalculatorViews {
         type: typeof View = HASBLED;
         id: string = 'HASBLED';
         name: string = 'HAS-BLED Score';
-        category: string[] = ['Καρδιολογία'];
+        category: string[] = ['Καρδιολογία', 'Κολπική Μαρμαρυγή'];
         tags: string = 'af';
     }
 
-    viewsCollection.add(new HASBLEDDescription());
+    ViewsCollection.add(new HASBLEDDescription());
 }

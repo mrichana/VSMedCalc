@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -223,10 +224,10 @@ module CalculatorViews {
   class GRACEScoreDescription extends ViewDescription implements IViewDescription {
       id: string = 'GRACEScore';
       name: string = 'GRACE Score';
-      category: string[] = [ 'Καρδιολογία'];
+      category: string[] = [ 'Καρδιολογία', 'Στεφανιαία Νόσος', 'Πρόγνωση'];
       tags: string = 'stemi\\nstemi';
       type: typeof View = GRACEScore;
   }
 
-  viewsCollection.add(new GRACEScoreDescription());
+  ViewsCollection.add(new GRACEScoreDescription());
 }

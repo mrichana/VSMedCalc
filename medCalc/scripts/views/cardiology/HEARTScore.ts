@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -178,9 +179,9 @@ module CalculatorViews {
         type: typeof View = HEARTScore;
         id: string = 'HEARTScore';
         name: string = 'HEART Score';
-        category: string[] = [ 'Καρδιολογία'];
+        category: string[] = [ 'Καρδιολογία', 'Στεφανιαία Νόσος'];
         tags: string = 'nstemi';
     }
 
-    viewsCollection.add(new HEARTScoreDescription());
+    ViewsCollection.add(new HEARTScoreDescription());
 }

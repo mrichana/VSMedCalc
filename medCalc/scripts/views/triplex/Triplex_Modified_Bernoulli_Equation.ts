@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -56,5 +57,5 @@ module CalculatorViews {
         tags: string = '';
     }
 
-    viewsCollection.add(new Triplex_Modified_Bernoulli_EquationDescription());
+    ViewsCollection.add(new Triplex_Modified_Bernoulli_EquationDescription());
 }

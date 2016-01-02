@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -51,11 +52,11 @@ module CalculatorViews {
     class Triplex_Stroke_VolumeDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_Stroke_Volume';
         name: string = 'Stroke Volume (SV)';
-        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αριστερός Κόλπος'];
+        category: string[] = ['Υπερηχοκαρδιογράφημα'];
         tags: string = '';
         type: typeof View = Triplex_Stroke_Volume;
     }
 
-    viewsCollection.add(new Triplex_Stroke_VolumeDescription());
+    ViewsCollection.add(new Triplex_Stroke_VolumeDescription());
 
 }

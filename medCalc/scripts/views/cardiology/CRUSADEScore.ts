@@ -1,4 +1,5 @@
 /// <reference path="../views.ts"/>
+/// <reference path="../viewsCollections.ts"/>
 
 module CalculatorViews {
   'use strict';
@@ -150,12 +151,12 @@ module CalculatorViews {
   class CRUSADEScoreDescription extends ViewDescription implements IViewDescription {
       id: string = 'CRUSADEScore';
       name: string = 'CRUSADE Score';
-      category: string[] = ['Καρδιολογία','NSTEMI'];
+      category: string[] = ['Καρδιολογία','Στεφανιαία Νόσος'];
       tags: string = 'stemi\\nstemi';
       type: typeof View = CRUSADEScore;
   }
 
-  viewsCollection.add(new CRUSADEScoreDescription());
+  ViewsCollection.add(new CRUSADEScoreDescription());
 
 
 

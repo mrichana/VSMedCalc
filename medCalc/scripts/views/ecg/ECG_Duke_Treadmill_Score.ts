@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -78,5 +79,5 @@ module CalculatorViews {
         tags: string = 'nstemi';
     }
 
-    viewsCollection.add(new ECG_Duke_Treadmill_ScoreDescription());
+    ViewsCollection.add(new ECG_Duke_Treadmill_ScoreDescription());
 }

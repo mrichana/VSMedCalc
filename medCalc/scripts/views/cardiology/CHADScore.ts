@@ -1,4 +1,5 @@
 /// <reference path="../views.ts"/>
+/// <reference path="../viewsCollections.ts"/>
 
 module CalculatorViews {
   'use strict';
@@ -86,10 +87,10 @@ module CalculatorViews {
   class CHADScoreDescription extends ViewDescription implements IViewDescription {
       id: string = 'CHADScore';
       name: string = 'CHA2DS2-VASc Score';
-      category: string[] = [ 'Καρδιολογία', 'Κολπική Μαρμαρυγή'];
+      category: string[] = ['Καρδιολογία', 'Κολπική Μαρμαρυγή'];
       tags: string = 'Καρδιολογία\\af';
       type: typeof View = CHADScore;
   }
 
-  viewsCollection.add( new CHADScoreDescription());
+  ViewsCollection.add( new CHADScoreDescription());
 }

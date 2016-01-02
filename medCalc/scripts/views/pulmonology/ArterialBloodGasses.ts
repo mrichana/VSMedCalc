@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -225,5 +226,5 @@ module CalculatorViews {
         tags: string = 'pe';
     }
 
-    viewsCollection.add(new ArterialBloodGassesDescription());
+    ViewsCollection.add(new ArterialBloodGassesDescription());
 }

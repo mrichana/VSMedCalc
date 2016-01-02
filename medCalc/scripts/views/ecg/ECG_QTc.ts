@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -73,5 +74,5 @@ module CalculatorViews {
         tags: string = '';
     }
 
-    viewsCollection.add(new ECG_QTcDescription());
+    ViewsCollection.add(new ECG_QTcDescription());
 }

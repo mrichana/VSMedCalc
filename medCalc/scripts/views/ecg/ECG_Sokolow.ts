@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -77,5 +78,5 @@ module CalculatorViews {
      type: typeof View = ECG_Sokolow;
  }
 
- viewsCollection.add( new ECG_SokolowDescription());
+ ViewsCollection.add( new ECG_SokolowDescription());
 }

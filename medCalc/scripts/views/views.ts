@@ -78,6 +78,14 @@ module CalculatorViews {
     }
 
     export class Result implements IResult {
+		constructor(result: any = null, resultlevel: IResult.resultLevel = IResult.resultLevel.none, explanation: string = '', prefix: string = '', suffix: string = '') {
+			this.result = result;
+			this.explanation = explanation;
+			this.resultlevel = resultlevel;
+			this.prefix = prefix;
+			this.suffix = suffix;
+		}
+
         result: any;
         explanation: string;
         resultlevel: IResult.resultLevel = IResult.resultLevel.none;

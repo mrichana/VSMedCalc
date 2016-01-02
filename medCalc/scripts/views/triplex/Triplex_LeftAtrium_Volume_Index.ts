@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -97,6 +98,6 @@ module CalculatorViews {
         type: typeof View = Triplex_LeftAtrium_Volume_Index;
     }
 
-    viewsCollection.add(new Triplex_LeftAtrium_Volume_IndexDescription());
+    ViewsCollection.add(new Triplex_LeftAtrium_Volume_IndexDescription());
 
 }

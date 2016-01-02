@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -134,5 +135,5 @@ module CalculatorViews {
         tags: string = 'pe';
     }
 
-    viewsCollection.add(new PESIDescription());
+    ViewsCollection.add(new PESIDescription());
 }

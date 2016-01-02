@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -90,6 +91,6 @@ description = new Triplex_LeftAtrium_VolumeDescription();
         type: typeof View = Triplex_LeftAtrium_Volume;
     }
 
-    viewsCollection.add(new Triplex_LeftAtrium_VolumeDescription());
+    ViewsCollection.add(new Triplex_LeftAtrium_VolumeDescription());
 
 }

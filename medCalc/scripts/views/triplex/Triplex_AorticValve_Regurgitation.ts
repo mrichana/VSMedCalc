@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -49,7 +50,7 @@ module CalculatorViews {
         tags: string = 'AoV\\regurgitation';
     }
 
-    viewsCollection.add(new Triplex_AorticValve_Regurgitation_VCDescription());
+    ViewsCollection.add(new Triplex_AorticValve_Regurgitation_VCDescription());
 
 
     class Triplex_AorticValve_Regurgitation_PHT extends View {
@@ -97,5 +98,5 @@ module CalculatorViews {
         tags: string = 'AoV\\regurgitation';
     }
 
-    viewsCollection.add(new Triplex_AorticValve_Regurgitation_PHTDescription());
+    ViewsCollection.add(new Triplex_AorticValve_Regurgitation_PHTDescription());
 }

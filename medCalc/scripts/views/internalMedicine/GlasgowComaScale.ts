@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -113,5 +114,5 @@ module CalculatorViews {
         tags: string = '';
     }
 
-    viewsCollection.add(new GlasgowComaScaleDescription());
+    ViewsCollection.add(new GlasgowComaScaleDescription());
 }

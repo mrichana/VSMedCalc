@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -68,9 +69,9 @@ module CalculatorViews {
         type: typeof View = KillipClassEval;
         id: string = 'KillipClassEval';
         name: string = 'Killip Class';
-        category: string[] = [ 'Καρδιολογία'];
+        category: string[] = [ 'Καρδιολογία', 'Στεφανιαία Νόσος', 'Πρόγνωση'];
         tags: string = 'stemi\\nstemi';
     }
 
-    viewsCollection.add(new KillipClassEvalDescription());
+    ViewsCollection.add(new KillipClassEvalDescription());
 }

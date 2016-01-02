@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -58,5 +59,5 @@ module CalculatorViews {
       tags: string = '';
   }
 
-  viewsCollection.add( new BMIDescription());
+  ViewsCollection.add( new BMIDescription());
 }

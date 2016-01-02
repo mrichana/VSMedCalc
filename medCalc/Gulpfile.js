@@ -37,7 +37,8 @@ gulp.task('copyLibs', ['bower'], function () {
         'bower_components/angular-material/angular-material.min.js',
         'bower_components/angular-scroll/angular-scroll.min.js',
         'bower_components/katex/dist/katex.min.js',
-        'bower_components/angular-katex/angular-katex.min.js'
+        'bower_components/angular-katex/angular-katex.min.js',
+        'bower_components/angular-translate/angular-translate.min.js'
     ])
 //    .pipe(sourcemap.init())
     .pipe(gulpIf('!*.min.js', uglify()))
@@ -92,14 +93,20 @@ gulp.task('copyImages', function () {
 
 gulp.task('copyTypescript', function () {
     return gulp.src([
+        "scripts/lib/**/*.ts",
         "scripts/typings/**/*.ts",
         "scripts/views/views.ts",
         "scripts/views/viewsCollections.ts",
+        "scripts/views/MinMaxToValue.ts",
+
+        "scripts/views/general/*.ts",
         "scripts/views/internalMedicine/*.ts",
         "scripts/views/pulmonology/*.ts",
-        "scripts/views/triplex/*.ts",
         "scripts/views/cardiology/*.ts",
         "scripts/views/ecg/*.ts",
+        "scripts/views/triplex/*.ts",
+        "scripts/views/drugs/*.ts",
+
         "scripts/services.ts",
         "scripts/controllers.ts",
         "scripts/filters.ts",

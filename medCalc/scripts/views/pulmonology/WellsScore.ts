@@ -1,3 +1,4 @@
+/// <reference path="../viewsCollections.ts"/>
 /// <reference path="../views.ts"/>
 
 module CalculatorViews {
@@ -100,5 +101,5 @@ module CalculatorViews {
         tags: string = 'pe';
     }
 
-    viewsCollection.add(new WellsScoreDescription());
+    ViewsCollection.add(new WellsScoreDescription());
 }
