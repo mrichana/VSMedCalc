@@ -105,7 +105,7 @@ gulp.task('copyTypescript', function () {
         "scripts/views/cardiology/*.ts",
         "scripts/views/ecg/*.ts",
         "scripts/views/triplex/*.ts",
-        "scripts/views/drugs/*.ts",
+        "scripts/views/drugs/**/*.ts",
 
         "scripts/services.ts",
         "scripts/controllers.ts",

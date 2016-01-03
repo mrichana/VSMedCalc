@@ -36,7 +36,7 @@ module CalculatorViews {
                 calculator: 'GFR',
                 input: {
                     type: 'number',
-                    step: 0.1,
+                    step: 1,
                     min: 0,
                     max: 250
                 }
