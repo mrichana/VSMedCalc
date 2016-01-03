@@ -17,7 +17,7 @@ module CalculatorViews {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('300-600mgr x 4', IResult.resultLevel.normal) }
             ]);
-            return resultArray.value(values.GFR);
+            return resultArray.value(0);
         };
     }
     class ClindamycinDescription extends ViewDescription implements IViewDescription {

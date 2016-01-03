@@ -4,8 +4,8 @@
 
 module CalculatorViews {
    'use strict';
-   class Cefepim extends View {
-       description = new CefepimDescription();
+   class Fluconazole extends View {
+       description = new FluconazoleDescription();
 
         template: string = 'calculator.basic';
         defaultValues = {
@@ -27,21 +27,19 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('2gr x 3', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('2gr x 3', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('2gr x 1-2', IResult.resultLevel.intermediate) },
-                { value: 10, result: new Result('1gr x 1', IResult.resultLevel.abnormal) }
+                { result: new Result('100-400mgr x 1', IResult.resultLevel.normal) },
+                { value: 50, result: new Result('100-200mgr x 1', IResult.resultLevel.intermediate) }
             ]);
             return resultArray.value(values.GFR);
         };
     }
-    class CefepimDescription extends ViewDescription implements IViewDescription {
-        type: typeof View = Cefepim;
-        id: string = 'Cefepim';
-        name: string = 'Κεφεπίμη (Maxipime)';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Κεφαλοσπορίνες'];
+    class FluconazoleDescription extends ViewDescription implements IViewDescription {
+        type: typeof View = Fluconazole;
+        id: string = 'Fluconazole';
+        name: string = 'Φλουκοναζόλη (Fungostatin)';
+        category: string[] = ['Φάρμακα', 'Αντιμυκητισιακά'];
         tags: string = '';
     }
 
-    ViewsCollection.add(new CefepimDescription());
+    ViewsCollection.add(new FluconazoleDescription());
 }

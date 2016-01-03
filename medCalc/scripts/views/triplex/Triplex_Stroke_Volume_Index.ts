@@ -64,7 +64,7 @@ module CalculatorViews {
     class Triplex_Stroke_Volume_IndexDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_Stroke_Volume_Index';
         name: string = 'Stroke Volume Index (SVi)';
-        category: string[] = ['Υπερηχοκαρδιογράφημα'];
+        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Διαστάσεις'];
         tags: string = '';
         type: typeof View = Triplex_Stroke_Volume_Index;
     }

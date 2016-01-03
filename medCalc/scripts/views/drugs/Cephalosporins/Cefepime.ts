@@ -4,8 +4,8 @@
 
 module CalculatorViews {
    'use strict';
-   class Meropenem extends View {
-       description = new MeropenemDescription();
+   class Cefepime extends View {
+       description = new CefepimeDescription();
 
         template: string = 'calculator.basic';
         defaultValues = {
@@ -27,21 +27,21 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('1gr x 3', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('1gr x 3', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('1gr x 2', IResult.resultLevel.intermediate) },
-                { value: 10, result: new Result('500mgr x 1', IResult.resultLevel.abnormal) }
+                { result: new Result('2gr x 3', IResult.resultLevel.normal) },
+                { value: 90, result: new Result('2gr x 2-3', IResult.resultLevel.normal) },
+                { value: 50, result: new Result('2gr x 1', IResult.resultLevel.intermediate) },
+                { value: 10, result: new Result('1gr x 1', IResult.resultLevel.abnormal) }
             ]);
             return resultArray.value(values.GFR);
         };
     }
-    class MeropenemDescription extends ViewDescription implements IViewDescription {
-        type: typeof View = Meropenem;
-        id: string = 'Meropenem';
-        name: string = 'Μεροπενέμη (Meronem)';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Πενέμες'];
+    class CefepimeDescription extends ViewDescription implements IViewDescription {
+        type: typeof View = Cefepime;
+        id: string = 'Cefepime';
+        name: string = 'Κεφεπίμη (Maxipime)';
+        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Κεφαλοσπορίνες'];
         tags: string = '';
     }
 
-    ViewsCollection.add(new MeropenemDescription());
+    ViewsCollection.add(new CefepimeDescription());
 }

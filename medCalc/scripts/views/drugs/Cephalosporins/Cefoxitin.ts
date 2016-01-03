@@ -28,8 +28,8 @@ module CalculatorViews {
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('2gr x 3', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('2gr x 3', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('2gr ανά 12h-48h', IResult.resultLevel.intermediate) },
+                { value: 90, result: new Result('2gr x 3', IResult.resultLevel.normal) },
+                { value: 50, result: new Result('2gr x 2-3', IResult.resultLevel.intermediate) },
                 { value: 10, result: new Result('2gr ανά 24h-48h', IResult.resultLevel.abnormal) }
             ]);
             return resultArray.value(values.GFR);

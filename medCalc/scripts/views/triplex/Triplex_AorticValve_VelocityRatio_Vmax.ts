@@ -64,7 +64,7 @@ module CalculatorViews {
     class Triplex_AorticValve_VelocityRatio_VmaxDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_AorticValve_VelocityRatio_Vmax';
         name: string = 'Aortic Valve Velocity Ratio (Vmax)';
-        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αορτική Βαλβίδα', 'Στένωση Αορτικής'];
+        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Βαλβίδες', 'Στένωση Αορτικής'];
         tags: string = 'AoV\\Stenosis';
         type: typeof View = Triplex_AorticValve_VelocityRatio_Vmax;
     }

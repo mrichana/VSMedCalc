@@ -93,7 +93,7 @@ module CalculatorViews {
     class Triplex_LeftAtrium_Volume_IndexDescription extends ViewDescription implements IViewDescription {
         id: string = 'Triplex_LeftAtrium_Volume_Index';
         name: string = 'Left Atrial Volume Index';
-        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αριστερός Κόλπος'];
+        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Διαστάσεις', 'Αριστερός Κόλπος'];
         tags: string = 'af';
         type: typeof View = Triplex_LeftAtrium_Volume_Index;
     }

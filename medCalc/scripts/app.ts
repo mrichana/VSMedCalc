@@ -47,7 +47,7 @@ module app {
         }])
         .value('duScrollDuration', 2000)
         .config(['$compileProvider', function ($compileProvider) {
-            $compileProvider.debugInfoEnabled(true); //Set to false for release
+            $compileProvider.debugInfoEnabled(false); //Set to false for release
         }])
         .run(['$rootScope', function ($rootScope) {
             $rootScope.debug = function (item : any):void {

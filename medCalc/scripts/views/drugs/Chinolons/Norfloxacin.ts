@@ -28,7 +28,7 @@ module CalculatorViews {
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('400mgr x 2', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('400mgr x 2', IResult.resultLevel.normal) },
+                { value: 90, result: new Result('400mgr x 2', IResult.resultLevel.normal) },
                 { value: 50, result: new Result('200mgr x 2', IResult.resultLevel.intermediate) },
                 { value: 10, result: new Result('400mgr x 1', IResult.resultLevel.abnormal) }
             ]);

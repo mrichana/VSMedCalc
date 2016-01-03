@@ -4,8 +4,8 @@
 
 module CalculatorViews {
    'use strict';
-   class Clarithromycin extends View {
-       description = new ClarithromycinDescription();
+   class Meropenem extends View {
+       description = new MeropenemDescription();
 
         template: string = 'calculator.basic';
         defaultValues = {
@@ -27,20 +27,21 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('500-1000mgr x 2', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('500mgr x 1-2', IResult.resultLevel.intermediate) },
+                { result: new Result('1gr x 3', IResult.resultLevel.normal) },
+                { value: 90, result: new Result('1gr x 3', IResult.resultLevel.normal) },
+                { value: 50, result: new Result('1gr x 2', IResult.resultLevel.intermediate) },
                 { value: 10, result: new Result('500mgr x 1', IResult.resultLevel.abnormal) }
             ]);
             return resultArray.value(values.GFR);
         };
     }
-    class ClarithromycinDescription extends ViewDescription implements IViewDescription {
-        type: typeof View = Clarithromycin;
-        id: string = 'Clarithromycin';
-        name: string = 'Κλαριθρομυκίνη (Klaricid)';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Μακρολίδες'];
+    class MeropenemDescription extends ViewDescription implements IViewDescription {
+        type: typeof View = Meropenem;
+        id: string = 'Meropenem';
+        name: string = 'Μεροπενέμη (Meronem)';
+        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Καρβαπενέμες'];
         tags: string = '';
     }
 
-    ViewsCollection.add(new ClarithromycinDescription());
+    ViewsCollection.add(new MeropenemDescription());
 }

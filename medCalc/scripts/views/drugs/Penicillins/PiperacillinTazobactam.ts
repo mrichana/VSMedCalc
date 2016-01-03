@@ -28,9 +28,8 @@ module CalculatorViews {
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('4.5gr x 3-4', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('4.5gr x 3-4', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('2.25gr x 3-4', IResult.resultLevel.intermediate) },
-                { value: 10, result: new Result('2.25gr x 3', IResult.resultLevel.abnormal) }
+                { value: 50, result: new Result('2.25gr x 4', IResult.resultLevel.intermediate) },
+                { value: 20, result: new Result('2.25gr x 3', IResult.resultLevel.abnormal) }
             ]);
             return resultArray.value(values.GFR);
         };

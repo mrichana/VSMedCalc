@@ -4,8 +4,8 @@
 
 module CalculatorViews {
    'use strict';
-   class Cotrimoxazole extends View {
-       description = new CotrimoxazoleDescription();
+   class Rifampicin extends View {
+       description = new RifampicinDescription();
 
         template: string = 'calculator.basic';
         defaultValues = {
@@ -27,21 +27,19 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('960mgr x 3', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('960mgr x 2', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('960mgr ανά 18h', IResult.resultLevel.intermediate) },
-                { value: 10, result: new Result('960mgr x 1', IResult.resultLevel.abnormal) }
+                { result: new Result('600mgr x 1', IResult.resultLevel.normal) },
+                { value: 50, result: new Result('300-600mgr x 1', IResult.resultLevel.intermediate) },
             ]);
             return resultArray.value(values.GFR);
         };
     }
-    class CotrimoxazoleDescription extends ViewDescription implements IViewDescription {
-        type: typeof View = Cotrimoxazole;
-        id: string = 'Cotrimoxazole';
-        name: string = 'Κοτριμοξαζόλη';
+    class RifampicinDescription extends ViewDescription implements IViewDescription {
+        type: typeof View = Rifampicin;
+        id: string = 'Rifampicin';
+        name: string = 'Ριφαμπικίνη (Rifadin)';
         category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Ειδικές Κατηγορίες'];
         tags: string = '';
     }
 
-    ViewsCollection.add(new CotrimoxazoleDescription());
+    ViewsCollection.add(new RifampicinDescription());
 }

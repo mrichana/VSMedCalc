@@ -94,7 +94,7 @@ module CalculatorViews {
         type: typeof View = Triplex_AorticValve_Regurgitation_PHT;
         id: string = 'Triplex_AorticValve_Regurgitation_PHT';
         name: string = 'Aortic Valve Regurgitation (PHT)';
-        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Αορτική Βαλβίδα', 'Ανεπάρκεια Αορτικής'];
+        category: string[] = ['Υπερηχοκαρδιογράφημα', 'Βαλβίδες', 'Ανεπάρκεια Αορτικής'];
         tags: string = 'AoV\\regurgitation';
     }
 

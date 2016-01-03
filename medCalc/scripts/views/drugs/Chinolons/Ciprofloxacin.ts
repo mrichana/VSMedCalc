@@ -28,8 +28,9 @@ module CalculatorViews {
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('500-750mgr x 2 ή 400mgr x 2-3 IV', IResult.resultLevel.normal) },
-                { value: 50, result: new Result('375-600mgr x 2 ή 400mgr x 2 IV', IResult.resultLevel.intermediate) },
-                { value: 10, result: new Result('250-375mgr x 2 ή 200mgr x 2 IV', IResult.resultLevel.abnormal) }
+                { value: 90, result: new Result('500-750mgr x 2 ή 400mgr x 2 IV', IResult.resultLevel.normal) },
+                { value: 50, result: new Result('250-500mgr x 2 ή 400mgr x 1 IV', IResult.resultLevel.intermediate) },
+                { value: 10, result: new Result('250 x 2 ή 400mgr x 1 IV', IResult.resultLevel.abnormal) }
             ]);
             return resultArray.value(values.GFR);
         };

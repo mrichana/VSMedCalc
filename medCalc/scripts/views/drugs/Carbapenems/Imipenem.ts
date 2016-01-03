@@ -28,7 +28,7 @@ module CalculatorViews {
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('500mgr x 4', IResult.resultLevel.normal) },
-                { value: 80, result: new Result('250-500mgr x 3-4', IResult.resultLevel.normal) },
+                { value: 90, result: new Result('250-500mgr x 3-4', IResult.resultLevel.normal) },
                 { value: 50, result: new Result('250mgr x 2-3', IResult.resultLevel.intermediate) },
                 { value: 10, result: new Result('125-250mgr x 2', IResult.resultLevel.abnormal) }
             ]);
@@ -39,7 +39,7 @@ module CalculatorViews {
         type: typeof View = Imipenem;
         id: string = 'Imipenem';
         name: string = 'Ιμιπενέμη (Primaxin)';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Πενέμες'];
+        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Καρβαπενέμες'];
         tags: string = '';
     }
 

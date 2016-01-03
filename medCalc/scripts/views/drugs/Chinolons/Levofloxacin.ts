@@ -27,9 +27,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('750-500mgr x 1', IResult.resultLevel.normal) },
+                { result: new Result('750mgr x 1', IResult.resultLevel.normal) },
                 { value: 50, result: new Result('750mgr ανά 48h ', IResult.resultLevel.intermediate) },
-                { value: 20, result: new Result('500mgr ανά 48h ', IResult.resultLevel.abnormal) }
+                { value: 20, result: new Result('750mg άπαξ και 500mgr ανά 48h ', IResult.resultLevel.abnormal) }
             ]);
             return resultArray.value(values.GFR);
         };

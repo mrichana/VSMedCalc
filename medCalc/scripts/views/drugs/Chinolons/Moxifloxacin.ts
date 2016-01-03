@@ -17,7 +17,7 @@ module CalculatorViews {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('400mgr x 1', IResult.resultLevel.normal) }
             ]);
-            return resultArray.value(values.GFR);
+            return resultArray.value(0);
         };
     }
     class MoxifloxacinDescription extends ViewDescription implements IViewDescription {

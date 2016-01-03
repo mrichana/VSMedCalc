@@ -17,7 +17,7 @@ module CalculatorViews {
             var resultArray = new CalculatorViews.MinMaxToValue([
                 { result: new Result('600mgr x 2', IResult.resultLevel.normal) }
             ]);
-            return resultArray.value(values.GFR);
+            return resultArray.value(0);
         };
     }
     class LinezolidDescription extends ViewDescription implements IViewDescription {

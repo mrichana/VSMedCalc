@@ -15,9 +15,9 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('2gr x 1-2', IResult.resultLevel.normal) }
+                { result: new Result('1-2gr x 1 ή 2gr x 2 σε μηνιγγίτιδα', IResult.resultLevel.normal) }
             ]);
-            return resultArray.value(values.GFR);
+            return resultArray.value(0);
         };
     }
     class CeftriaxoneDescription extends ViewDescription implements IViewDescription {

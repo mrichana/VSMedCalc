@@ -91,6 +91,13 @@ gulp.task('copyImages', function () {
     .pipe(gulp.dest('www/images'));
 });
 
+
+var tsProject = tsc.createProject({
+        noImplicitAny: false,
+        outDir: 'www/scripts',
+        target: 'ES5'
+});
+ 
 gulp.task('copyTypescript', function () {
     return gulp.src([
         "scripts/lib/**/*.ts",
@@ -114,11 +121,7 @@ gulp.task('copyTypescript', function () {
         "scripts/app.ts"
     ], { base: 'scripts/' })
     .pipe(sourcemap.init())
-    .pipe(tsc({
-        noImplicitAny: false,
-        outDir: 'www/scripts',
-        target: 'ES5'
-    }))
+    .pipe(tsc(tsProject))
     .pipe(concat("index.min.js"))
     //.pipe(uglify())
     .pipe(sourcemap.write())

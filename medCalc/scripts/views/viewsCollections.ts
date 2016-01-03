@@ -121,10 +121,10 @@ module CalculatorViews {
 		}
 		private static prepareViewsList(topLevelCategory): IView[] {
 			var ret = [];
-			_.forEach(topLevelCategory.views, (view: IView) => {
+			_.forEach(_.sortBy(_.values(topLevelCategory.views), (item: IView) => {return item.description.name;}), (view: IView) => {
 				ret.push(view);
 			});
-			_.forEach(topLevelCategory.categories, (category: ICategory) => {
+			_.forEach(_.sortBy(_.values(topLevelCategory.categories), 'name'), (category: ICategory) => {
 				ret = ret.concat(ViewsCollection.prepareViewsList(category));
 			});
 			return ret;
