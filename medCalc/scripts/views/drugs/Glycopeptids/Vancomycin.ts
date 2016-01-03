@@ -38,7 +38,7 @@ module CalculatorViews {
         type: typeof View = Vancomycin;
         id: string = 'Vancomycin';
         name: string = 'Βανκομυκίνη (Voncon)';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Gram(+)', 'Γλυκοπεπτιδικά'];
+        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά για Gram(+)',''];
         tags: string = '';
     }
 

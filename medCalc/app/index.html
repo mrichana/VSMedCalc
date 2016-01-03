@@ -80,7 +80,12 @@
                 <h2 class="md-heading">Ιατρικό Βοήθημα</h2>
             </div>
         </md-toolbar>
-        <md-tabs flex layout="column" md-border-bottom md-enable-disconnect md-selected="selectedTabCategoryIndex">
+        <md-tabs 
+            flex 
+            layout="column" 
+            md-border-bottom 
+            md-selected="selectedTabCategoryIndex"
+            md-enable-disconnect> 
             <md-tab flex layout="column" layout-fill ng-repeat="(key, category) in views.categories.categories" label="{{category.name}}">
                 <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{category.name}}">
                     <div class="view-card"

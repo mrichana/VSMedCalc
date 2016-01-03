@@ -40,7 +40,7 @@ module CalculatorViews {
         type: typeof View = Teicoplanin;
         id: string = 'Teicoplanin';
         name: string = 'Τεϊκοπλανίνη (Targocid)';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Gram(+)', 'Γλυκοπεπτιδικά'];
+        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά για Gram(+)',''];
         tags: string = '';
     }
 

@@ -39,7 +39,7 @@ module CalculatorViews {
         type: typeof View = Cotrimoxazole;
         id: string = 'Cotrimoxazole';
         name: string = 'Κοτριμοξαζόλη';
-        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά', 'Ειδικές Κατηγορίες'];
+        category: string[] = ['Φάρμακα', 'Αντιβακτηριακά Ευρέος Φάσματος', 'Ειδικές Κατηγορίες'];
         tags: string = '';
     }
 

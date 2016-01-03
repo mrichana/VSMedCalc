@@ -5,110 +5,117 @@
 /// <reference path="views/viewsCollections.ts"/>
 
 module controllers {
-	'use strict';
+    'use strict';
 
-	interface ICalculatorScope extends ng.IScope {
-		filterText: string;
-		setFilter(filterName: string): void;
-		values: any;
+    interface ICalculatorScope extends ng.IScope {
+        filterText: string;
+        setFilter(filterName: string): void;
+        values: any;
 
-		views: CalculatorViews.IFilteredViews;
+        views: CalculatorViews.IFilteredViews;
 
-		selectedTabCategoryIndex: number;
+        selectedTabCategoryIndex: number;
 
-		openLeftPanel(): void;
-		closeLeftPanel(): void;
-		toggleLeftPanel(): void;
+        openLeftPanel(): void;
+        closeLeftPanel(): void;
+        toggleLeftPanel(): void;
 
-		navViewItemClicked($event: JQueryEventObject): void;
+        navViewItemClicked($event: JQueryEventObject): void;
 
-		clearSearchBox(): void;
-		clearPanel(id: string): void;
+        clearSearchBox(): void;
+        clearPanel(id: string): void;
 
-		keys(dictionary: any): string[];
-		subcategories(category: any): any;
-		items(category: any): any;
-		selectedTabCategory(): any;
-		viewsList(): CalculatorViews.IView[];
+        keys(dictionary: any): string[];
+        subcategories(category: any): any;
+        items(category: any): any;
+        selectedTabCategory(): any;
+        viewsList(): CalculatorViews.IView[];
 
-		isNewCategory(index: number): string[];
-	}
+        isNewCategory(index: number): string[];
+    }
 
-	/* Controllers */
-	export class calculatorController {
-		public static $inject = ['$scope', '$mdSidenav'];
-		constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
-			$scope.filterText = '';
-			$scope.values = {};
-			$scope.selectedTabCategoryIndex = 0;
+    /* Controllers */
+    export class calculatorController {
+        public static $inject = ['$scope', '$mdSidenav'];
+        constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
+            $scope.filterText = '';
+            $scope.values = {};
+            $scope.selectedTabCategoryIndex = 0;
 
-			var views = new CalculatorViews.ViewsCollection($scope.values);
+            var views = new CalculatorViews.ViewsCollection($scope.values);
 
-			$scope.toggleLeftPanel = function() {
-				$mdSidenav('left').toggle();
-			}
+            $scope.toggleLeftPanel = function() {
+                $mdSidenav('left').toggle();
+            }
 
-			$scope.openLeftPanel = function() {
-				$mdSidenav('left').open();
-			}
+            $scope.openLeftPanel = function() {
+                $mdSidenav('left').open();
+            }
 
-			$scope.closeLeftPanel = function() {
-				$mdSidenav('left').close();
-			}
+            $scope.closeLeftPanel = function() {
+                $mdSidenav('left').close();
+            }
 
-			$scope.navViewItemClicked = ($event: JQueryEventObject) => {
-				$scope.closeLeftPanel();
-				$event.preventDefault();
-				var targetId = angular.element($event.target).parent().parent().attr('href').slice(1);
-				var target = angular.element(document.getElementById(targetId));
-				var targetContainer = target.parent();
-				targetContainer['duScrollToElementAnimated'](target);
-
-
-			}
-
-			$scope.$watch("filterText", function(newValue, olValue) {
-				$scope.setFilter(newValue);
-			});
-
-			$scope.setFilter = function(filterText: string = ""): void {
-				$scope.views = views.filter(filterText);
-			};
+            $scope.navViewItemClicked = ($event: JQueryEventObject) => {
+                $scope.closeLeftPanel();
+                $event.preventDefault();
+                var targetId = angular.element($event.target).parent().parent().attr('href').slice(1);
+                var target = angular.element(document.getElementById(targetId));
+                var targetContainer = target.parent();
+                targetContainer['duScrollToElementAnimated'](target);
 
 
-			$scope.viewsList = function (): CalculatorViews.IView[] {
-				var ret;
-				if (!_.isEmpty($scope.views.categories.categories)) {
-					ret = $scope.views.viewsList($scope.views.categories.categories[_.keys($scope.views.categories.categories)[$scope.selectedTabCategoryIndex]])
-				} else {
-					ret = [];
-				}
-				return ret;
-			};
+            }
 
-			$scope.isNewCategory = function (index: number) {
-				var prev: CalculatorViews.IView = $scope.viewsList()[index - 1];
-				var curr: CalculatorViews.IView = $scope.viewsList()[index];
-				var ret: string[] = ['',''];
-				if (!prev || prev.description.category[1] != curr.description.category[1]) {
-					ret[0] = curr.description.category[1] || '';
-					ret[1] = curr.description.category[2] || '';
-				}
-				else if (prev.description.category[2] != curr.description.category[2]) {
-					ret[1] = curr.description.category[2] || '';
-				}
-				return ret;
-			}
+            $scope.$watch("filterText", function(newValue, olValue) {
+                $scope.setFilter(newValue);
+            });
 
-			$scope.clearSearchBox = function() {
-			  $scope.filterText = '';
-			};
+            $scope.setFilter = function(filterText: string = ""): void {
+                $scope.views = views.filter(filterText);
+            };
 
-			$scope.clearPanel = function(id) {
-				$scope.views.views[id].reset();
-			};
-		};
-	}
+
+            $scope.viewsList = function(): CalculatorViews.IView[] {
+                var ret;
+                var selectedTabCategoryName = _.keys($scope.views.categories.categories)[$scope.selectedTabCategoryIndex];
+                if (!_.isEmpty($scope.views.categories.categories) && selectedTabCategoryName) {
+                    ret = $scope.views.viewsList(
+                        $scope.views.categories.categories[
+                            selectedTabCategoryName
+                        ]
+                    )
+                } else {
+                    ret = [];
+                }
+                return ret;
+            };
+
+            $scope.isNewCategory = function(index: number) {
+                var prev: CalculatorViews.IView = $scope.viewsList()[index - 1];
+                var curr: CalculatorViews.IView = $scope.viewsList()[index];
+                var ret: string[] = ['', ''];
+                if (curr) {
+                    if (!prev || prev.description.category[1] != curr.description.category[1]) {
+                        ret[0] = curr.description.category[1] || '';
+                        ret[1] = curr.description.category[2] || '';
+                    }
+                    else if (prev.description.category[2] != curr.description.category[2]) {
+                        ret[1] = curr.description.category[2] || '';
+                    }
+                }
+                return ret;
+            }
+
+            $scope.clearSearchBox = function() {
+                $scope.filterText = '';
+            };
+
+            $scope.clearPanel = function(id) {
+                $scope.views.views[id].reset();
+            };
+        };
+    }
 
 	/*
 	  interface IPatientScope extends ICalculatorScope {
