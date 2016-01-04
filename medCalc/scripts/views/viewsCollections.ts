@@ -120,7 +120,7 @@ module CalculatorViews {
 			return ret;
 		}
         
-		private static prepareViewsList(topLevelCategory): IView[] {
+		private static prepareViewsList(topLevelCategory: ICategory): IView[] {
 			var ret = [];
 			_.forEach(_.sortBy(_.values(topLevelCategory.views), (item: IView) => {return item.description.name;}), (view: IView) => {
 				ret.push(view);

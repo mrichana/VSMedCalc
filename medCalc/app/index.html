@@ -80,9 +80,9 @@
                 <h2 class="md-heading">Ιατρικό Βοήθημα</h2>
             </div>
         </md-toolbar>
-        <md-tabs flex layout="column" md-border-bottom md-selected="selectedTabCategoryIndex" md-enable-disconnect> 
-            <md-tab flex layout="column" layout-fill ng-repeat="(key, category) in views.categories.categories" label="{{category.name}}">
-                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{category.name}}">
+        <md-tabs flex layout="column" md-enable-disconnect>
+            <md-tab flex layout="column" layout-fill md-on-select="selectedTabCategory(key)" label="{{::key}}" ng-repeat="(key, category) in views.categories.categories">
+                <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{::key}}">
                     <div class="view-card"
                          ng-repeat="view in viewsList() track by view.description.id"
                          id="{{::view.description.id}}">
