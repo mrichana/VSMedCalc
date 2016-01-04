@@ -119,6 +119,7 @@ module CalculatorViews {
 			}, this);
 			return ret;
 		}
+        
 		private static prepareViewsList(topLevelCategory): IView[] {
 			var ret = [];
 			_.forEach(_.sortBy(_.values(topLevelCategory.views), (item: IView) => {return item.description.name;}), (view: IView) => {

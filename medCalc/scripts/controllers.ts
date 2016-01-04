@@ -75,10 +75,12 @@ module controllers {
                 $scope.views = views.filter(filterText);
             };
 
-
+            var viewsListCache = {};
             $scope.viewsList = function(): CalculatorViews.IView[] {
                 var ret;
                 var selectedTabCategoryName = _.keys($scope.views.categories.categories)[$scope.selectedTabCategoryIndex];
+                if (viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter]) return viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter];
+                
                 if (!_.isEmpty($scope.views.categories.categories) && selectedTabCategoryName) {
                     ret = $scope.views.viewsList(
                         $scope.views.categories.categories[
@@ -88,12 +90,14 @@ module controllers {
                 } else {
                     ret = [];
                 }
+                viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter]=ret;
                 return ret;
             };
 
             $scope.isNewCategory = function(index: number) {
-                var prev: CalculatorViews.IView = $scope.viewsList()[index - 1];
-                var curr: CalculatorViews.IView = $scope.viewsList()[index];
+                var list = $scope.viewsList();
+                var prev: CalculatorViews.IView = list[index - 1];
+                var curr: CalculatorViews.IView = list[index];
                 var ret: string[] = ['', ''];
                 if (curr) {
                     if (!prev || prev.description.category[1] != curr.description.category[1]) {

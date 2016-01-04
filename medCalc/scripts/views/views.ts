@@ -144,7 +144,7 @@ module CalculatorViews {
         static formulaEvaluator(scope: any, formula: string) {
             var items = _.keys(scope);
             _.each(items, (item) => {
-                formula = formula.replace(item, scope[item]);
+                formula = formula.replace(new RegExp(item, 'g'), scope[item]);
             });
             return math.parse(formula).toTex({ parenthesis: 'auto'});
         };
