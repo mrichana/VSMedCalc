@@ -14,6 +14,8 @@ module controllers {
 
         views: CalculatorViews.IFilteredViews;
 
+        selectedTabCategoryIndex: number;
+
         openLeftPanel(): void;
         closeLeftPanel(): void;
         toggleLeftPanel(): void;
@@ -26,7 +28,7 @@ module controllers {
         keys(dictionary: any): string[];
         subcategories(category: any): any;
         items(category: any): any;
-        selectedTabCategory(name: string): any;
+        selectedTabCategory(): any;
         viewsList(): CalculatorViews.IView[];
 
         isNewCategory(index: number): string[];
@@ -38,6 +40,7 @@ module controllers {
         constructor(private $scope: ICalculatorScope, private $mdSidenav: angular.material.ISidenavService) {
             $scope.filterText = '';
             $scope.values = {};
+            $scope.selectedTabCategoryIndex = 0;
 
             var views = new CalculatorViews.ViewsCollection($scope.values);
 
@@ -60,6 +63,8 @@ module controllers {
                 var target = angular.element(document.getElementById(targetId));
                 var targetContainer = target.parent();
                 targetContainer['duScrollToElementAnimated'](target);
+
+
             }
 
             $scope.$watch("filterText", function(newValue, olValue) {
@@ -70,26 +75,22 @@ module controllers {
                 $scope.views = views.filter(filterText);
             };
 
-            var selectedTabCategoryName = '';
-            $scope.selectedTabCategory = function(name: string) {
-                if (name) {
-                    this.selectedTabCategoryName = name;
-                }
-                return this.selectedTabCategoryName;
-            }
-            
             var viewsListCache = {};
             $scope.viewsList = function(): CalculatorViews.IView[] {
                 var ret;
-                if (viewsListCache[this.selectedTabCategoryName+'||'+$scope.views.filter]) return viewsListCache[this.selectedTabCategoryName+'||'+$scope.views.filter];
+                var selectedTabCategoryName = _.keys($scope.views.categories.categories)[$scope.selectedTabCategoryIndex];
+                if (viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter]) return viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter];
                 
-                if (!_.isEmpty($scope.views.categories.categories) && this.selectedTabCategoryName) {
-                    var selected = $scope.views.categories.categories[this.selectedTabCategoryName];
-                    ret = $scope.views.viewsList(selected||_.values($scope.views.categories.categories)[0]);
+                if (!_.isEmpty($scope.views.categories.categories) && selectedTabCategoryName) {
+                    ret = $scope.views.viewsList(
+                        $scope.views.categories.categories[
+                            selectedTabCategoryName
+                        ]
+                    )
                 } else {
                     ret = [];
                 }
-                viewsListCache[this.selectedTabCategoryName+'||'+$scope.views.filter]=ret;
+                viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter]=ret;
                 return ret;
             };
 
