@@ -142,6 +142,7 @@ module CalculatorViews {
             if (field.id === 'EuroSCORE_SimpleCABG' && this.values.EuroSCORE_SimpleCABG === true) {
                 this.values.EuroSCORE_ThoracicAorta = this.values.EuroSCORE_SeptalRupture = false;
             }
+            super.validate(newValue, oldValue, scope, field);
         }
 
         calculator(values) {

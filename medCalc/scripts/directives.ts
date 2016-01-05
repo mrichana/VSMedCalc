@@ -51,6 +51,7 @@ module directives {
     interface IViewScope extends ng.IScope {
         view: CalculatorViews.IView;
         modalCalculator(calculatorView: CalculatorViews.IView, $event: ng.IAugmentedJQuery): void;
+        resetValues();
     };
 
     export function view($compile: ng.ICompileService, $http: ng.IHttpService, $templateCache: ng.ITemplateCacheService, $timeout: ng.ITimeoutService, $q, $mdDialog): ng.IDirective {
@@ -75,6 +76,10 @@ module directives {
                         $scope.view.result = $scope.view.update();
                     });
                 });
+                
+                $scope.resetValues = () => {
+                    console.log('now');
+                }
 
                 $scope.modalCalculator = (calculatorView: CalculatorViews.IView, $event: ng.IAugmentedJQuery = null) => {
                     function DialogController($scope, $mdDialog) {

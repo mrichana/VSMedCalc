@@ -59,6 +59,7 @@ module CalculatorViews {
                 ret.resultlevel = IResult.resultLevel.normal;
             }
 
+            ret.result = result;
             return ret;
         };
     }

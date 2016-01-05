@@ -23,7 +23,7 @@ module controllers {
         navViewItemClicked($event: JQueryEventObject): void;
 
         clearSearchBox(): void;
-        clearPanel(id: string): void;
+        clearPanel(id: string, form: ng.IFormController): void;
 
         keys(dictionary: any): string[];
         subcategories(category: any): any;
@@ -109,14 +109,16 @@ module controllers {
                     }
                 }
                 return ret;
-            }
-
-            $scope.clearSearchBox = function() {
+            };
+            
+             $scope.clearSearchBox = function() {
                 $scope.filterText = '';
             };
 
-            $scope.clearPanel = function(id) {
+            $scope.clearPanel = function(id, form: ng.IFormController) {
                 $scope.views.views[id].reset();
+                form.$setPristine();
+                form.$setUntouched();
             };
         };
     }

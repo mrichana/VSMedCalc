@@ -189,6 +189,7 @@ module CalculatorViews {
             if (field.id === 'EuroSCORE_ThoracicAorta' && newValue == true && this.values.EuroSCOREII_OperationWeight == 0) {
                 this.values.EuroSCOREII_OperationWeight = 1;
             }
+            super.validate(newValue, oldValue, scope, field);
         }
 
         calculator(values) {

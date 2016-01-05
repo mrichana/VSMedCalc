@@ -1,3 +1,6 @@
+md-dialog {
+    overflow-y: hidden;
+}
 
 .hint {
     /* Position the hint */

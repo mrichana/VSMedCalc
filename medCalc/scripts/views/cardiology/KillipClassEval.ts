@@ -61,7 +61,7 @@ module CalculatorViews {
                     break;
             }
 
-            ret.result = '';
+            ret.result = result;
             return ret;
         };
     }

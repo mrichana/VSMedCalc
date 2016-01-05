@@ -48,9 +48,9 @@ module CalculatorViews {
         export class resultLevel {
             static get none() {
                 return 'resultlevel-none';
-            }   
+            }
 
-            
+
             static get normal() {
                 return 'resultlevel-normal';
             }
@@ -78,13 +78,13 @@ module CalculatorViews {
     }
 
     export class Result implements IResult {
-		constructor(result: any = null, resultlevel: IResult.resultLevel = IResult.resultLevel.none, explanation: string = '', prefix: string = '', suffix: string = '') {
-			this.result = result;
-			this.explanation = explanation;
-			this.resultlevel = resultlevel;
-			this.prefix = prefix;
-			this.suffix = suffix;
-		}
+        constructor(result: any = null, resultlevel: IResult.resultLevel = IResult.resultLevel.none, explanation: string = '', prefix: string = '', suffix: string = '') {
+            this.result = result;
+            this.explanation = explanation;
+            this.resultlevel = resultlevel;
+            this.prefix = prefix;
+            this.suffix = suffix;
+        }
 
         result: any;
         explanation: string;
@@ -127,6 +127,16 @@ module CalculatorViews {
         }
 
         validate(newValue: any, oldValue: any, scope: ng.IScope, field: IField) {
+            if (scope['form']) {
+                if (newValue != this.defaultValues[field.id]) {
+                    scope['form'].$setDirty();
+                }
+                else {
+                    if (_['isMatch'](scope['view']['values'], this.defaultValues)) {
+                        scope['form'].$setPristine();
+                    }
+                }
+            }
         }
 
         static roundNum(thisNum: number, dec?: number): number {
@@ -146,7 +156,7 @@ module CalculatorViews {
             _.each(items, (item) => {
                 formula = formula.replace(new RegExp(item, 'g'), scope[item]);
             });
-            return math.parse(formula).toTex({ parenthesis: 'auto'});
+            return math.parse(formula).toTex({ parenthesis: 'auto' });
         };
 
         calculator(values) {

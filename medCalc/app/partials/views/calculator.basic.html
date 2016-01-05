@@ -1,62 +1,60 @@
-<md-content layout-padding>
+<form layout-padding name="form">
     <div layout="row">
         <span class="md-headline">{{::view.description.name}}</span>
         <span flex></span>
-        <md-button class="md-icon-button reset-button"
-                   aria-label="Reset Calculation"
-                   ng-show="view.reset"
-                   verified-click="clearPanel(view.description.id)">
+        <md-button class="md-fab md-mini reset-button"
+                aria-label="Reset Calculation"
+                ng-show="view.reset && form.$dirty"
+                ng-click="$parent.clearPanel(view.description.id, form)">
             <md-icon md-svg-icon="reset"></md-icon>
         </md-button>
     </div>
-    <form name="{{::view.description.id}}">
-        <div ng-repeat="field in ::view.fields" ng-switch on="field.input.type" layout="column">
-            <md-input-container ng-switch-when="none">
-                <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
-                <span></span>
-            </md-input-container>
-            <md-input-container ng-switch-when="image">
-                <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
-                <img ng-src="{{::field.url}}" />
-            </md-input-container>
-            <!--<md-input-container ng-switch-when="number">
-                <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
-                <div layout="row" layout-align="center center">
-                    <input flex="10" type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
-                    <md-slider flex="90" md-discrete step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
-                </div>
-                <div class="hint">{{field.description}}</div>
-            </md-input-container>-->
-            <div layout="row" ng-switch-when="number">
-                <md-input-container flex>
-                    <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
-                    <input type="number" step="{{::field.input.step}}" min="{{::field.input.min}}" max="{{::field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{::field.id}}" ng-model="view.values[field.id]" select-on-click />
-                    <div class="hint">{{::field.description}}</div>
-                </md-input-container>
-                <md-button class="md-icon-button" aria-label="�����������..." ng-if="field.calculatorView" ng-click="modalCalculator(field.calculatorView, $event)">
-                    <md-icon md-svg-icon="edit" />
-                </md-button>
+    <div ng-repeat="field in ::view.fields" ng-switch on="field.input.type" layout="column">
+        <md-input-container ng-switch-when="none">
+            <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+            <span></span>
+        </md-input-container>
+        <md-input-container ng-switch-when="image">
+            <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+            <img ng-src="{{::field.url}}" />
+        </md-input-container>
+        <!--<md-input-container ng-switch-when="number">
+            <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+            <div layout="row" layout-align="center center">
+                <input flex="10" type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
+                <md-slider flex="90" md-discrete step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{field.id}}" ng-model="view.values[field.id]" />
             </div>
-            <md-input-container ng-switch-when="text">
+            <div class="hint">{{field.description}}</div>
+        </md-input-container>-->
+        <div layout="row" ng-switch-when="number">
+            <md-input-container flex>
                 <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
-                <input type="text" ng-disabled="{{field.input.disabled}}" name="{{::field.id}}" maxlength="{{::field.input.length || 524288}}" ng-model="view.values[field.id]" select-on-click />
+                <input type="number" step="{{::field.input.step}}" min="{{::field.input.min}}" max="{{::field.input.max}}" ng-disabled="{{field.input.disabled}}" name="{{::field.id}}" ng-model="view.values[field.id]" select-on-click />
                 <div class="hint">{{::field.description}}</div>
             </md-input-container>
-            <md-input-container ng-switch-when="select">
-                <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
-                <md-select ng-model="view.values[field.id]" ng-disabled="{{field.input.disabled}}">
-                    <md-option ng-repeat="option in ::field.input.options" ng-value="option.value">
-                        {{::option.name}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container ng-switch-when="check">
-                <md-checkbox ng-disabled="{{field.input.disabled}}" ng-model="view.values[field.id]">{{::field.name | to_trusted}}</md-checkbox>
-                <div class="hint">{{::field.description}}</div>
-            </md-input-container>
-            <div ng-switch-when="result">
-                <result result="view.result"></result>
-            </div>
+            <md-button class="md-icon-button" aria-label="Υπολογιστής..." ng-if="field.calculatorView" ng-click="modalCalculator(field.calculatorView, $event)">
+                <md-icon md-svg-icon="edit" />
+            </md-button>
         </div>
-    </form>
-</md-content>
+        <md-input-container ng-switch-when="text">
+            <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+            <input type="text" ng-disabled="{{field.input.disabled}}" name="{{::field.id}}" maxlength="{{::field.input.length || 524288}}" ng-model="view.values[field.id]" select-on-click />
+            <div class="hint">{{::field.description}}</div>
+        </md-input-container>
+        <md-input-container ng-switch-when="select">
+            <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+            <md-select ng-model="view.values[field.id]" ng-disabled="{{field.input.disabled}}">
+                <md-option ng-repeat="option in ::field.input.options" ng-value="option.value">
+                    {{::option.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container ng-switch-when="check">
+            <md-checkbox ng-disabled="{{field.input.disabled}}" ng-model="view.values[field.id]">{{::field.name | to_trusted}}</md-checkbox>
+            <div class="hint">{{::field.description}}</div>
+        </md-input-container>
+        <div ng-switch-when="result">
+            <result result="view.result"></result>
+        </div>
+    </div>
+</form>

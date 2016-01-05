@@ -35,6 +35,13 @@ module app {
                 .icon('close', 'css/fonts/close.svg', 24)
                 .icon('search', 'css/fonts/search.svg', 24)
 
+                .icon('Γενικά', 'css/fonts/logo.svg', 48)
+                .icon('Παθολογία', 'css/fonts/med.svg', 48)
+                .icon('Πνευμονολογία', 'css/fonts/pulmo.svg', 48)
+                .icon('Καρδιολογία', 'css/fonts/cardio.svg', 48)
+                .icon('Υπερηχοκαρδιογράφημα', 'css/fonts/echo.svg', 48)
+                .icon('Φάρμακα', 'css/fonts/drugs.svg', 48)
+
                 .icon('resultlevel-none', 'css/fonts/info.svg', 48)
                 .icon('resultlevel-normal', 'css/fonts/check.svg', 48)
                 .icon('resultlevel-intermediate', 'css/fonts/info.svg', 48)
