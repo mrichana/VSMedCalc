@@ -8,13 +8,12 @@ module controllers {
     'use strict';
 
     interface ICalculatorScope extends ng.IScope {
+        values: any;
+        selectedTabCategoryIndex: number;
+
         filterText: string;
         setFilter(filterName: string): void;
-        values: any;
-
         views: CalculatorViews.IFilteredViews;
-
-        selectedTabCategoryIndex: number;
 
         openLeftPanel(): void;
         closeLeftPanel(): void;
@@ -23,15 +22,10 @@ module controllers {
         navViewItemClicked($event: JQueryEventObject): void;
 
         clearSearchBox(): void;
-        clearPanel(id: string, form: ng.IFormController): void;
 
-        keys(dictionary: any): string[];
-        subcategories(category: any): any;
-        items(category: any): any;
-        selectedTabCategory(): any;
+        categoryIndexToName(index: number):string;
         viewsList(): CalculatorViews.IView[];
-
-        isNewCategory(index: number): string[];
+        
     }
 
     /* Controllers */
@@ -59,12 +53,18 @@ module controllers {
             $scope.navViewItemClicked = ($event: JQueryEventObject) => {
                 $scope.closeLeftPanel();
                 $event.preventDefault();
+
                 var targetId = angular.element($event.target).parent().parent().attr('href').slice(1);
                 var target = angular.element(document.getElementById(targetId));
-                var targetContainer = target.parent();
+                //var targetContainer = target.parent();
+                var targetContainer = angular.element(document.getElementById('view-cards-'+$scope.categoryIndexToName($scope.selectedTabCategoryIndex)));
                 targetContainer['duScrollToElementAnimated'](target);
 
 
+            }
+            
+            $scope.categoryIndexToName = function(index: number):string {
+                return _.keys($scope.views.categories.categories)[index];
             }
 
             $scope.$watch("filterText", function(newValue, olValue) {
@@ -78,7 +78,7 @@ module controllers {
             var viewsListCache = {};
             $scope.viewsList = function(): CalculatorViews.IView[] {
                 var ret;
-                var selectedTabCategoryName = _.keys($scope.views.categories.categories)[$scope.selectedTabCategoryIndex];
+                var selectedTabCategoryName = $scope.categoryIndexToName($scope.selectedTabCategoryIndex);
                 if (viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter]) return viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter];
                 
                 if (!_.isEmpty($scope.views.categories.categories) && selectedTabCategoryName) {
@@ -93,32 +93,26 @@ module controllers {
                 viewsListCache[selectedTabCategoryName+'||'+$scope.views.filter]=ret;
                 return ret;
             };
-
-            $scope.isNewCategory = function(index: number) {
-                var list = $scope.viewsList();
-                var prev: CalculatorViews.IView = list[index - 1];
-                var curr: CalculatorViews.IView = list[index];
-                var ret: string[] = ['', ''];
-                if (curr) {
-                    if (!prev || prev.description.category[1] != curr.description.category[1]) {
-                        ret[0] = curr.description.category[1] || '';
-                        ret[1] = curr.description.category[2] || '';
-                    }
-                    else if (prev.description.category[2] != curr.description.category[2]) {
-                        ret[1] = curr.description.category[2] || '';
-                    }
-                }
-                return ret;
-            };
+ 
+//             $scope.isNewCategory = function(index: number) {
+//                 var list = $scope.viewsList();
+//                 var prev: CalculatorViews.IView = list[index - 1];
+//                 var curr: CalculatorViews.IView = list[index];
+//                 var ret: string[] = ['', ''];
+//                 if (curr) {
+//                     if (!prev || prev.description.category[1] != curr.description.category[1]) {
+//                         ret[0] = curr.description.category[1] || '';
+//                         ret[1] = curr.description.category[2] || '';
+//                     }
+//                     else if (prev.description.category[2] != curr.description.category[2]) {
+//                         ret[1] = curr.description.category[2] || '';
+//                     }
+//                 }
+//                 return ret;
+//             };
             
              $scope.clearSearchBox = function() {
                 $scope.filterText = '';
-            };
-
-            $scope.clearPanel = function(id, form: ng.IFormController) {
-                $scope.views.views[id].reset();
-                form.$setPristine();
-                form.$setUntouched();
             };
         };
     }

@@ -37,7 +37,8 @@ gulp.task('copyLibs', ['bower'], function () {
         'bower_components/angular-material/angular-material.min.js',
         'bower_components/angular-scroll/angular-scroll.min.js',
         'bower_components/katex/dist/katex.min.js',
-        'bower_components/angular-katex/angular-katex.min.js',
+        'bower_components/angular-katex/angular-katex.min.js',        
+        'bower_components/v-accordion/dist/v-accordion.min.js',
         'bower_components/angular-translate/angular-translate.min.js'
     ])
 //    .pipe(sourcemap.init())
@@ -69,6 +70,7 @@ gulp.task('copyCss', function () {
     return gulp.src([
         'bower_components/angular-material/angular-material.css',
         'bower_components/katex/dist/katex.min.css',
+        'bower_components/v-accordion/dist/v-accordion.min.css',
         'app/css/*.css'
     ])
     .pipe(autoprefixer('last 2 versions'))

@@ -1,11 +1,11 @@
 <form layout-padding name="form">
-    <div layout="row">
+    <div layout="row" class="view-title">
         <span class="md-headline">{{::view.description.name}}</span>
         <span flex></span>
-        <md-button class="md-fab md-mini reset-button"
+        <md-button class="md-fab md-mini reset-button ng-hide"
                 aria-label="Reset Calculation"
                 ng-show="view.reset && form.$dirty"
-                ng-click="$parent.clearPanel(view.description.id, form)">
+                ng-click="clearPanel()">
             <md-icon md-svg-icon="reset"></md-icon>
         </md-button>
     </div>

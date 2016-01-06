@@ -82,7 +82,7 @@ module CalculatorViews {
 				filter: filterText,
 				views: filteredviews,
 				categories: filteredCategories,
-				viewsList: ViewsCollection.prepareViewsList
+				viewsList: ViewsCollection.prepareViewsList,
 			};
 		};
 

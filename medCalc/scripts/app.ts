@@ -12,10 +12,12 @@ module app {
         'ngAnimate',
         'ngMaterial',
         'katex',
-        'duScroll'
+        'duScroll',
+        'vAccordion'
     ])
 
         .filter('to_trusted', filters.to_trusted)
+        .filter('orderObjectBy', filters.orderObjectBy)
 
         .controller('calculatorController', controllers.calculatorController)
         //  .controller('patientCtrl', controllers.patientCtrl)
@@ -30,6 +32,7 @@ module app {
 
             $mdIconProvider
                 .icon('menu', 'css/fonts/menu.svg', 24)
+                .icon('more', 'css/fonts/more.svg', 24)
                 .icon('reset', 'css/fonts/reset.svg', 24)
                 .icon('edit', 'css/fonts/edit.svg', 24)
                 .icon('close', 'css/fonts/close.svg', 24)
