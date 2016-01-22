@@ -75,7 +75,7 @@ module CalculatorViews {
         type: typeof View = ECG_Duke_Treadmill_Score;
         id: string = 'ECG_Duke_Treadmill_Score';
         name: string = 'Duke Treadmill Score (DTS)';
-        category: string[] = ['Καρδιολογία', 'ΗΚΓ'];
+        category: string[] = ['Ηλεκτροκαρδιογράφημα', 'Στεφανιαία Νόσος'];
         tags: string = 'nstemi';
     }
 

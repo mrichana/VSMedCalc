@@ -56,7 +56,7 @@
             </md-list>
             <v-accordion class="vAccordion--default" multiple>
                 <v-pane expanded ng-repeat="(key, category) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].categories">
-                    <v-pane-header>
+                    <v-pane-header class="md-hue-1">
                         {{::category.name}}
                     </v-pane-header>
                     <v-pane-content>
@@ -106,37 +106,22 @@
                 </md-tab-label>
                 <md-tab-body>
                     <md-tab-content flex layout-fill md-scroll-y layout-padding id="view-cards-{{::category.name}}">
-                        <div class="view-card" ng-repeat="(key, view) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].views"
-                        id="{{::view.description.id}}">
+                        <div class="view-card" ng-repeat="(key, view) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].views" id="{{::view.description.id}}">
                             <view view="view"></view>
-                            <md-divider ng-if="!$last"></md-divider>
+                            <md-divider></md-divider>
                         </div>
-                        <v-accordion class="vAccordion--default" multiple>
-                            <v-pane expanded ng-repeat="(key, category) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].categories">
-                                <v-pane-header>
-                                    {{::category.name}}
-                                </v-pane-header>
-                                <v-pane-content>
-                                    <div class="view-card" ng-repeat="(key, view) in category.views" id="{{::view.description.id}}">
-                                        <view view="view"></view>
-                                        <md-divider ng-if="!$last"></md-divider>
-                                    </div>
-                                    <v-accordion multiple>
-                                        <v-pane expanded ng-repeat="(key, category) in category.categories">
-                                            <v-pane-header>
-                                                {{::category.name}}
-                                            </v-pane-header>
-                                            <v-pane-content>
-                                                <div class="view-card" ng-repeat="(key, view) in category.views" id="{{::view.description.id}}">
-                                                    <view view="view"></view>
-                                                    <md-divider ng-if="!$last"></md-divider>
-                                                </div>
-                                            </v-pane-content>
-                                        </v-pane>
-                                    </v-accordion>
-                                </v-pane-content>
-                            </v-pane>
-                        </v-accordion>
+                        <div ng-repeat="(key, category) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].categories">
+                            <div class="view-card" ng-repeat="(key, view) in category.views" id="{{::view.description.id}}">
+                                <view view="view"></view>
+                                <md-divider></md-divider>
+                            </div>
+                            <div ng-repeat="(key, category) in category.categories">
+                                <div class="view-card" ng-repeat="(key, view) in category.views" id="{{::view.description.id}}">
+                                    <view view="view"></view>
+                                    <md-divider></md-divider>
+                                </div>
+                            </div>
+                        </div>
                     </md-tab-content>
                 </md-tab-body>
             </md-tab>

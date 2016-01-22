@@ -11,7 +11,7 @@
             <span class="md-subhead" ng-bind-html="result.prefix | to_trusted"></span>
         </md-card-header-text>
     </md-card-header>
-    <md-card-content ng-show="result.explanation || result.formula">
+    <md-card-content>
         <p ng-bind-html="result.explanation | to_trusted"></p>
         <div katex-bind="result.formula"></div>
     </md-card-content>

@@ -15,7 +15,9 @@ var sourcemap = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
 var tsc = require('gulp-typescript');
 var manifest = require('gulp-manifest');
-
+var gutil = require('gulp-util');
+var ftp = require('gulp-ftp');
+ 
 gulp.task('clean', function () {
     del('www/**');
 });
@@ -157,6 +159,21 @@ gulp.task('build', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages'
             exclude: 'manifest.appcache'
         }))
         .pipe(gulp.dest('www'));
+});
+
+gulp.task('deploy', ['build'], function () {
+	return gulp.src('www/**/*')
+		.pipe(ftp({
+			host: 'richana.eu',
+			user: 'mrichana',
+			pass: 'R0b3rt!n0',
+            remotePath: 'httpdocs/beta/'
+            
+		}))
+		// you need to have some kind of stream after gulp-ftp to make sure it's flushed 
+		// this can be a gulp plugin, gulp.dest, or any kind of stream 
+		// here we use a passthrough stream 
+		.pipe(gutil.noop());
 });
 
 gulp.task('default',['serve']);

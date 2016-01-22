@@ -101,23 +101,28 @@ md-card.result
         md-card.result md-card-header md-card-avatar md-icon {
             padding: 0;
             background-color: inherit;
-            height: 40px;
-            width: 40px;
+            height: 28px;
+            width: 28px;
         }
 
         md-card.result md-card-header md-card-avatar .md-user-avatar, md-card md-card-header md-card-avatar md-icon {
             border-radius: 0;
         }
 
-
+    md-card md-card-header md-card-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    md-card md-card-content {
+        padding-top: 0;
+    }
 
 md-input-container.search {
     margin-bottom: 0;
 }
 
 span.result-text {
-    font-size: xx-large;
-    height: 33px;
+    font-size: x-large;
 }
 
 md-dialog {
@@ -137,10 +142,10 @@ nav-view.active {
 }
 
 /* when hiding the picture */
-.ng-hide-add         { animation:1s flipOutX ease; }
+.reset-button.ng-hide-add         { animation:1s flipOutX ease; }
 
 /* when showing the picture */
-.ng-hide-remove      { animation:1s flipInX ease; }
+.reset-button.ng-hide-remove      { animation:1s flipInX ease; }
 
 /* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
 /* flip in */

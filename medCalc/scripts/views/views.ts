@@ -170,6 +170,8 @@ module CalculatorViews {
         min?: number;
         step?: number;
         options?: any[];
+        disabled?: boolean;
+        hidden?: boolean;
     }
 
     export interface IField {

@@ -42,6 +42,7 @@ module app {
                 .icon('Παθολογία', 'css/fonts/med.svg', 48)
                 .icon('Πνευμονολογία', 'css/fonts/pulmo.svg', 48)
                 .icon('Καρδιολογία', 'css/fonts/cardio.svg', 48)
+                .icon('Ηλεκτροκαρδιογράφημα', 'css/fonts/ecg.svg', 48)
                 .icon('Υπερηχοκαρδιογράφημα', 'css/fonts/echo.svg', 48)
                 .icon('Φάρμακα', 'css/fonts/drugs.svg', 48)
 

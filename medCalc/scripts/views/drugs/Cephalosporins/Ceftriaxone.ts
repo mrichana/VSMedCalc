@@ -15,7 +15,7 @@ module CalculatorViews {
         ];
         calculator(values) {
             var resultArray = new CalculatorViews.MinMaxToValue([
-                { result: new Result('1-2gr x 1 ή 2gr x 2 σε μηνιγγίτιδα', IResult.resultLevel.normal) }
+                { result: new Result('1-2gr x 1', IResult.resultLevel.normal, 'ή 2gr x 2 σε μηνιγγίτιδα') }
             ]);
             return resultArray.value(0);
         };
