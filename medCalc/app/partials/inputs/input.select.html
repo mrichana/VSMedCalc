@@ -1,0 +1,9 @@
+<md-input-container>
+    <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+    <md-select ng-model="view.values[field.id]" ng-disabled="field.input.disabled">
+        <md-option ng-repeat="option in ::field.input.options" ng-value="option.value">
+            {{::option.name}}
+        </md-option>
+    </md-select>
+    <div class="hint">{{::field.description}}</div>
+</md-input-container>

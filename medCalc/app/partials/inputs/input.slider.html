@@ -1,0 +1,8 @@
+<md-input-container>
+    <label for="{{field.id}}" ng-bind-html="field.name | to_trusted"></label>
+    <div layout="row" layout-align="center center">
+        <input flex="10" type="number" step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="field.input.disabled" name="{{field.id}}" ng-model="view.values[field.id]" />
+        <md-slider flex="90" md-discrete step="{{field.input.step}}" min="{{field.input.min}}" max="{{field.input.max}}" ng-disabled="field.input.disabled" name="{{field.id}}" ng-model="view.values[field.id]" />
+    </div>
+    <div class="hint">{{field.description}}</div>
+</md-input-container>

@@ -1,0 +1,11 @@
+<div layout="row">
+    <md-input-container flex>
+        <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+        <input type="number" step="{{::field.input.step}}" min="{{::field.input.min}}" max="{{::field.input.max}}" ng-disabled="field.input.disabled"
+        name="{{::field.id}}" ng-model="view.values[field.id]" select-on-click />
+        <div class="hint">{{::field.description}}</div>
+    </md-input-container>
+    <md-button class="md-icon-button" aria-label="Υπολογιστής..." ng-if="field.calculatorView" ng-click="modalCalculator(field.calculatorView, $event)">
+        <md-icon md-svg-icon="edit" />
+    </md-button>
+</div>

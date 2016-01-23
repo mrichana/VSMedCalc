@@ -1,0 +1,4 @@
+<md-input-container>
+    <md-checkbox ng-disabled="field.input.disabled" ng-model="view.values[field.id]">{{::field.name | to_trusted}}</md-checkbox>
+    <div class="hint">{{::field.description}}</div>
+</md-input-container>

@@ -361,7 +361,6 @@
     <MainPackageIdentityName>62224MisselRichanaMD.58996320A4EAC</MainPackageIdentityName>
     <ReservedNames>
       <ReservedName>Ιατρικό Βοήθημα</ReservedName>
-      <ReservedName>Medical Helper</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames />
@@ -369,7 +368,7 @@
     <PackageInfo>
       <OsMinVersion>6.3.0.0</OsMinVersion>
       <PackageArchitecture>neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>1.1.0.1</PackageMaxArchitectureVersion>
+      <PackageMaxArchitectureVersion>1.1.0.5</PackageMaxArchitectureVersion>
     </PackageInfo>
   </PackageInfoList>
 </StoreAssociation>

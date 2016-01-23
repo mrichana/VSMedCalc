@@ -1,0 +1,5 @@
+<md-input-container>
+    <label for="{{::field.id}}" ng-bind-html="::field.name | to_trusted"></label>
+    <input type="text" ng-disabled="field.input.disabled" name="{{::field.id}}" maxlength="{{::field.input.length || 524288}}" ng-model="view.values[field.id]" select-on-click />
+    <div class="hint">{{::field.description}}</div>
+</md-input-container>
