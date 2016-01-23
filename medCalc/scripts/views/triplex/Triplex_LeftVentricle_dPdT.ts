@@ -4,17 +4,17 @@
 module CalculatorViews {
     'use strict';
 
-    class Triplex_MitralValve_dPdT extends View {
-        description = new Triplex_MitralValve_dPdTDescription();
+    class Triplex_LeftVentricle_dPdT extends View {
+        description = new Triplex_LeftVentricle_dPdTDescription();
 
         template: string = 'calculator.basic';
         defaultValues = {
-            Triplex_MitralValve_dPdT_Time: 25
+            Triplex_LeftVentricle_dPdT_Time: 25
         };
         fields: IField[] = [
             {
 
-                id: 'Triplex_MitralValve_dPdT_Time',
+                id: 'Triplex_LeftVentricle_dPdT_Time',
                 name: '1 to 3m/s MR Acceleration Time (msec)',
                 input: {
                     type: 'number',
@@ -28,13 +28,13 @@ module CalculatorViews {
                 input: {
                     type: 'image'
                 },
-                url: 'images/dP2dT.png'
+                url: 'images/dPdT.png'
             }
         ];
         calculator(values) {
             var ret = new Result();
 
-            var formula = '32/(Triplex_MitralValve_dPdT_Time/1000)';
+            var formula = '32/(Triplex_LeftVentricle_dPdT_Time/1000)';
             ret.formula = View.formulaEvaluator(values, formula);
             
             ret.result = View.roundNum(View.evaluator(values, formula));
@@ -56,13 +56,13 @@ module CalculatorViews {
             return ret;
         };
     }
-    class Triplex_MitralValve_dPdTDescription extends ViewDescription implements IViewDescription {
-        type: typeof View = Triplex_MitralValve_dPdT;
-        id: string = 'Triplex_MitralValve_dPdT';
+    class Triplex_LeftVentricle_dPdTDescription extends ViewDescription implements IViewDescription {
+        type: typeof View = Triplex_LeftVentricle_dPdT;
+        id: string = 'Triplex_LeftVentricle_dPdT';
         name: string = 'Συσταλτικότητα Αρ.Κοιλίας (dP/dT)';
         category: string[] = ['Υπερηχοκαρδιογράφημα', 'Κοιλίες', 'Αριστερή Κοιλία'];
         tags: string = '';
     }
 
-    ViewsCollection.add(new Triplex_MitralValve_dPdTDescription());
+    ViewsCollection.add(new Triplex_LeftVentricle_dPdTDescription());
 }

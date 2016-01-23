@@ -15,7 +15,9 @@ var sourcemap = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
 var tsc = require('gulp-typescript');
 var manifest = require('gulp-manifest');
-
+var gutil = require('gulp-util');
+var ftp = require('gulp-ftp');
+ 
 gulp.task('clean', function () {
     del('www/**');
 });
@@ -37,7 +39,8 @@ gulp.task('copyLibs', ['bower'], function () {
         'bower_components/angular-material/angular-material.min.js',
         'bower_components/angular-scroll/angular-scroll.min.js',
         'bower_components/katex/dist/katex.min.js',
-        'bower_components/angular-katex/angular-katex.min.js',
+        'bower_components/angular-katex/angular-katex.min.js',        
+        'bower_components/v-accordion/dist/v-accordion.min.js',
         'bower_components/angular-translate/angular-translate.min.js'
     ])
 //    .pipe(sourcemap.init())
@@ -69,6 +72,7 @@ gulp.task('copyCss', function () {
     return gulp.src([
         'bower_components/angular-material/angular-material.css',
         'bower_components/katex/dist/katex.min.css',
+        'bower_components/v-accordion/dist/v-accordion.min.css',
         'app/css/*.css'
     ])
     .pipe(autoprefixer('last 2 versions'))
@@ -155,6 +159,21 @@ gulp.task('build', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages'
             exclude: 'manifest.appcache'
         }))
         .pipe(gulp.dest('www'));
+});
+
+gulp.task('deploy', ['build'], function () {
+	return gulp.src('www/**/*')
+		.pipe(ftp({
+			host: 'richana.eu',
+			user: 'mrichana',
+			pass: 'R0b3rt!n0',
+            remotePath: 'httpdocs/beta/'
+            
+		}))
+		// you need to have some kind of stream after gulp-ftp to make sure it's flushed 
+		// this can be a gulp plugin, gulp.dest, or any kind of stream 
+		// here we use a passthrough stream 
+		.pipe(gutil.noop());
 });
 
 gulp.task('default',['serve']);

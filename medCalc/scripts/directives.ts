@@ -51,7 +51,7 @@ module directives {
     interface IViewScope extends ng.IScope {
         view: CalculatorViews.IView;
         modalCalculator(calculatorView: CalculatorViews.IView, $event: ng.IAugmentedJQuery): void;
-        resetValues();
+        clearPanel(): void;
     };
 
     export function view($compile: ng.ICompileService, $http: ng.IHttpService, $templateCache: ng.ITemplateCacheService, $timeout: ng.ITimeoutService, $q, $mdDialog): ng.IDirective {
@@ -62,29 +62,25 @@ module directives {
                 view: '='
             },
             link: ($scope: IViewScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-                _.each($scope.view.fields, function (field: CalculatorViews.IField) {
+                _.each($scope.view.fields, function(field: CalculatorViews.IField) {
                     if (field.id != 'result') {
-                        $scope.$watch('view.values.' + field.id, function (newValue, oldValue, $scope: IViewScope) {
+                        $scope.$watch('view.values.' + field.id, function(newValue, oldValue, $scope: IViewScope) {
                             $scope.view.validate(newValue, oldValue, $scope, field);
                             $scope.view.result = $scope.view.update();
                         });
                     };
                 });
-                _.each($scope.view.external, function (field) {
-                    $scope.$watch('view.values.' + field, function (newValue, oldValue, $scope: IViewScope) {
+                _.each($scope.view.external, function(field) {
+                    $scope.$watch('view.values.' + field, function(newValue, oldValue, $scope: IViewScope) {
                         $scope.view.validate(newValue, oldValue, $scope, null);
                         $scope.view.result = $scope.view.update();
                     });
                 });
-                
-                $scope.resetValues = () => {
-                    console.log('now');
-                }
 
                 $scope.modalCalculator = (calculatorView: CalculatorViews.IView, $event: ng.IAugmentedJQuery = null) => {
                     function DialogController($scope, $mdDialog) {
                         $scope.view = calculatorView;
-                        $scope.closeDialog = function () {
+                        $scope.closeDialog = function() {
                             $mdDialog.hide();
                         }
                     };
@@ -100,10 +96,14 @@ module directives {
                     });
                 };
 
+                $scope.clearPanel = function() {
+                    $scope.view.reset();
+                };
+
                 var templateName = $scope['view'].template || 'calculator';
                 $http.get('partials/views/' + templateName + '.html', {
                     cache: $templateCache
-                }).success(function (html: string) {
+                }).success(function(html: string) {
                     element.replaceWith(($compile(html))($scope));
 
                 });
@@ -127,13 +127,13 @@ module directives {
                 verifiedClick: '&'
             },
             link: ($scope: IVerifiedClickScope, element: ng.IAugmentedJQuery, attributes: IVerifiedClickAttributes) => {
-                element.on('tap click', function () {
-                    $scope.$apply(function () {
+                element.on('tap click', function() {
+                    $scope.$apply(function() {
                         var waitTime = attributes.verifyWait || 2000;
                         if (!$scope.timer) {
                             $animate.addClass(element, 'verify');
                             $animate.addClass(element.children(), 'spin');
-                            $scope.timer = $timeout(function () {
+                            $scope.timer = $timeout(function() {
                                 $scope.timer = null;
                                 $animate.removeClass(element, 'verify');
                                 $animate.removeClass(element.children(), 'spin');

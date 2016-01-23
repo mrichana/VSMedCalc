@@ -50,7 +50,7 @@ module CalculatorViews {
         type: typeof View = ECG_QT;
         id: string = 'ECG_QT';
         name: string = 'mm σε msec';
-        category: string[] = ['Καρδιολογία', 'ΗΚΓ'];
+        category: string[] = ['Ηλεκτροκαρδιογράφημα'];
         isHelper: boolean = true;
         tags: string = '';
     }
