@@ -49,8 +49,9 @@
         <md-content md-scroll-y role="navigation">
             <!-- add `multiple` attribute to allow multiple sections to open at once -->
             <!-- add expanded attribute to open the section -->
-            <md-list ng-repeat="(key, view) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].views">
-                <md-list-item class="nav-view-item" ng-href="#{{view.description.id}}" ng-click="navViewItemClicked($event)">
+            <md-list>
+                <md-list-item ng-repeat="(key, view) in views.categories.categories[categoryIndexToName(selectedTabCategoryIndex)].views"
+                    class="nav-view-item" ng-href="#{{view.description.id}}" ng-click="navViewItemClicked($event)">
                     {{::view.description.name}}
                 </md-list-item>
             </md-list>
@@ -60,8 +61,8 @@
                         {{::category.name}}
                     </v-pane-header>
                     <v-pane-content>
-                        <md-list ng-repeat="(key, view) in category.views">
-                            <md-list-item class="nav-view-item" ng-href="#{{view.description.id}}" ng-click="navViewItemClicked($event)">
+                        <md-list>
+                            <md-list-item ng-repeat="(key, view) in category.views" class="nav-view-item" ng-href="#{{view.description.id}}" ng-click="navViewItemClicked($event)">
                                 {{::view.description.name}}
                             </md-list-item>
                         </md-list>
@@ -72,8 +73,8 @@
                                 </v-pane-header>
 
                                 <v-pane-content>
-                                    <md-list ng-repeat="(key, view) in category.views">
-                                        <md-list-item class="nav-view-item" ng-href="#{{view.description.id}}" ng-click="navViewItemClicked($event)">
+                                    <md-list>
+                                        <md-list-item ng-repeat="(key, view) in category.views" class="nav-view-item" ng-href="#{{view.description.id}}" ng-click="navViewItemClicked($event)">
                                             {{::view.description.name}}
                                         </md-list-item>
                                     </md-list>
