@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget defaultlocale="el-GR" id="medcalc.richana.eu" version="4.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
+<widget defaultlocale="el-GR" id="medcalc.richana.eu" version="4.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
   <name>Ιατρικό Βοήθημα</name>
   <description>Διάφοροι ιατρικοί υπολογιστές, χρήσιμοι στην κλινική πράξη.</description>
   <author email="medcalcapp@gmail.com" href="http://missel.richana.eu">Missel Richana MD</author>
@@ -98,7 +98,7 @@
     <splash height="800" src="res/screens/wp8/SplashScreenImage.jpg" width="480" />
   </platform>
   <vs:platformSpecificValues>
-    <vs:platformSpecificWidget id="62224MisselRichanaMD.58996320A4EAC" platformName="windows" version="1.1.0.5">
+    <vs:platformSpecificWidget id="62224MisselRichanaMD.58996320A4EAC" platformName="windows" version="1.1.0.6">
       <vs:name>Ιατρικό Βοήθημα</vs:name>
       <vs:publisherId>CN=CAF7F6ED-986F-4ED5-B965-DC250E5D2A13</vs:publisherId>
       <vs:author>Missel Richana MD</vs:author>

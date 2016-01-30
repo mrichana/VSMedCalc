@@ -127,7 +127,7 @@ gulp.task('copyTypescript', function () {
     .pipe(sourcemap.init())
     .pipe(tsc(tsProject))
     .pipe(concat("index.min.js"))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(sourcemap.write())
     .pipe(gulp.dest('www/scripts'));
 });
