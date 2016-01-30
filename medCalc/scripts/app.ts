@@ -9,6 +9,7 @@ module app {
     // Declare app level module which depends on filters, and services
     angular.module('medicalCalculator', [
         'medical.services',
+        'ngRoute',
         'ngAnimate',
         'ngMaterial',
         'katex',
@@ -28,6 +29,20 @@ module app {
         .directive('result', directives.result)
         .directive('view', directives.view)
         .directive('verifiedClick', directives.verifiedClick)
+        
+        .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+            $routeProvider
+            .when('/:calculatorId', {
+                template: '<view view="view"></view>',
+                controller: 'calculatorController'
+            })
+            .otherwise({
+                redirectTo: 'Calc'
+            });
+            $locationProvider.html5Mode(false);
+        }])
+        
+        
         .config(['$mdThemingProvider', '$mdIconProvider', function ($mdThemingProvider, $mdIconProvider) {
 
             $mdIconProvider
@@ -59,10 +74,5 @@ module app {
         .value('duScrollDuration', 2000)
         .config(['$compileProvider', function ($compileProvider) {
             $compileProvider.debugInfoEnabled(false); //Set to false for release
-        }])
-        .run(['$rootScope', function ($rootScope) {
-            $rootScope.debug = function (item : any):void {
-                console.log(item);
-            }
         }]);
 }
