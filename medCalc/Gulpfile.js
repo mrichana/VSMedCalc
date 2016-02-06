@@ -12,11 +12,12 @@ var gulpIf = require('gulp-if');
 var del = require('del');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemap = require('gulp-sourcemaps');
-var browserSync = require('browser-sync').create();
+//var browserSync = require('browser-sync').create();
 var tsc = require('gulp-typescript');
 var manifest = require('gulp-manifest');
 var gutil = require('gulp-util');
 var ftp = require('gulp-ftp');
+var connect = require('gulp-connect');
  
 gulp.task('clean', function () {
     del('www/**');
@@ -133,15 +134,25 @@ gulp.task('copyTypescript', function () {
     .pipe(gulp.dest('www/scripts'));
 });
 
-gulp.task('serve', ['watch'], function () {
-    browserSync.init({
-        server: {
-            baseDir: "www",
-            port: 3000
-        }
+gulp.task('serve', ['watch'], function() {
+    connect.server({
+      root: 'www',
+      port: 3000,
+      fallback: 'www/index.html',
+      livereload: true
     });
-    gulp.watch("www/**/*.*", browserSync.reload);
+    gulp.watch("www/**/*.*", connect.reload);
 });
+
+// gulp.task('serve', ['watch'], function () {
+//     browserSync.init({
+//         server: {
+//             baseDir: "www",
+//             port: 3000
+//         }
+//     });
+//     gulp.watch("www/**/*.*", browserSync.reload);
+// });
 
 gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
     gulp.watch("lib/*.js", ['copyLibs']);

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "^2.10.0",
     "cordova": "^5.4.1",
     "del": "^2.2.0",
     "es6-promise": "^3.0.2",
@@ -11,6 +10,7 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-bower": "^0.0.11",
     "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.3.1",
     "gulp-ftp": "^1.1.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.4.0",

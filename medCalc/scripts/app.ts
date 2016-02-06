@@ -37,9 +37,9 @@ module app {
                 controller: 'calculatorController'
             })
             .otherwise({
-                redirectTo: 'Calc'
+                redirectTo: '/Calc'
             });
-            $locationProvider.html5Mode(false);
+            $locationProvider.html5Mode(true);
         }])
         
         
@@ -71,7 +71,6 @@ module app {
                 .accentPalette('red');
 
         }])
-        .value('duScrollDuration', 2000)
         .config(['$compileProvider', function ($compileProvider) {
             $compileProvider.debugInfoEnabled(false); //Set to false for release
         }]);
