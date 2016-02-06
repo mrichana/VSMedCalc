@@ -12,7 +12,6 @@ var gulpIf = require('gulp-if');
 var del = require('del');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemap = require('gulp-sourcemaps');
-//var browserSync = require('browser-sync').create();
 var tsc = require('gulp-typescript');
 var manifest = require('gulp-manifest');
 var gutil = require('gulp-util');
@@ -143,16 +142,6 @@ gulp.task('serve', ['watch'], function() {
     });
     gulp.watch("www/**/*.*", connect.reload);
 });
-
-// gulp.task('serve', ['watch'], function () {
-//     browserSync.init({
-//         server: {
-//             baseDir: "www",
-//             port: 3000
-//         }
-//     });
-//     gulp.watch("www/**/*.*", browserSync.reload);
-// });
 
 gulp.task('watch', ['copyRoot', 'copyLibs', 'copyCss', 'copyFonts', 'copyImages', 'copyHtml', 'copyTypescript'], function () {
     gulp.watch("lib/*.js", ['copyLibs']);

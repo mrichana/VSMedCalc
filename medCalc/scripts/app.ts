@@ -30,7 +30,10 @@ module app {
         .directive('view', directives.view)
         .directive('verifiedClick', directives.verifiedClick)
         
-        .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+        .config(['$routeProvider', '$locationProvider', '$compileProvider', function ($routeProvider, $locationProvider, $compileProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
+            $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|ms-appx|x-wmapp0):|data:image\//);
+
             $routeProvider
             .when('/:calculatorId', {
                 template: '<view view="view"></view>',
@@ -39,7 +42,7 @@ module app {
             .otherwise({
                 redirectTo: '/Calc'
             });
-            $locationProvider.html5Mode(true);
+            $locationProvider.html5Mode(false);
         }])
         
         

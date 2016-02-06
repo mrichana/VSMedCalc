@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="" />
     
-    <base href="/">
+    <!--<base href="/">-->
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -61,7 +61,7 @@
                     <v-pane-content>
                         <md-list>
                             <md-list-item ng-repeat="(key, view) in category.views"
-                                class="nav-view-item" ng-href="{{view.description.id}}" ng-click="closeLeftPanel()">
+                                class="nav-view-item" ng-href="#/{{view.description.id}}" ng-click="closeLeftPanel()">
                                 {{::view.description.name}}
                             </md-list-item>
                         </md-list>
@@ -72,7 +72,7 @@
                                 </v-pane-header>
                                 <v-pane-content>
                                     <md-list>
-                                        <md-list-item ng-repeat="(key, view) in category.views" class="nav-view-item" ng-href="{{view.description.id}}" ng-click="closeLeftPanel()">
+                                        <md-list-item ng-repeat="(key, view) in category.views" class="nav-view-item" ng-href="#/{{view.description.id}}" ng-click="closeLeftPanel()">
                                             {{::view.description.name}}
                                         </md-list-item>
                                     </md-list>
@@ -84,7 +84,7 @@
 
                                             <v-pane-content>
                                                 <md-list>
-                                                    <md-list-item ng-repeat="(key, view) in category.views" class="nav-view-item" ng-href="{{view.description.id}}" ng-click="closeLeftPanel()">
+                                                    <md-list-item ng-repeat="(key, view) in category.views" class="nav-view-item" ng-href="#/{{view.description.id}}" ng-click="closeLeftPanel()">
                                                         {{::view.description.name}}
                                                     </md-list-item>
                                                 </md-list>
