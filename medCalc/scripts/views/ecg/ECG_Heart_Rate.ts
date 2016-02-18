@@ -47,7 +47,7 @@ module CalculatorViews {
         ];
         calculator(values) {
             var ret = new Result();
-            var formula = '60*ECG_PaperSpeed/ECG_HRQRS2QRSmm/ECG_Cycles';
+            var formula = '60*ECG_PaperSpeed*ECG_Cycles/ECG_HRQRS2QRSmm';
             ret.result = View.roundNum(View.evaluator(values, formula));
             ret.formula = View.formulaEvaluator(values, formula);
             ret.suffix = ' BPM';
